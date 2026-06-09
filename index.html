@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendstore — мікровендинг Helper та Bloomy під ключ</title>
+    <meta name="description"
+        content="Vendstore — екосистема високотехнологічного мікровендингу. Helper: товари першої необхідності. Bloomy: парфумерний вендинг. B2B та B2C під ключ." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#262626" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
+    <style>
+        @font-face{font-family:'Manrope';src:url('../fonts/manrope/Manrope-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+        @font-face{font-family:'Manrope';src:url('../fonts/manrope/Manrope-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+        @font-face{font-family:'Manrope';src:url('../fonts/manrope/Manrope-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;overflow-x:clip}
+        body{font-family:Manrope,sans-serif;font-size:16px;line-height:1.5;background:#262626;color:#FDFBFA}
+        .skip-link{position:absolute;top:-100px;left:8px;z-index:10000;padding:12px 20px;background:#262626;color:#FFF;border-radius:4px}
+        .skip-link:focus{top:8px}
+        .header{position:fixed;width:100%;z-index:1000;padding:12px 0}
+        .header__inner{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:10px 18px;border-radius:4px;background:rgba(30,30,30,.44);backdrop-filter:blur(18px);border:1px solid rgba(253,251,250,.1)}
+        .header__logo-text{font-size:1.2rem;font-weight:600;letter-spacing:-.03em;color:#FDFBFA}
+        .header__logo-serif{font-family:'EB Garamond',serif;font-style:italic;color:#E7D6C3}
+        .burger{display:flex;flex-direction:column;gap:5px;width:24px;background:none;border:0;cursor:pointer;padding:4px 0}
+        .burger__line{height:2px;background:#505050;width:100%}
+        .header__nav,.header__cta{display:none}
+        .hero{min-height:100svh;display:flex;align-items:flex-end;padding:0 0 72px;position:relative}
+        .hero__title{font-size:clamp(2rem,5.5vw,3.75rem);font-weight:600;line-height:1.1;max-width:18ch}
+        .hero__title em{font-family:'EB Garamond',serif;font-style:italic;color:#C6BCAC}
+        .hero__lead{font-size:clamp(16px,1.8vw,19px);color:#CDCDCD;max-width:36em;line-height:1.5;margin-bottom:28px}
+        .hero__perks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:32px}
+        .hero__perk{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:4px;background:rgba(253,251,250,.06);border:1px solid rgba(253,251,250,.1);font-size:14px;line-height:1.3;color:#FDFBFA;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+        @media(hover:hover){.hero__perk:hover{transform:translateY(-15px)}}
+        .hero__perk i{font-size:20px;color:#E7D6C3;flex-shrink:0}
+        @font-face{font-family:'icomoon';src:url('fonts/icomoon.woff2') format('woff2');font-display:swap}
+        [class^="icon-"],[class*=" icon-"]{font-family:'icomoon'!important;font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased}
+        .icon-Nameclock-m:before{content:"\e912"}
+        .icon-Nameverified_badge:before{content:"\e933"}
+        .icon-NameStars:before{content:"\e92f"}
+        .icon-Namelocation-m:before{content:"\e925"}
+        .icon-Namearrow_forward:before{content:"\e903"}
+        @media(min-width:768px){.hero__perks{grid-template-columns:repeat(4,minmax(0,1fr))}}
+        @media(min-width:1024px){.hero__body{max-width:min(100%,920px)}.hero__title{max-width:none}}
+        html:not(.css-ready) main>section:not(.hero){visibility:hidden}
+    </style>
+    <link rel="preload" href="css/app.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('css-ready')">
+    <noscript><link rel="stylesheet" href="css/app.min.css"></noscript>
+    <script>document.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(function(){document.documentElement.classList.add('css-ready')})});setTimeout(function(){document.documentElement.classList.add('css-ready')},2000);</script>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/icomoon.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/manrope/Manrope-SemiBold.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/eb-garamond/EBGaramond-Italic.woff2" crossorigin>
+    <link rel="preload" as="image" href="img/hero-poster.webp" type="image/webp" fetchpriority="high">
+</head>
+
+<body data-page="home">
+    <a href="#main" class="skip-link">Перейти до основного вмісту</a>
+
+    <header class="header">
+        <div class="container header__inner">
+            <div class="header__left">
+                <button type="button" class="burger" aria-label="Відкрити меню" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                </button>
+                <a href="index.html" class="header__logo" aria-label="Vendstore — на головну">
+                    <span class="header__logo-text" aria-hidden="true">Vend<span class="header__logo-serif">store</span></span>
+                </a>
+            </div>
+            <nav id="main-nav" class="header__nav" aria-label="Основна навігація">
+                <ul class="header__list">
+                    <li><a href="about.html" class="link">Про нас</a></li>
+                    <li><a href="b2b.html" class="link">B2B</a></li>
+                    <li><a href="b2c.html" class="link">B2C</a></li>
+                    <li><a href="helper.html" class="link">Helper 24</a></li>
+                    <li><a href="bloomi.html" class="link">Bloomy</a></li>
+                </ul>
+            </nav>
+            <button type="button" class="header__cta btn btn--primary js-open-modal" data-form-type="callback">Безкоштовна
+                консультація</button>
+        </div>
+        <div id="mobile-menu" class="header__menu" aria-hidden="true">
+            <div class="header__menu-inner">
+                <nav aria-label="Мобільне меню">
+                    <ul>
+                        <li><a href="index.html">Головна</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                        <li><a href="b2b.html">B2B</a></li>
+                        <li><a href="b2c.html">B2C</a></li>
+                        <li><a href="helper.html">Helper</a></li>
+                        <li><a href="bloomi.html">Bloomy</a></li>
+                        <li><a href="#location">Локація</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="btn btn--primary js-open-modal" data-form-type="callback">Безкоштовна
+                    консультація</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- 1. Про нас -->
+        <section class="hero hero--home" id="offer" aria-labelledby="hero-title">
+            <div class="hero__bg" aria-hidden="true">
+                <picture class="hero__poster">
+                    <img src="img/hero-poster.jpg" width="1920" height="1080" alt="" fetchpriority="high"
+                        decoding="async">
+                </picture>
+            </div>
+            <div class="container hero__container">
+                <div class="hero__body">
+                    <h1 id="hero-title" class="hero__title">Vendstore — Екосистема високотехнологічного <em>мікровендингу</em> під ключ</h1>
+                    <p class="hero__lead">Готові автономні точки продажу, що перетворюють вільний метр або стіну на стабільне джерело високомаржинального пасивного прибутку.</p>
+                    <ul class="hero__perks" aria-label="Ключові переваги">
+                        <li class="hero__perk"><i class="icon-Nameclock-m" aria-hidden="true"></i><span>24/7 без персоналу та касових розривів</span></li>
+                        <li class="hero__perk"><i class="icon-Nameverified_badge" aria-hidden="true"></i><span>Запуск під ключ без великих витрат</span></li>
+                        <li class="hero__perk"><i class="icon-NameStars" aria-hidden="true"></i><span>Високомаржинальний пасивний дохід</span></li>
+                        <li class="hero__perk"><i class="icon-Namelocation-m" aria-hidden="true"></i><span>Імпульсивні покупки там, де трафік</span></li>
+                    </ul>
+                </div>
+                <div class="hero__actions">
+                    <a href="#products" class="btn btn--primary">Helper та Bloomy <i class="icon-Namearrow_forward"
+                            aria-hidden="true"></i></a>
+                    <button type="button" class="btn btn--outline js-open-modal" data-form-type="callback">Безкоштовна
+                        консультація</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. B2B / B2C -->
+        <section class="audience section" id="audience" aria-labelledby="audience-title">
+            <div class="container audience__intro">
+                <p class="eyebrow">B2B & B2C</p>
+                <h2 id="audience-title" class="section-title section-title--wide">Моделі <span
+                        class="t-serif">співпраці</span></h2>
+            </div>
+            <div class="audience__stage">
+                <article class="audience__lane audience__lane--b2b" id="panel-b2b">
+                    <div class="container audience__lane-inner">
+                        <div class="audience__lane-grid">
+                            <div class="audience__copy">
+                                <span class="audience__index" aria-hidden="true">01</span>
+                                <p class="audience__tag">B2B · бізнесові мережі та бренди</p>
+                                <h3>Кастомізація та масштабування під ваші бізнес-задачі</h3>
+                                <p><strong>White Label &amp; брендування:</strong> повна адаптація обладнання під ваш
+                                    корпоративний стиль. Розробка індивідуального дизайну: фірмові кольори, інтеграція
+                                    логотипу, кастомне LED-підсвічування та стилізація інтерфейсу дисплеїв.</p>
+                                <p><strong>Для кого:</strong> мережі фітнес-центрів, готелі, АЗС, ритейл, б'юті-мережі
+                                    та бренди, що прагнуть розширити точки присутності без капітальних витрат на
+                                    класичні магазини.</p>
+                                <a href="b2b.html" class="btn btn--dark audience__cta">Сторінка B2B <i
+                                        class="icon-Namearrow_forward" aria-hidden="true"></i></a>
+                            </div>
+                            <figure class="audience__figure">
+                                <div class="audience__frame">
+                                    <img src="img/photo-b2b-hero.jpg" width="1920" height="1080"
+                                        alt="Корпоративна локація для вендингу" loading="lazy" decoding="async">
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </article>
+                <article class="audience__lane audience__lane--b2c" id="panel-b2c">
+                    <div class="container audience__lane-inner">
+                        <div class="audience__lane-grid">
+                            <figure class="audience__figure">
+                                <div class="audience__frame">
+                                    <img src="img/photo-b2c-audience.jpg" width="712" height="776"
+                                        alt="Приватний інвестор біля автомату" loading="lazy" decoding="async">
+                                </div>
+                            </figure>
+                            <div class="audience__copy">
+                                <span class="audience__index" aria-hidden="true">02</span>
+                                <p class="audience__tag">B2C · приватні інвестори · від 1 одиниці</p>
+                                <h3>Готовий автономний мікробізнес з окупністю від 5 місяців</h3>
+                                <ul class="audience__list">
+                                    <li><strong>Низький поріг входу:</strong> можливість запустити власну справу,
+                                        придбавши один апарат.</li>
+                                    <li><strong>Повна автономність:</strong> бізнес не потребує найму працівників та
+                                        виплати заробітних плат. Обслуговування однієї точки займає до 20 хвилин на
+                                        день.</li>
+                                    <li><strong>Smart-керівництво:</strong> весь контроль за фінансами, закупками та
+                                        технічним станом апарату — у вашому смартфоні.</li>
+                                </ul>
+                                <a href="b2c.html" class="btn btn--dark audience__cta">Сторінка B2C <i
+                                        class="icon-Namearrow_forward" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. Helper + Bloomy -->
+        <section class="products section section--light" id="products" aria-labelledby="products-title">
+            <div class="container products__head">
+                <p class="eyebrow eyebrow--dark">Продукти</p>
+                <h2 id="products-title" class="section-title section-title--dark section-title--wide">Helper та Bloomy —
+                    <span class="t-serif">два формати</span></h2>
+            </div>
+            <div class="products__stage">
+                <article class="product-spot product-spot--helper">
+                    <div class="product-spot__visual">
+                        <img src="img/photo-helper.jpg" width="737" height="776"
+                            alt="Helper — мікровендинг автомат" loading="lazy" decoding="async">
+                        <span class="product-spot__num" aria-hidden="true">01</span>
+                        <div class="product-spot__foot">
+                            <h3 class="product-spot__title">Мікровендинг товарів першої необхідності</h3>
+                            <div class="product-spot__actions">
+                                <button type="button" class="btn btn--outline product-spot__more js-product-detail-open"
+                                    aria-expanded="false" aria-controls="product-detail-helper">Детальніше</button>
+                                <a href="helper.html" class="btn btn--primary product-spot__cta">Сторінка Helper <i
+                                        class="icon-Namearrow_forward" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-spot__detail" id="product-detail-helper" aria-hidden="true">
+                            <button type="button" class="product-spot__detail-close js-product-detail-close"
+                                aria-label="Закрити деталі">
+                                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+                            </button>
+                            <div class="product-spot__detail-scroll">
+                                <p class="product-spot__trait">Helper · мікровендинг</p>
+                                <p class="product-spot__lead">Автоматизована безконтактна торгівля дрібними товарами в
+                                    місцях високого трафіку. Поруч у потрібну мить.</p>
+                                <div class="product-spot__group">
+                                    <p class="product-spot__group-label">Гнучкість наповнення</p>
+                                    <ul class="product-spot__chips">
+                                        <li>Фармація: пластирі, антисептики, вітаміни, тести</li>
+                                        <li>Tech &amp; Mobile: кабелі, павербанки, навушники</li>
+                                        <li>Гігієна &amp; Care: жіноча гігієна, презервативи, сухі шампуні</li>
+                                        <li>Снеки &amp; напої: перекуси, батончики, вода</li>
+                                        <li>Auto Care: ароматизатори, серветки, догляд</li>
+                                    </ul>
+                                </div>
+                                <div class="product-spot__group">
+                                    <p class="product-spot__group-label">Технічні модифікації</p>
+                                    <ul class="product-spot__specs">
+                                        <li><strong>Helper Box</strong> 80 товарів/ряд · 8 рядів · 50 Вт</li>
+                                        <li><strong>Helper Slim</strong> 50 товарів/ряд · 5 рядів · 50 Вт</li>
+                                    </ul>
+                                </div>
+                                <div class="product-spot__economy">
+                                    <p class="product-spot__group-label">Економіка</p>
+                                    <p>Чистий пасивний прибуток від 11&nbsp;550 грн/міс з одного апарату. Висока
+                                        маржинальність — окупність на базі чека 85 грн при 17 продажах на день.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="products__seam" aria-hidden="true">
+                    <span class="products__seam-ring"><span class="products__seam-word">і</span></span>
+                </div>
+                <article class="product-spot product-spot--bloomi">
+                    <div class="product-spot__visual">
+                        <img src="img/photo-bloomi.jpg" width="712" height="776"
+                            alt="Bloomy — парфумерний вендинг" loading="lazy" decoding="async">
+                        <span class="product-spot__num" aria-hidden="true">02</span>
+                        <div class="product-spot__foot">
+                            <h3 class="product-spot__title">Парфумерний вендинг нового покоління</h3>
+                            <div class="product-spot__actions">
+                                <button type="button" class="btn btn--outline product-spot__more js-product-detail-open"
+                                    aria-expanded="false" aria-controls="product-detail-bloomi">Детальніше</button>
+                                <a href="bloomi.html" class="btn btn--primary product-spot__cta">Сторінка Bloomy <i
+                                        class="icon-Namearrow_forward" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-spot__detail" id="product-detail-bloomi" aria-hidden="true">
+                            <button type="button" class="product-spot__detail-close js-product-detail-close"
+                                aria-label="Закрити деталі">
+                                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+                            </button>
+                            <div class="product-spot__detail-scroll">
+                                <p class="product-spot__trait">Bloomy · парфумерія</p>
+                                <p class="product-spot__lead">Автоматизована преміум-точка: клієнт обирає, тестує та
+                                    купує розпилення або міні-об'єм аромату без продавця.</p>
+                                <div class="product-spot__group">
+                                    <p class="product-spot__group-label">Технічні модифікації</p>
+                                    <ul class="product-spot__specs">
+                                        <li><strong>Настінна</strong> 700×185×413 мм · 22–24 кг · Android 10,1"</li>
+                                        <li><strong>Підлогова</strong> 800×250×1900 мм · 100 кг · 10,1" + 43" дисплей</li>
+                                    </ul>
+                                </div>
+                                <div class="product-spot__group">
+                                    <p class="product-spot__group-label">Характеристики</p>
+                                    <ul class="product-spot__specs">
+                                        <li>5 ароматів · 1000–1200 розпилень по 100 мл</li>
+                                        <li>Сталевий антивандальний корпус · розпилення до 50 см</li>
+                                        <li>Оплата карткою або монетами</li>
+                                    </ul>
+                                </div>
+                                <div class="product-spot__economy">
+                                    <p class="product-spot__group-label">Економіка</p>
+                                    <p>Окупність 5–6 місяців завдяки надвисокій маржинальності: 1 оплата = 2 якісних
+                                        розпилення парфуму.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 4. Етапи -->
+        <section class="steps section" id="steps" aria-labelledby="steps-title">
+            <div class="container steps__head">
+                <p class="eyebrow">Етапи співпраці</p>
+                <h2 id="steps-title" class="section-title section-title--wide">Від заявки до <span
+                        class="t-serif">запуску</span></h2>
+            </div>
+            <div class="container">
+                <ol class="steps__track">
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">01</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Заявка</h3>
+                            <p>Ви залишаєте запит, ми аналізуємо ваші цілі (B2B-мережа чи B2C-інвестиція) та підбираємо
+                                оптимальну модель обладнання (Helper або Bloomy).</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">02</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Узгодження концепту та фінансової моделі</h3>
+                            <p>Розрахунок окупності під обрану нішу товару/парфумерії, затвердження об'ємів та потреби
+                                в індивідуальному брендуванні.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">03</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Виробництво та брендування</h3>
+                            <p>Збірка автоматів, нанесення вашого фірмового стилю, встановлення платіжних терміналів
+                                та налаштування ПЗ під ключ.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">04</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Локація та монтаж</h3>
+                            <p>Тестування та встановлення обладнання на локацію. Підключення до хмарної системи
+                                моніторингу.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">05</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Запуск та супровід</h3>
+                            <p>Початок роботи 24/7. Ви отримуєте чистий прибуток, контролюючи всі процеси через екран
+                                смартфона з нашою технічною підтримкою.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 5. Оффер + CTA -->
+        <section class="cta-banner section section--light" id="cta" aria-labelledby="cta-title">
+            <div class="cta-banner__stage">
+                <aside class="cta-banner__left">
+                    <div class="cta-banner__left-content">
+                        <p class="eyebrow">Готовий бізнес під ключ</p>
+                        <h2 id="cta-title" class="cta-banner__title">Почніть заробляти на пасиві <span
+                                class="t-serif">вже за 30 днів</span></h2>
+                        <p class="cta-banner__desc">Оберіть свій формат високотехнологічного бізнесу від Vendstore, який
+                            працює без працівників, вихідних та операційного хаосу.</p>
+                    </div>
+                    <footer class="cta-banner__footer">
+                        <p class="cta-banner__trigger">Не знаєте, який продукт підійде саме під вашу локацію чи бюджет?
+                            Залиште коротку заявку — наш маркетолог-стратег проведе безкоштовний аудит вашої
+                            бізнес-задачі, підбере правильну модель (Helper чи Bloomy) та розрахує точні терміни
+                            окупності проекту.</p>
+                        <button type="button" class="btn btn--outline js-open-modal" data-form-type="callback">Отримати
+                            безкоштовну консультацію <i class="icon-Nameemail-m" aria-hidden="true"></i></button>
+                    </footer>
+                </aside>
+
+                <div class="cta-banner__right">
+                    <div class="cta-banner__formats">
+                    <article class="cta-banner__format cta-banner__format--bloomi">
+                        <p class="cta-banner__format-label">Формат 1 · Bloomy</p>
+                        <h3>Запустити преміум-точку парфумерії Bloomy</h3>
+                        <div class="cta-banner__format-media">
+                            <img src="img/Bloomy.jpg" width="800" height="480" alt="Bloomy — парфумерний вендинг"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <div class="cta-banner__points">
+                            <p class="cta-banner__point"><strong>Для кого</strong> Для тих, хто шукає надвисоку
+                                маржинальність, wow-ефект на топових локаціях (ТРЦ, клуби, фітнес-центри, готелі) та
+                                швидку окупність від 5 місяців.</p>
+                            <p class="cta-banner__point"><strong>Що ви отримуєте</strong> Антивандальний апарат на 5
+                                топових ароматів з великим 43" рекламним екраном (у підлоговій версії) та безконтактною
+                                оплатою під ключ.</p>
+                        </div>
+                        <div class="cta-banner__action">
+                            <button type="button" class="btn btn--dark js-open-modal"
+                                data-form-type="partner" data-product="Bloomy">Замовити прорахунок Bloomy <i
+                                    class="icon-Namearrow_forward" aria-hidden="true"></i></button>
+                            <p class="cta-banner__action-note">Отримайте індивідуальний медіаплан та розрахунок прибутку
+                                для парфумерного вендингу.</p>
+                        </div>
+                    </article>
+
+                    <article class="cta-banner__format cta-banner__format--helper">
+                        <p class="cta-banner__format-label">Формат 2 · Helper</p>
+                        <h3>Створити мережу мікро-ритейлу Helper</h3>
+                        <div class="cta-banner__format-media">
+                            <img src="img/Helper.jpg" width="800" height="480" alt="Helper — мікровендинг автомат"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <div class="cta-banner__points">
+                            <p class="cta-banner__point"><strong>Для кого</strong> Для інвесторів, які роблять ставку на
+                                системний бізнес, товари першої необхідності (фармація, техніка, гігієна, снеки) та
+                                тотальну гнучкість наповнення під будь-яку локацію.</p>
+                            <p class="cta-banner__point"><strong>Що ви отримуєте</strong> Автономний smart-бокс (Helper Box
+                                або Helper Slim) із чистим пасивним прибутком від 11&nbsp;550 до 16&nbsp;050 грн/місяць
+                                з одного апарату та повним хмарним контролем із телефона.</p>
+                        </div>
+                        <div class="cta-banner__action">
+                            <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
+                                data-product="Helper">Запустити Helper <i class="icon-Namearrow_forward"
+                                    aria-hidden="true"></i></button>
+                            <p class="cta-banner__action-note">Отримайте фінмодель масштабування мережі від 1 до 50
+                                автоматів та каталог товарних матриць.</p>
+                        </div>
+                    </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Локація — CTA -->
+        <section class="location-cta section" id="location" aria-labelledby="location-cta-title">
+            <div class="location-cta__bg" aria-hidden="true">
+                <img src="img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="container location-cta__container">
+                <div class="location-cta__inner">
+                <p class="eyebrow">Локація</p>
+                <h2 id="location-cta-title" class="location-cta__title">Запропонувати <span class="t-serif">локацію</span>
+                    під встановлення</h2>
+                <p class="location-cta__lead">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в місці
+                    з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення мережі
+                    Vendstore (ЖК, фітнес-центри, ТРЦ, бізнес-центри, готелі, заклади відпочинку).</p>
+                <p class="location-cta__payoff">Запропонуйте нам локацію — ми проведемо безкоштовний аудит трафіку, і якщо
+                    місце підійде, ви отримаєте <strong>стабільний пасивний дохід від оренди площі</strong>: встановлення,
+                    сервіс і заправку апарата беремо на себе.</p>
+                <a href="#location-apply" class="btn btn--primary">Запропонувати локацію <i class="icon-Namelocation-m"
+                        aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Локація — форма -->
+        <section class="location section section--light" id="location-apply" aria-labelledby="location-form-title">
+            <div class="container location__layout">
+                <div class="location__intro">
+                    <p class="eyebrow eyebrow--dark">Анкета власника локації</p>
+                    <h2 id="location-form-title" class="section-title section-title--dark section-title--wide">Розкажіть
+                        про <span class="t-serif">площу</span></h2>
+                    <p class="location__desc">Це займе 2–3 хвилини: вкажіть адресу, тип об'єкта та приблизну прохідність.
+                        Ми перевіримо карту трафіку та передзвонимо з рішенням — чи підходить місце під Helper чи Bloomy і
+                        який дохід можна очікувати.</p>
+                    <ul class="location__hints">
+                        <li>ТРЦ, лобі та коридори бізнес-центрів</li>
+                        <li>Фітнес-клуби, готелі, заклади відпочинку</li>
+                        <li>Житлові комплекси біля входу чи ресепшену</li>
+                    </ul>
+                </div>
+                <form id="location-form" class="location__form"
+                    aria-label="Запропонувати локацію під встановлення">
+                    <input type="hidden" name="form_type" value="location">
+                    <input type="hidden" name="product" value="">
+                    <div class="form-group">
+                        <label for="loc-name">Ваше ім'я</label>
+                        <input type="text" id="loc-name" name="name" placeholder="Олександр" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="loc-phone">Телефон *</label>
+                        <input type="tel" id="loc-phone" name="phone" placeholder="+38 (0__) ___-__-__" required
+                            aria-required="true" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="loc-address">Адреса або опис локації *</label>
+                        <input type="text" id="loc-address" name="address"
+                            placeholder="Київ, ТРЦ «…», 1 поверх, лобі" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="loc-comment">Коментар</label>
+                        <textarea id="loc-comment" name="comment"
+                            placeholder="Площа, прохідність, тип об'єкта…"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Надіслати пропозицію</button>
+                    <p class="form-note">Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.</p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__shell">
+            <div class="footer__mast">
+                <div class="footer__brand">
+                    <a href="index.html" class="footer__logo" aria-label="Vendstore — на головну">
+                        <span class="footer__logo-text">Vend<span class="footer__logo-serif">store</span></span>
+                    </a>
+                    <p class="footer__tagline">Екосистема високотехнологічного мікровендингу під ключ.</p>
+                </div>
+                <button type="button" class="btn btn--primary footer__cta js-open-modal" data-form-type="callback">Безкоштовна
+                    консультація <i class="icon-Nameemail-m" aria-hidden="true"></i></button>
+            </div>
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <p class="footer__label">Компанія</p>
+                    <nav class="footer__nav" aria-label="Компанія">
+                        <a href="index.html">Головна</a>
+                        <a href="about.html">Про нас</a>
+                        <a href="b2b.html">B2B</a>
+                        <a href="b2c.html">B2C</a>
+                    </nav>
+                </div>
+                <div class="footer__col">
+                    <p class="footer__label">Продукти</p>
+                    <nav class="footer__nav" aria-label="Продукти">
+                        <a href="helper.html">Helper 24</a>
+                        <a href="bloomi.html">Bloomy</a>
+                        <a href="#products">Формати</a>
+                        <a href="#location">Локація</a>
+                    </nav>
+                </div>
+                <div class="footer__col">
+                    <p class="footer__label">Зв'язок</p>
+                    <div class="footer__contact">
+                        <a href="tel:+380000000000">+38 (000) 000 00 00</a>
+                        <a href="mailto:hello@vendstore.ua">hello@vendstore.ua</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>© 2026 Vendstore. Усі права захищено. Інформація на сайті не є публічною офертою.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal__window">
+            <button type="button" class="modal__close js-modal-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
+            <div class="modal__content">
+                <h2 id="modal-title">Заявка <span>партнеру</span></h2>
+                <p class="modal__subtitle">Залиште контакти — ми зв'яжемося найближчим часом</p>
+                <form id="modal-form" class="modal__form">
+                    <input type="hidden" name="form_type" value="partner">
+                    <input type="hidden" name="product" id="modal-product" value="">
+                    <div class="form-group">
+                        <label for="modal-name">Ім'я</label>
+                        <input type="text" id="modal-name" name="name" placeholder="Ваше ім'я" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-phone">Телефон *</label>
+                        <input type="tel" id="modal-phone" name="phone" placeholder="+38 (0__) ___-__-__" required
+                            aria-required="true" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-comment">Коментар</label>
+                        <textarea id="modal-comment" name="comment" placeholder="Локація, тип об'єкта, питання…"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Надіслати</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"
+        aria-hidden="true">
+        <div class="modal__window">
+            <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
+            <div class="modal__content modal__content--center">
+                <h2 id="success-title"><span>Дякуємо!</span> Заявку отримано</h2>
+                <p>Менеджер VendStore зателефонує протягом 1 робочого дня.</p>
+                <button type="button" class="btn btn--primary js-modal-success-close">Зрозуміло</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            function closeProductDetail(visual) {
+                if (!visual) return;
+                var detail = visual.querySelector('.product-spot__detail');
+                var trigger = visual.querySelector('.js-product-detail-open');
+                visual.classList.remove('is-detail-open');
+                if (detail) {
+                    detail.classList.remove('is-open');
+                    detail.setAttribute('aria-hidden', 'true');
+                }
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            }
+            function getHeaderOffset() {
+                var raw = getComputedStyle(document.documentElement).getPropertyValue('--vs-header-h').trim();
+                return parseInt(raw, 10) || 80;
+            }
+
+            function scrollVisualToStart(visual) {
+                return new Promise(function (resolve) {
+                    var headerOffset = getHeaderOffset();
+                    var top = visual.getBoundingClientRect().top;
+
+                    if (Math.abs(top - headerOffset) <= 3) {
+                        resolve();
+                        return;
+                    }
+
+                    var targetY = window.pageYOffset + top - headerOffset;
+                    var settled = false;
+
+                    function finish() {
+                        if (settled) return;
+                        settled = true;
+                        window.removeEventListener('scroll', onScroll);
+                        clearTimeout(timer);
+                        resolve();
+                    }
+
+                    function onScroll() {
+                        if (Math.abs(visual.getBoundingClientRect().top - headerOffset) <= 3) {
+                            finish();
+                        }
+                    }
+
+                    window.addEventListener('scroll', onScroll, { passive: true });
+                    var timer = setTimeout(finish, 800);
+
+                    if (window.__vsLenis && typeof window.__vsLenis.scrollTo === 'function') {
+                        window.__vsLenis.scrollTo(targetY, { duration: 0.75, onComplete: finish });
+                        return;
+                    }
+
+                    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+                });
+            }
+
+            function openProductDetail(visual, trigger) {
+                var detail = visual.querySelector('.product-spot__detail');
+                if (!detail || visual.classList.contains('is-detail-open')) return;
+
+                return scrollVisualToStart(visual).then(function () {
+                    document.querySelectorAll('.product-spot__visual.is-detail-open').forEach(function (v) {
+                        if (v !== visual) closeProductDetail(v);
+                    });
+                    visual.classList.add('is-detail-open');
+                    detail.classList.add('is-open');
+                    detail.setAttribute('aria-hidden', 'false');
+                    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                var openBtn = e.target.closest('.js-product-detail-open');
+                if (openBtn) {
+                    e.preventDefault();
+                    var visual = openBtn.closest('.product-spot__visual');
+                    if (!visual || visual.dataset.detailBusy === 'true') return;
+                    visual.dataset.detailBusy = 'true';
+                    openProductDetail(visual, openBtn).finally(function () {
+                        delete visual.dataset.detailBusy;
+                    });
+                    return;
+                }
+                var closeBtn = e.target.closest('.js-product-detail-close');
+                if (closeBtn) {
+                    e.preventDefault();
+                    closeProductDetail(closeBtn.closest('.product-spot__visual'));
+                }
+            }, true);
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Escape') return;
+                document.querySelectorAll('.product-spot__visual.is-detail-open').forEach(closeProductDetail);
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            var scripts = [
+                '../libs/gsap/gsap.min.js',
+                '../libs/gsap/ScrollTrigger.min.js',
+                '../libs/lenis/lenis.min.js',
+                'js/main.js'
+            ];
+            var loaded = false;
+            function loadAll() {
+                if (loaded) return;
+                loaded = true;
+                (function next(i) {
+                    if (i >= scripts.length) return;
+                    var s = document.createElement('script');
+                    s.src = scripts[i];
+                    s.onload = function () { next(i + 1); };
+                    document.body.appendChild(s);
+                })(0);
+            }
+            ['scroll', 'pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
+                window.addEventListener(e, loadAll, { once: true, passive: true });
+            });
+            window.addEventListener('load', function () {
+                setTimeout(loadAll, 1500);
+            }, { once: true });
+        })();
+    </script>
+</body>
+
+</html>

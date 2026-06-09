@@ -1,0 +1,10 @@
+{
+  "name": "vendstore",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VendStore — smart vending (Helper 24 & Bloomi)",
+  "scripts": {
+    "build:css": "cat ../css/reset.css css/fonts.css css/style.css > css/_all.tmp.css && npx --yes clean-css-cli@5 -o css/app.min.css css/_all.tmp.css && rm css/_all.tmp.css",
+    "build": "npm run build:css"
+  }
+}
