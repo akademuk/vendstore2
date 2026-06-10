@@ -11,11 +11,9 @@ python3 -m http.server 8080
 # або з папки vendstore: http://localhost:8080/
 ```
 
-## Збірка CSS
+## Стилі
 
-```bash
-npm run build
-```
+Під час розробки підключаються напряму `css/fonts.css` і `css/style.css` (без мініфікації). Збірку CSS додамо пізніше.
 
 ## Тимчасові зображення
 

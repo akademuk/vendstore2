@@ -93,22 +93,50 @@ const html = document.documentElement;
   }
 })();
 
-/* ─── Lenis (skip Safari) ─── */
+/* ─── Lenis + GSAP (lazy, via __vsInitMotion) ─── */
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 let lenisInstance = null;
+let motionReady = false;
 
-if (!isSafari && typeof Lenis !== 'undefined') {
+function initMotion() {
+  if (motionReady) return;
+  if (isSafari || typeof Lenis === 'undefined') return;
+  motionReady = true;
+
   lenisInstance = new Lenis({
     prevent: (node) => node.closest('.modal__window') !== null,
   });
   window.__vsLenis = lenisInstance;
+
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
     lenisInstance.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+
+    gsap.utils.toArray('.steps__step, .audience__figure, .product-spot, .card, .split__media, .product-pick, .offer-card').forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom-=60',
+            toggleActions: 'play none none none',
+          },
+          delay: (i % 3) * 0.08,
+        }
+      );
+    });
   }
 }
+
+window.__vsInitMotion = initMotion;
+initMotion();
 
 function updateHeader() {
   if (!header) return;
@@ -117,30 +145,6 @@ function updateHeader() {
 
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
-
-/* ─── GSAP reveals ─── */
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.utils.toArray('.steps__step, .audience__figure, .product-spot, .card, .split__media, .product-pick, .offer-card').forEach((el, i) => {
-    gsap.fromTo(
-      el,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top bottom-=60',
-          toggleActions: 'play none none none',
-        },
-        delay: (i % 3) * 0.08,
-      }
-    );
-  });
-}
 
 /* ─── Burger menu ─── */
 const burger = document.querySelector('.burger');
@@ -336,12 +340,13 @@ function closeModalSuccess() {
   unlockScroll();
 }
 
-document.querySelectorAll('.js-open-modal').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    openModal({
-      formType: btn.dataset.formType || 'partner',
-      product: btn.dataset.product || '',
-    });
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.js-open-modal');
+  if (!btn) return;
+  e.preventDefault();
+  openModal({
+    formType: btn.dataset.formType || 'callback',
+    product: btn.dataset.product || '',
   });
 });
 
@@ -475,4 +480,102 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 if (document.body.dataset.page === 'home') {
   document.querySelector('.header__menu a[href="index.html"]')?.classList.add('is-active');
 }
+
+/* ─── Product detail overlay (home) ─── */
+(function () {
+  function closeProductDetail(visual) {
+    if (!visual) return;
+    const detail = visual.querySelector('.product-spot__detail');
+    const trigger = visual.querySelector('.js-product-detail-open');
+    visual.classList.remove('is-detail-open');
+    if (detail) {
+      detail.classList.remove('is-open');
+      detail.setAttribute('aria-hidden', 'true');
+    }
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function getHeaderOffset() {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--vs-header-h').trim();
+    return parseInt(raw, 10) || 80;
+  }
+
+  function scrollVisualToStart(visual) {
+    return new Promise((resolve) => {
+      const headerOffset = getHeaderOffset();
+      const top = visual.getBoundingClientRect().top;
+
+      if (Math.abs(top - headerOffset) <= 3) {
+        resolve();
+        return;
+      }
+
+      const targetY = window.pageYOffset + top - headerOffset;
+      let settled = false;
+
+      function finish() {
+        if (settled) return;
+        settled = true;
+        window.removeEventListener('scroll', onScroll);
+        clearTimeout(timer);
+        resolve();
+      }
+
+      function onScroll() {
+        if (Math.abs(visual.getBoundingClientRect().top - headerOffset) <= 3) {
+          finish();
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      const timer = setTimeout(finish, 800);
+
+      if (window.__vsLenis && typeof window.__vsLenis.scrollTo === 'function') {
+        window.__vsLenis.scrollTo(targetY, { duration: 0.75, onComplete: finish });
+        return;
+      }
+
+      window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+    });
+  }
+
+  function openProductDetail(visual, trigger) {
+    const detail = visual.querySelector('.product-spot__detail');
+    if (!detail || visual.classList.contains('is-detail-open')) return;
+
+    return scrollVisualToStart(visual).then(() => {
+      document.querySelectorAll('.product-spot__visual.is-detail-open').forEach((v) => {
+        if (v !== visual) closeProductDetail(v);
+      });
+      visual.classList.add('is-detail-open');
+      detail.classList.add('is-open');
+      detail.setAttribute('aria-hidden', 'false');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('.js-product-detail-open');
+    if (openBtn) {
+      e.preventDefault();
+      const visual = openBtn.closest('.product-spot__visual');
+      if (!visual || visual.dataset.detailBusy === 'true') return;
+      visual.dataset.detailBusy = 'true';
+      openProductDetail(visual, openBtn).finally(() => {
+        delete visual.dataset.detailBusy;
+      });
+      return;
+    }
+    const closeBtn = e.target.closest('.js-product-detail-close');
+    if (closeBtn) {
+      e.preventDefault();
+      closeProductDetail(closeBtn.closest('.product-spot__visual'));
+    }
+  }, true);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.product-spot__visual.is-detail-open').forEach(closeProductDetail);
+  });
+})();
 
