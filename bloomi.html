@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bloomi — квітковий вендінг | VendStore</title>
+    <title>Bloomy — парфумерний вендинг | Vendstore</title>
     <meta name="description"
-        content="Bloomi — преміум вендінг свіжих квітів від VendStore. Готелі, event-простори, імпульсні покупки без черги." />
+        content="Bloomy — преміум парфумерний вендинг: 5 ароматів, тестування розпилення, настінна та підлогова моделі. Окупність 5–6 місяців." />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#262626" />
+    <meta name="theme-color" content="#0C1712" />
     <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
-    <link rel="stylesheet" href="css/app.min.css" />
-    <script>document.documentElement.classList.add('css-ready');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preload" as="font" type="font/woff2" href="fonts/icomoon.woff2" crossorigin>
 </head>
 
-<body data-page="bloomi">
+<body data-page="bloomi" class="product-profile product-profile--bloomi">
     <a href="#main" class="skip-link">Перейти до основного вмісту</a>
 
     <header class="header">
@@ -22,131 +26,376 @@
             <div class="header__left">
                 <button type="button" class="burger" aria-label="Відкрити меню" aria-expanded="false"
                     aria-controls="mobile-menu">
-                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
                 </button>
-                <a href="index.html" class="header__logo" aria-label="Vendstore — головна">
-                    <span class="header__logo-text" aria-hidden="true">Vend<span class="header__logo-serif">store</span></span>
+                <a href="index.html" class="header__logo" aria-label="Vendstore — на головну">
+                    <span class="header__logo-text" aria-hidden="true">Vend<span
+                            class="header__logo-serif">store</span></span>
                 </a>
             </div>
-            <nav class="header__nav" aria-label="Навігація">
+            <nav id="main-nav" class="header__nav" aria-label="Основна навігація">
                 <ul class="header__list">
                     <li><a href="about.html" class="link">Про нас</a></li>
                     <li><a href="b2b.html" class="link">B2B</a></li>
                     <li><a href="b2c.html" class="link">B2C</a></li>
-                    <li><a href="helper.html" class="link">Helper 24</a></li>
-                    <li><a href="bloomi.html" class="link">Bloomi</a></li>
+                    <li><a href="helper.html" class="link">HELPER+</a></li>
+                    <li><a href="bloomi.html" class="link is-active">Bloomy</a></li>
                 </ul>
             </nav>
-            <button type="button" class="header__cta btn btn--primary btn--bloomi js-open-modal" data-form-type="partner"
-                data-product="Bloomi">Запит на Bloomi</button>
+            <div class="header__right">
+                <nav class="lang-switch" aria-label="Вибір мови">
+                    <a href="bloomi.html" class="lang-switch__btn is-active" hreflang="uk" lang="uk"
+                        aria-current="page">УКР</a>
+                    <a href="ru/index.html" class="lang-switch__btn" hreflang="ru" lang="ru">РУС</a>
+                </nav>
+                <button type="button" class="header__cta btn btn--primary btn--bloomi js-open-modal"
+                    data-form-type="partner" data-product="Bloomy">Запит на Bloomy</button>
+            </div>
         </div>
         <div id="mobile-menu" class="header__menu" aria-hidden="true">
             <div class="header__menu-inner">
-                <nav><ul>
-                    <li><a href="index.html">Головна</a></li>
-                    <li><a href="about.html">Про нас</a></li>
-                    <li><a href="b2b.html">B2B</a></li>
-                    <li><a href="b2c.html">B2C</a></li>
-                    <li><a href="helper.html">Helper 24</a></li>
-                    <li><a href="bloomi.html">Bloomi</a></li>
-                </ul></nav>
+                <nav class="lang-switch lang-switch--menu" aria-label="Вибір мови">
+                    <a href="bloomi.html" class="lang-switch__btn is-active" hreflang="uk" lang="uk"
+                        aria-current="page">УКР</a>
+                    <a href="ru/index.html" class="lang-switch__btn" hreflang="ru" lang="ru">РУС</a>
+                </nav>
+                <nav aria-label="Мобільне меню">
+                    <ul>
+                        <li><a href="index.html">Головна</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                        <li><a href="b2b.html">B2B</a></li>
+                        <li><a href="b2c.html">B2C</a></li>
+                        <li><a href="helper.html">HELPER+</a></li>
+                        <li><a href="bloomi.html">Bloomy</a></li>
+                        <li><a href="index.html#location">Локація</a></li>
+                    </ul>
+                </nav>
                 <button type="button" class="btn btn--primary btn--bloomi js-open-modal" data-form-type="partner"
-                    data-product="Bloomi">Запит</button>
+                    data-product="Bloomy">Запит на Bloomy</button>
             </div>
         </div>
     </header>
 
     <main id="main">
-        <section class="page-hero page-hero--bloomi">
+        <svg class="vs-sprite" aria-hidden="true" focusable="false">
+            <symbol id="vs-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.5 2" />
+            </symbol>
+            <symbol id="vs-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3.5 18 6.5v5.2c0 4.6-3.2 7.8-6 9.3-2.8-1.5-6-4.7-6-9.3V6.5l6-3z" />
+                <path d="M9.2 11.8 11 13.6 14.8 9.8" />
+            </symbol>
+            <symbol id="vs-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.6 12 21 12 21z" />
+                <circle cx="12" cy="10.5" r="2.2" />
+            </symbol>
+            <symbol id="vs-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V5M4 19h16" />
+                <path d="M8 15.5V11M12 15.5V8M16 15.5v-4" />
+            </symbol>
+            <symbol id="vs-smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="7.5" y="2.5" width="9" height="19" rx="2" />
+                <path d="M11 18.5h2" />
+                <path d="M5.5 9c2.2-1.8 5.3-1.8 7.5 0M4 6.5c3.2-2.6 8.3-2.6 11.5 0" />
+                <circle cx="12" cy="7" r="0.75" fill="currentColor" stroke="none" />
+            </symbol>
+        </svg>
+
+        <section class="page-hero page-hero--bloomi page-hero--product">
             <div class="page-hero__bg" aria-hidden="true">
-                <img src="img/photo-bloomi.webp" width="712" height="776" alt="" loading="eager" decoding="async">
+                <img src="img/photo-bloomi.jpg" width="712" height="776" alt="" loading="eager" decoding="async">
             </div>
             <div class="container">
-                <p class="eyebrow">Продукт · 02</p>
-                <h1 class="page-hero__title"><em>Bloomi</em></h1>
-                <p class="page-hero__text">Преміум-апарат для свіжих квітів і готових букетів. Емоційна покупка за секунди —
-                    у готелі, ресторані, аеропорту або на заході, де важливі естетика та сервіс.</p>
+                <p class="eyebrow">Продукт · 02 · парфумерія</p>
+                <h1 class="page-hero__title"><span class="t-serif">Bloomy</span></h1>
+                <p class="page-hero__text">Автоматизована преміум-точка нового покоління: клієнт обирає аромат, тестує
+                    розпилення та купує міні-об'єм без продавця. Wow-ефект для ТРЦ, клубів, готелів і б'юті-локацій.</p>
                 <div class="page-hero__actions">
                     <button type="button" class="btn btn--primary btn--bloomi js-open-modal" data-form-type="partner"
-                        data-product="Bloomi">Встановити Bloomi</button>
-                    <a href="b2c.html" class="btn btn--outline">Для покупців</a>
+                        data-product="Bloomy">Запустити Bloomy</button>
+                    <a href="#models" class="btn btn--outline">Настінна та підлогова <i class="icon-Namearrow_forward"
+                            aria-hidden="true"></i></a>
                 </div>
+                <dl class="page-hero__stats">
+                    <div class="page-hero__stat">
+                        <strong>5–6 міс.</strong>
+                        <span>окупність</span>
+                    </div>
+                    <div class="page-hero__stat">
+                        <strong>5 ароматів</strong>
+                        <span>на одній точці</span>
+                    </div>
+                    <div class="page-hero__stat">
+                        <strong>2×</strong>
+                        <span>розпилення за 1 оплату</span>
+                    </div>
+                </dl>
             </div>
         </section>
 
-        <section class="page-block page-block--light">
+        <section class="page-block" aria-labelledby="bloomi-concept-title">
             <div class="container split split--reverse">
                 <div class="split__media">
-                    <img src="img/photo-bloomi.webp" width="712" height="776" alt="Квітковий вендінг Bloomi"
+                    <img src="img/Bloomy.jpg" width="800" height="480" alt="Bloomy — парфумерний вендинг"
                         loading="lazy" decoding="async">
                 </div>
                 <div class="split__content">
-                    <span class="split__tag split__tag--bloomi">Квітковий вендінг</span>
-                    <h2 class="section-title section-title--dark section-title--wide">Емоція <span
-                            class="t-serif">в моменті</span></h2>
-                    <p>Bloomi закриває імпульс «подарувати зараз» — без черги, без пошуку квіткового біля готелю о 23:00.</p>
+                    <span class="split__tag split__tag--bloomi">Концепція</span>
+                    <h2 id="bloomi-concept-title" class="section-title section-title--wide">Парфумерія без <span
+                            class="t-serif">продавця</span></h2>
+                    <p>Bloomy перетворює вільний метр на преміум-досвід: інтерактивний вибір, тестування на шкірі та
+                        покупка розпилення або міні-флакона за секунди. Сталевий антивандальний корпус, сенсорні дисплеї
+                        та сервіс Vendstore — під ключ.</p>
                     <ul class="products__features">
-                        <li>Клімат-контроль для свіжості</li>
-                        <li>Сезонні та святкові колекції</li>
-                        <li>Преміум-презентація упаковки</li>
+                        <li><strong>1 оплата = 2 якісних розпилення</strong> — надвисока маржинальність</li>
+                        <li><strong>1000–1200 розпилень</strong> по 100 мл на аромат</li>
+                        <li><strong>Android-інтерфейс</strong> — зрозумілий UX для будь-якого покупця</li>
                     </ul>
+                    <a href="b2b.html" class="btn btn--outline">White Label для мереж <i class="icon-Namearrow_forward"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
 
-        <section class="page-block">
+        <section class="page-block page-block--light" aria-labelledby="bloomi-experience-title">
             <div class="container">
                 <div class="page-block__head">
-                    <p class="eyebrow">Специфікація</p>
-                    <h2 class="section-title section-title--wide">Характеристики</h2>
+                    <p class="eyebrow eyebrow--dark">Досвід покупця</p>
+                    <h2 id="bloomi-experience-title" class="section-title section-title--dark section-title--wide">Три
+                        кроки до <span class="t-serif">аромату</span>
+                    </h2>
+                </div>
+                <div class="cards cards--3">
+                    <article class="card card--bloomi">
+                        <span class="card__index" aria-hidden="true">01</span>
+                        <h3>Обрати</h3>
+                        <p>На сенсорному дисплеї — 5 топових ароматів з описом нот і рекомендаціями.</p>
+                    </article>
+                    <article class="card card--bloomi">
+                        <span class="card__index" aria-hidden="true">02</span>
+                        <h3>Спробувати</h3>
+                        <p>Розпилення до 50 см — клієнт відчуває аромат на собі перед покупкою.</p>
+                    </article>
+                    <article class="card card--bloomi">
+                        <span class="card__index" aria-hidden="true">03</span>
+                        <h3>Купити</h3>
+                        <p>Оплата карткою або монетами — миттєва видача розпилення або міні-об'єму.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-block" id="models" aria-labelledby="bloomi-models-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow">Моделі</p>
+                    <h2 id="bloomi-models-title" class="section-title section-title--wide">Два формати <span
+                            class="t-serif">обладнання</span></h2>
+                    <p class="section-desc">Настінна — для компактних зон. Підлогова — флагман з великим дисплеєм і
+                        максимальним wow-ефектом у просторі.</p>
+                </div>
+                <div class="product-models">
+                    <article class="product-model">
+                        <span class="product-model__badge">Компакт</span>
+                        <h3 class="product-model__name">Настінна Bloomy</h3>
+                        <ul class="product-model__specs">
+                            <li><strong>Габарити:</strong> 700×185×413 мм</li>
+                            <li><strong>Вага:</strong> 22–24 кг</li>
+                            <li><strong>Дисплей:</strong> Android 10,1"</li>
+                            <li><strong>Для кого:</strong> коридори, лобі, зони очікування</li>
+                        </ul>
+                    </article>
+                    <article class="product-model product-model--featured">
+                        <span class="product-model__badge">Флагман</span>
+                        <h3 class="product-model__name">Підлогова Bloomy</h3>
+                        <ul class="product-model__specs">
+                            <li><strong>Габарити:</strong> 800×250×1900 мм</li>
+                            <li><strong>Вага:</strong> 100 кг</li>
+                            <li><strong>Дисплеї:</strong> 10,1" + 43" екран</li>
+                            <li><strong>Для кого:</strong> ТРЦ, готелі, преміум-клуби</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-block page-block--light" aria-labelledby="bloomi-specs-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow eyebrow--dark">Специфікація</p>
+                    <h2 id="bloomi-specs-title" class="section-title section-title--dark section-title--wide">
+                        Технічні <span class="t-serif">характеристики</span>
+                    </h2>
                 </div>
                 <ul class="specs">
-                    <li><strong>Категорія</strong><span>Квіти, букети, подарункові набори</span></li>
-                    <li><strong>Локації</strong><span>Готель · Lounge · Event · Retail</span></li>
-                    <li><strong>Оплата</strong><span>Безконтакт, преміум POS</span></li>
-                    <li><strong>Логістика</strong><span>Регулярна підміна SKU VendStore</span></li>
-                    <li><strong>Дизайн</strong><span>Точка привертає увагу в інтер'єрі</span></li>
+                    <li><strong>Аромати</strong><span>5 позицій · 1000–1200 розпилень по 100 мл кожен</span></li>
+                    <li><strong>Корпус</strong><span>Сталевий антивандальний · розпилення до 50 см</span></li>
+                    <li><strong>Оплата</strong><span>Безконтакт, картка, монети</span></li>
+                    <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
+                    <li><strong>Сервіс</strong><span>Заправка ароматів, техпідтримка, аналітика продажів</span></li>
                 </ul>
             </div>
         </section>
 
-        <section class="page-block page-block--light">
+        <section class="page-block" aria-labelledby="bloomi-audience-title">
             <div class="container">
                 <div class="page-block__head">
-                    <p class="eyebrow eyebrow--dark">Локація</p>
-                    <h2 class="section-title section-title--dark section-title--wide">Чому <span
-                            class="t-serif">Bloomi</span></h2>
+                    <p class="eyebrow">Локації</p>
+                    <h2 id="bloomi-audience-title" class="section-title section-title--wide">Де Bloomy <span
+                            class="t-serif">виграє</span></h2>
                 </div>
-                <div class="cards cards--3">
-                    <article class="card card--bloomi">
-                        <i class="icon-NameHeart" aria-hidden="true"></i>
-                        <h3>Вищий чек</h3>
-                        <p>Емоційний товар — вища маржа при правильній локації.</p>
-                    </article>
-                    <article class="card card--bloomi">
-                        <i class="icon-NameStars" aria-hidden="true"></i>
-                        <h3>Імідж локації</h3>
-                        <p>Преміум-автомат підкреслює турботу про гостей.</p>
-                    </article>
-                    <article class="card card--bloomi">
-                        <i class="icon-Namecheck" aria-hidden="true"></i>
-                        <h3>Повний цикл</h3>
-                        <p>Закупівля, сервіс, техніка — на стороні VendStore.</p>
-                    </article>
+                <ul class="values values--icons">
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-pin" /></svg>
+                        </span>
+                        <p class="values__text"><strong>ТРЦ та преміум-ритейл</strong> — імпульсна покупка з високим
+                            чеком і сильним візуальним акцентом.</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Готелі та spa</strong> — сервіс для гостей 24/7, підкреслює
+                            турботу про деталі.</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-chart" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Фітнес та б'юті-мережі</strong> — доповнення до основного
+                            сервісу, додатковий revenue stream.</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-smartphone" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Event-простори</strong> — wow-ефект на заходах, швидкий контакт
+                            з брендом парфумерії.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="page-block page-block--light" aria-labelledby="bloomi-economy-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow eyebrow--dark">Економіка</p>
+                    <h2 id="bloomi-economy-title" class="section-title section-title--dark section-title--wide">
+                        Преміум-маржа <span class="t-serif">в цифрах</span>
+                    </h2>
+                </div>
+                <div class="product-stat product-stat--bloomi">
+                    <div>
+                        <p class="product-stat__label">Окупність інвестиції</p>
+                        <p class="product-stat__figure">5–6<small>місяців на сильній локації</small></p>
+                    </div>
+                    <p>Надвисока маржинальність парфумерії: <strong>1 оплата = 2 якісних розпилення</strong>.
+                        Покупець отримує преміум-досвід, ви — стабільний cash flow без найму персоналу. Детальну
+                        фінмодель надсилаємо після заявки з урахуванням формату та трафіку.</p>
                 </div>
             </div>
         </section>
 
-        <section class="cta-banner section" aria-label="Заклик">
-            <div class="cta-banner__bg" aria-hidden="true">
-                <img src="img/photo-banner.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+        <section class="page-block" aria-labelledby="bloomi-cross-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow">Екосистема</p>
+                    <h2 id="bloomi-cross-title" class="section-title section-title--wide">Також у <span
+                            class="t-serif">лінійці</span> Vendstore</h2>
+                </div>
+                <div class="product-picks">
+                    <a href="helper.html" class="product-pick product-pick--helper">
+                        <span class="product-pick__label">01 · мікровендинг</span>
+                        <span class="product-pick__title">HELPER+</span>
+                        <p>Товари першої необхідності: фармація, tech, гігієна, снеки. Box і Slim — для щоденного
+                            трафіку та пасивного доходу від 11 550 грн/міс.</p>
+                        <span class="product-pick__arrow">Сторінка HELPER+ <i class="icon-Namearrow_forward"
+                                aria-hidden="true"></i></span>
+                    </a>
+                </div>
             </div>
-            <div class="container cta-banner__inner">
-                <p class="eyebrow cta-banner__eyebrow">Bloomi</p>
-                <h2 class="cta-banner__title">Bloomi у <span class="t-serif">вашому просторі</span></h2>
-                <p class="cta-banner__desc">Залиште заявку — обговоримо формат і локацію.</p>
-                <button type="button" class="btn btn--primary btn--bloomi js-open-modal" data-form-type="partner"
-                    data-product="Bloomi">Залишити заявку</button>
+        </section>
+
+        <section class="page-block page-block--light faq-section faq-section--light" aria-labelledby="bloomi-faq-title">
+            <div class="container">
+                <div class="faq-stage">
+                    <div class="faq-layout">
+                        <div class="faq-layout__content">
+                            <div class="faq-layout__intro">
+                                <p class="eyebrow eyebrow--dark">FAQ · Bloomy</p>
+                                <h2 id="bloomi-faq-title" class="section-title section-title--dark section-title--wide">
+                                    Питання про <span class="t-serif">формат</span>
+                                </h2>
+                                <p class="faq-layout__lead">Про моделі, аромати та сервіс — перед запуском преміум-точки.
+                                </p>
+                            </div>
+                            <div class="faq faq--cards" data-faq>
+                                <div class="faq__item is-open">
+                                    <span class="faq__index" aria-hidden="true">01</span>
+                                    <button type="button" class="faq__q">Яку модель обрати — настінну чи підлогову? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Залежить від площі та цілей: настінна — компактна для коридорів;
+                                        підлогова з 43" дисплеєм — максимальний wow-ефект у ТРЦ та готелях. Підкажемо
+                                        після аудиту локації.</p>
+                                </div>
+                                <div class="faq__item">
+                                    <span class="faq__index" aria-hidden="true">02</span>
+                                    <button type="button" class="faq__q">Скільки ароматів можна встановити? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Стандартна конфігурація — 5 ароматів. Кожен дає 1000–1200
+                                        розпилень по 100 мл. Ротація та підбір ніш — разом з Vendstore.</p>
+                                </div>
+                                <div class="faq__item">
+                                    <span class="faq__index" aria-hidden="true">03</span>
+                                    <button type="button" class="faq__q">Хто обслуговує апарат? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Vendstore: заправка ароматів, технічний сервіс, моніторинг і
+                                        звітність. Ваш персонал не залучається до щоденних операцій.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <figure class="faq-layout__media faq-layout__media--bloomi">
+                            <span class="faq-layout__ghost" aria-hidden="true">02</span>
+                            <img src="img/photo-bloomi.jpg" width="712" height="776"
+                                alt="Bloomy у преміум-локації" loading="lazy" decoding="async">
+                            <figcaption class="faq-layout__caption">
+                                <span class="faq-layout__caption-tag">Bloomy · підлогова</span>
+                                <span class="faq-layout__caption-text">Флагманський формат з великим дисплеєм — для
+                                    локацій, де важливий візуальний wow-ефект.</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="location-cta section" aria-labelledby="bloomi-cta-title">
+            <div class="location-cta__bg" aria-hidden="true">
+                <img src="img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="container location-cta__container">
+                <div class="location-cta__inner">
+                    <p class="eyebrow">Bloomy</p>
+                    <h2 id="bloomi-cta-title" class="location-cta__title">Запустити <span
+                            class="t-serif">преміум-точку</span></h2>
+                    <p class="location-cta__lead">Залиште заявку — підберемо модель, локацію та надішлемо фінмодель з
+                        прогнозом окупності.</p>
+                    <div class="location-cta__actions">
+                        <button type="button" class="btn btn--primary btn--bloomi js-open-modal" data-form-type="partner"
+                            data-product="Bloomy">Залишити заявку</button>
+                        <a href="b2c.html" class="btn btn--outline">Для інвесторів B2C <i class="icon-Namearrow_forward"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -160,8 +409,9 @@
                     </a>
                     <p class="footer__tagline">Екосистема високотехнологічного мікровендингу під ключ.</p>
                 </div>
-                <button type="button" class="btn btn--primary footer__cta js-open-modal" data-form-type="callback">Безкоштовна
-                    консультація <i class="icon-Nameemail-m" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn--primary footer__cta js-open-modal"
+                    data-form-type="callback">Безкоштовна
+                    консультація</button>
             </div>
             <div class="footer__grid">
                 <div class="footer__col">
@@ -176,7 +426,7 @@
                 <div class="footer__col">
                     <p class="footer__label">Продукти</p>
                     <nav class="footer__nav" aria-label="Продукти">
-                        <a href="helper.html">Helper 24</a>
+                        <a href="helper.html">HELPER+</a>
                         <a href="bloomi.html">Bloomy</a>
                         <a href="index.html#products">Формати</a>
                         <a href="index.html#location">Локація</a>
@@ -196,41 +446,82 @@
         </div>
     </footer>
 
-    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal__window">
-            <button type="button" class="modal__close js-modal-close" aria-label="Закрити"><i
-                    class="icon-Nameclose-r" aria-hidden="true"></i></button>
+            <button type="button" class="modal__close js-modal-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
             <div class="modal__content">
-                <h2 id="modal-title"><span class="t-serif">Bloomi</span></h2>
-                <p class="modal__subtitle">Заявка на встановлення</p>
+                <h2 id="modal-title"><span>Bloomy</span></h2>
+                <p class="modal__subtitle">Заявка на запуск</p>
                 <form id="modal-form" class="modal__form">
                     <input type="hidden" name="form_type" value="partner">
-                    <input type="hidden" name="product" id="modal-product" value="Bloomi">
-                    <div class="form-group"><label for="modal-name">Ім'я</label><input type="text" id="modal-name"
-                            name="name"></div>
-                    <div class="form-group"><label for="modal-phone">Телефон *</label><input type="tel" id="modal-phone"
-                            name="phone" required placeholder="+38 (0__) ___-__-__"></div>
-                    <div class="form-group"><label for="modal-comment">Коментар</label><textarea id="modal-comment"
-                            name="comment"></textarea></div>
+                    <input type="hidden" name="product" id="modal-product" value="Bloomy">
+                    <div class="form-group">
+                        <label for="modal-name">Ім'я</label>
+                        <input type="text" id="modal-name" name="name" placeholder="Ваше ім'я" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-phone">Телефон *</label>
+                        <input type="tel" id="modal-phone" name="phone" placeholder="+38 (0__) ___-__-__" required
+                            aria-required="true" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-comment">Коментар</label>
+                        <textarea id="modal-comment" name="comment"
+                            placeholder="Локація, настінна/підлогова, B2B чи B2C…"></textarea>
+                    </div>
                     <button type="submit" class="btn btn--primary btn--bloomi btn--block">Надіслати</button>
                 </form>
             </div>
         </div>
     </div>
-    <div id="modal-success" class="modal" role="dialog" aria-hidden="true">
+
+    <div id="modal-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"
+        aria-hidden="true">
         <div class="modal__window">
-            <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити"><i
-                    class="icon-Nameclose-r" aria-hidden="true"></i></button>
+            <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
             <div class="modal__content modal__content--center">
-                <h2><span class="t-serif">Дякуємо!</span> Заявку отримано</h2>
-                <button type="button" class="btn btn--primary js-modal-success-close">Зрозуміло</button>
+                <h2 id="success-title"><span>Дякуємо!</span> Заявку отримано</h2>
+                <p>Менеджер Vendstore зателефонує протягом 1 робочого дня.</p>
+                <button type="button" class="btn btn--primary btn--bloomi js-modal-success-close">Зрозуміло</button>
             </div>
         </div>
     </div>
-    <script src="../libs/gsap/gsap.min.js"></script>
-    <script src="../libs/gsap/ScrollTrigger.min.js"></script>
-    <script src="../libs/lenis/lenis.min.js"></script>
+
     <script src="js/main.js"></script>
+    <script>
+        (function () {
+            var scripts = [
+                '../libs/gsap/gsap.min.js',
+                '../libs/gsap/ScrollTrigger.min.js',
+                '../libs/lenis/lenis.min.js'
+            ];
+            var loaded = false;
+            function loadMotion() {
+                if (loaded) return;
+                loaded = true;
+                (function next(i) {
+                    if (i >= scripts.length) {
+                        if (typeof window.__vsInitMotion === 'function') window.__vsInitMotion();
+                        return;
+                    }
+                    var s = document.createElement('script');
+                    s.src = scripts[i];
+                    s.onload = function () { next(i + 1); };
+                    document.body.appendChild(s);
+                })(0);
+            }
+            ['scroll', 'pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
+                window.addEventListener(e, loadMotion, { once: true, passive: true });
+            });
+            window.addEventListener('load', function () {
+                setTimeout(loadMotion, 1500);
+            }, { once: true });
+        })();
+    </script>
 </body>
 
 </html>

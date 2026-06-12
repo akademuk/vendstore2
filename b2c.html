@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>B2C — покупцям VendStore</title>
+    <title>B2C — інвестиції у мікровендинг | Vendstore</title>
     <meta name="description"
-        content="Як користуватися апаратами VendStore: Helper 24 та Bloomi. Оплата, підтримка, де знайти автомат." />
+        content="B2C від Vendstore: приватні інвестори від 1 апарату. Пасивний дохід, окупність від 5 місяців, HELPER+ та Bloomy під ключ." />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#262626" />
+    <meta name="theme-color" content="#0C1712" />
     <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
-    <link rel="stylesheet" href="css/app.min.css" />
-    <script>document.documentElement.classList.add('css-ready');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preload" as="font" type="font/woff2" href="fonts/icomoon.woff2" crossorigin>
 </head>
 
 <body data-page="b2c">
@@ -22,144 +26,373 @@
             <div class="header__left">
                 <button type="button" class="burger" aria-label="Відкрити меню" aria-expanded="false"
                     aria-controls="mobile-menu">
-                    <span class="burger__line"></span><span class="burger__line"></span><span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
                 </button>
-                <a href="index.html" class="header__logo" aria-label="Vendstore — головна">
-                    <span class="header__logo-text" aria-hidden="true">Vend<span class="header__logo-serif">store</span></span>
+                <a href="index.html" class="header__logo" aria-label="Vendstore — на головну">
+                    <span class="header__logo-text" aria-hidden="true">Vend<span
+                            class="header__logo-serif">store</span></span>
                 </a>
             </div>
-            <nav class="header__nav" aria-label="Навігація">
+            <nav id="main-nav" class="header__nav" aria-label="Основна навігація">
                 <ul class="header__list">
                     <li><a href="about.html" class="link">Про нас</a></li>
                     <li><a href="b2b.html" class="link">B2B</a></li>
                     <li><a href="b2c.html" class="link">B2C</a></li>
-                    <li><a href="helper.html" class="link">Helper 24</a></li>
-                    <li><a href="bloomi.html" class="link">Bloomi</a></li>
+                    <li><a href="helper.html" class="link">HELPER+</a></li>
+                    <li><a href="bloomi.html" class="link">Bloomy</a></li>
                 </ul>
             </nav>
-            <a href="index.html#location" class="header__cta btn btn--primary">Знайти апарат</a>
+            <div class="header__right">
+                <nav class="lang-switch" aria-label="Вибір мови">
+                    <a href="b2c.html" class="lang-switch__btn is-active" hreflang="uk" lang="uk"
+                        aria-current="page">УКР</a>
+                    <a href="ru/index.html" class="lang-switch__btn" hreflang="ru" lang="ru">РУС</a>
+                </nav>
+                <button type="button" class="header__cta btn btn--primary js-open-modal" data-form-type="partner"
+                    data-product="B2C">Розрахувати прибуток</button>
+            </div>
         </div>
         <div id="mobile-menu" class="header__menu" aria-hidden="true">
             <div class="header__menu-inner">
-                <nav><ul>
-                    <li><a href="index.html">Головна</a></li>
-                    <li><a href="about.html">Про нас</a></li>
-                    <li><a href="b2b.html">B2B</a></li>
-                    <li><a href="b2c.html">B2C</a></li>
-                    <li><a href="helper.html">Helper 24</a></li>
-                    <li><a href="bloomi.html">Bloomi</a></li>
-                </ul></nav>
+                <nav class="lang-switch lang-switch--menu" aria-label="Вибір мови">
+                    <a href="b2c.html" class="lang-switch__btn is-active" hreflang="uk" lang="uk"
+                        aria-current="page">УКР</a>
+                    <a href="ru/index.html" class="lang-switch__btn" hreflang="ru" lang="ru">РУС</a>
+                </nav>
+                <nav aria-label="Мобільне меню">
+                    <ul>
+                        <li><a href="index.html">Головна</a></li>
+                        <li><a href="about.html">Про нас</a></li>
+                        <li><a href="b2b.html">B2B</a></li>
+                        <li><a href="b2c.html">B2C</a></li>
+                        <li><a href="helper.html">HELPER+</a></li>
+                        <li><a href="bloomi.html">Bloomy</a></li>
+                        <li><a href="index.html#location">Локація</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
+                    data-product="B2C">Розрахувати прибуток</button>
             </div>
         </div>
     </header>
 
     <main id="main">
-        <section class="page-hero page-hero--b2c">
+        <svg class="vs-sprite" aria-hidden="true" focusable="false">
+            <symbol id="vs-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V5M4 19h16" />
+                <path d="M8 15.5V11M12 15.5V8M16 15.5v-4" />
+            </symbol>
+            <symbol id="vs-smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="7.5" y="2.5" width="9" height="19" rx="2" />
+                <path d="M11 18.5h2" />
+                <path d="M5.5 9c2.2-1.8 5.3-1.8 7.5 0M4 6.5c3.2-2.6 8.3-2.6 11.5 0" />
+                <circle cx="12" cy="7" r="0.75" fill="currentColor" stroke="none" />
+            </symbol>
+            <symbol id="vs-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.5 2" />
+            </symbol>
+            <symbol id="vs-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3.5 18 6.5v5.2c0 4.6-3.2 7.8-6 9.3-2.8-1.5-6-4.7-6-9.3V6.5l6-3z" />
+                <path d="M9.2 11.8 11 13.6 14.8 9.8" />
+            </symbol>
+            <symbol id="vs-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.6 12 21 12 21z" />
+                <circle cx="12" cy="10.5" r="2.2" />
+            </symbol>
+        </svg>
+
+        <section class="page-hero">
             <div class="page-hero__bg" aria-hidden="true">
-                <img src="img/photo-b2c-audience.webp" width="712" height="776" alt="" loading="eager" decoding="async">
+                <img src="img/photo-b2c-audience.jpg" width="712" height="776" alt="" loading="eager" decoding="async">
             </div>
             <div class="container">
-                <p class="eyebrow">B2C · покупцям</p>
-                <h1 class="page-hero__title">Купуйте швидко, <em>коли зручно</em></h1>
-                <p class="page-hero__text">Апарати VendStore стоять там, де ви вже буваєте — в офісі, ТРЦ, готелі. Снеки в
-                    Helper 24, квіти в Bloomi: оберіть на екрані, оплатіть карткою — заберiть за кілька секунд.</p>
+                <p class="eyebrow">B2C · приватні інвестори · від 1 одиниці</p>
+                <h1 class="page-hero__title">Автономний мікробізнес з <span class="t-serif">окупністю</span></h1>
+                <p class="page-hero__text">Запустіть власну точку HELPER+ або Bloomy без найму персоналу та операційного
+                    хаосу. Від одного апарату — з повним супроводом Vendstore і контролем зі смартфона.</p>
                 <div class="page-hero__actions">
-                    <a href="helper.html" class="btn btn--primary">Helper 24</a>
-                    <a href="bloomi.html" class="btn btn--outline">Bloomi</a>
+                    <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
+                        data-product="B2C">Отримати фінмодель</button>
+                    <a href="#formats" class="btn btn--outline">Формати <i class="icon-Namearrow_forward"
+                            aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
 
-        <section class="page-block page-block--light">
-            <div class="container">
-                <div class="page-block__head">
-                    <p class="eyebrow eyebrow--dark">Як це працює</p>
-                    <h2 class="section-title section-title--dark section-title--wide">3 кроки <span
-                            class="t-serif">покупки</span></h2>
-                </div>
-                <div class="cards cards--3">
-                    <article class="card">
-                        <span class="card__index" aria-hidden="true">01</span>
-                        <h3>Оберіть товар</h3>
-                        <p>На сенсорному екрані — зрозуміле меню та ціна.</p>
-                    </article>
-                    <article class="card">
-                        <span class="card__index" aria-hidden="true">02</span>
-                        <h3>Оплатіть</h3>
-                        <p>Картка, Apple Pay, Google Pay — без дрібних готівок.</p>
-                    </article>
-                    <article class="card">
-                        <span class="card__index" aria-hidden="true">03</span>
-                        <h3>Заберіть</h3>
-                        <p>Апарат видасть товар одразу після оплати.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-block">
+        <section class="page-block" aria-labelledby="b2c-intro-title">
             <div class="container split">
-                <div class="split__content">
-                    <p class="eyebrow">Продукт</p>
-                    <h2 class="section-title section-title--wide">Helper <em>24</em></h2>
-                    <p class="section-desc">Снеки, напої, корисні дрібниці — для перерви в офісі чи по дорозі додому.</p>
-                    <a href="helper.html" class="btn btn--outline">Детальніше <i class="icon-Namearrow_forward"
-                            aria-hidden="true"></i></a>
-                </div>
                 <div class="split__media">
-                    <img src="img/photo-helper.webp" width="737" height="776" alt="Helper 24" loading="lazy"
-                        decoding="async">
+                    <img src="img/photo-b2c-audience.jpg" width="712" height="776"
+                        alt="Приватний інвестор біля автомату" loading="lazy" decoding="async">
+                </div>
+                <div class="split__content">
+                    <span class="split__tag split__tag--bloomi">Пасивний дохід</span>
+                    <h2 id="b2c-intro-title" class="section-title section-title--wide">Бізнес, який <span
+                            class="t-serif">працює</span> без вас</h2>
+                    <p>Мікровендинг Vendstore — це не класичний магазин і не франшиза зі штатом продавців. Це автономна
+                        точка, що працює 24/7: ви контролюєте фінанси та асортимент з телефону, а сервіс і техпідтримку
+                        бере на себе команда Vendstore.</p>
+                    <p><strong>Окупність від 5 місяців</strong> — залежно від формату, локації та обраної товарної
+                        матриці.</p>
+                    <button type="button" class="btn btn--primary js-open-modal" data-form-type="callback">Безкоштовна
+                        консультація</button>
                 </div>
             </div>
         </section>
 
-        <section class="page-block page-block--light">
-            <div class="container split split--reverse">
-                <div class="split__media">
-                    <img src="img/photo-bloomi.webp" width="712" height="776" alt="Bloomi" loading="lazy"
-                        decoding="async">
-                </div>
-                <div class="split__content">
-                    <p class="eyebrow eyebrow--dark">Продукт</p>
-                    <h2 class="section-title section-title--dark section-title--wide"><span
-                            class="t-serif">Bloomi</span></h2>
-                    <p class="section-desc">Свіжі квіти та букети — подарунок «тут і зараз» без походу в магазин.</p>
-                    <a href="bloomi.html" class="btn btn--primary">Детальніше <i class="icon-Namearrow_forward"
-                            aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-block">
+        <section class="page-block page-block--light" aria-labelledby="b2c-benefits-title">
             <div class="container">
                 <div class="page-block__head">
-                    <h2 class="section-title section-title--wide">Підтримка <span class="t-serif">покупців</span></h2>
+                    <p class="eyebrow eyebrow--dark">Переваги</p>
+                    <h2 id="b2c-benefits-title" class="section-title section-title--dark section-title--wide">Чому
+                        <span class="t-serif">інвестори</span> обирають нас
+                    </h2>
                 </div>
-                <div class="faq" data-faq>
-                    <div class="faq__item">
-                        <button type="button" class="faq__q">Що робити, якщо апарат не видав товар? <i
-                                class="icon-Namearrow_down" aria-hidden="true"></i></button>
-                        <p class="faq__a">На корпусі вказано номер підтримки. Збережіть чек або час операції — ми
-                            компенсуємо або повернемо кошти.</p>
-                    </div>
-                    <div class="faq__item">
-                        <button type="button" class="faq__q">Чи потрібна готівка? <i class="icon-Namearrow_down"
-                                aria-hidden="true"></i></button>
-                        <p class="faq__a">Ні — лише безконтактні способи оплати.</p>
+                <div class="cards cards--2">
+                    <article class="card card--helper">
+                        <span class="vs-icon-wrap" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-chart" /></svg>
+                        </span>
+                        <h3>Низький поріг входу</h3>
+                        <p>Старт від одного апарату — без необхідності відкривати магазин чи наймати команду з першого
+                            дня.</p>
+                    </article>
+                    <article class="card card--helper">
+                        <span class="vs-icon-wrap" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-clock" /></svg>
+                        </span>
+                        <h3>Повна автономність</h3>
+                        <p>Без зарплат і змін. Обслуговування однієї точки — до 20 хвилин на день, решту закриває
+                            Vendstore.</p>
+                    </article>
+                    <article class="card card--bloomi">
+                        <span class="vs-icon-wrap vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-smartphone" /></svg>
+                        </span>
+                        <h3>Smart-керування</h3>
+                        <p>Фінанси, закупки, технічний стан і аналітика продажів — у вашому смартфоні, цілодобово.</p>
+                    </article>
+                    <article class="card card--bloomi">
+                        <span class="vs-icon-wrap vs-icon-wrap--bloomi" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
+                        </span>
+                        <h3>Під ключ</h3>
+                        <p>Виробництво, доставка, монтаж, платіжні термінали, софт і сервіс — один контракт, одна
+                            команда.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-block" aria-labelledby="b2c-economy-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow">Економіка</p>
+                    <h2 id="b2c-economy-title" class="section-title section-title--wide">Цифри, на яких <span
+                            class="t-serif">будується</span> прибуток</h2>
+                    <p class="section-desc">Орієнтири для планування — точний розрахунок робимо під вашу локацію та
+                        формат.</p>
+                </div>
+                <ul class="values values--icons">
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-chart" /></svg>
+                        </span>
+                        <p class="values__text"><strong>HELPER+</strong> — чистий пасивний прибуток від 11&nbsp;550 до
+                            16&nbsp;050 грн/міс з одного апарату (Box або Slim).</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-clock" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Bloomy</strong> — окупність 5–6 місяців завдяки надвисокій
+                            маржинальності: 1 оплата = 2 якісних розпилення парфуму.</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-pin" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Масштабування</strong> — від 1 до 50+ автоматів: фінмодель
+                            мережі та каталог товарних матриць під вашу стратегію.</p>
+                    </li>
+                    <li class="values__item">
+                        <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
+                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
+                        </span>
+                        <p class="values__text"><strong>Прозорість</strong> — допомагаємо з підбором локації, аудитом
+                            трафіку та розрахунком термінів окупності до старту.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="page-block page-block--light" id="formats" aria-labelledby="b2c-formats-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow eyebrow--dark">Формати</p>
+                    <h2 id="b2c-formats-title" class="section-title section-title--dark section-title--wide">Оберіть
+                        <span class="t-serif">продукт</span>
+                    </h2>
+                </div>
+                <div class="product-picks">
+                    <a href="helper.html" class="product-pick product-pick--helper">
+                        <span class="product-pick__label">HELPER+ · мікровендинг</span>
+                        <span class="product-pick__title">Системний мікро-ритейл</span>
+                        <p>Товари першої необхідності: фармація, tech, гігієна, снеки. Гнучке наповнення під будь-яку
+                            локацію. Box і Slim.</p>
+                        <span class="product-pick__arrow">Сторінка HELPER+ <i class="icon-Namearrow_forward"
+                                aria-hidden="true"></i></span>
+                    </a>
+                    <a href="bloomi.html" class="product-pick product-pick--bloomi">
+                        <span class="product-pick__label">Bloomy · парфумерія</span>
+                        <span class="product-pick__title"><span class="t-serif">Преміум-точка</span></span>
+                        <p>5 топових ароматів, wow-ефект на ТРЦ, клубах і готелях. Ідеально для високої маржинальності
+                            та швидкої окупності.</p>
+                        <span class="product-pick__arrow">Сторінка Bloomy <i class="icon-Namearrow_forward"
+                                aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-block" id="steps" aria-labelledby="b2c-steps-title">
+            <div class="container">
+                <div class="page-block__head">
+                    <p class="eyebrow">Етапи</p>
+                    <h2 id="b2c-steps-title" class="section-title section-title--wide">Від заявки до <span
+                            class="t-serif">пасивного доходу</span></h2>
+                </div>
+                <ol class="steps__track">
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">01</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Заявка</h3>
+                            <p>Залишаєте запит — аналізуємо цілі та підбираємо HELPER+ або Bloomy під ваш бюджет.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">02</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Фінмодель</h3>
+                            <p>Розрахунок окупності, підбір локації або аудит вашої площі, затвердження асортименту.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">03</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Постачання</h3>
+                            <p>Виробництво апарата, налаштування ПЗ, платіжні термінали — все під ключ.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">04</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Запуск</h3>
+                            <p>Монтаж, підключення до хмари, перший продаж — ви вже в системі.</p>
+                        </div>
+                    </li>
+                    <li class="steps__step">
+                        <div class="steps__marker"><span class="steps__num" aria-hidden="true">05</span><span
+                                class="steps__dot"></span></div>
+                        <div class="steps__body">
+                            <h3>Супровід</h3>
+                            <p>24/7 моніторинг, сервіс, аналітика. Масштабуйте мережу, коли будете готові.</p>
+                        </div>
+                    </li>
+                </ol>
+                <p class="steps__note">Від заявки до запуску — зазвичай <strong>до 30 днів</strong>.</p>
+            </div>
+        </section>
+
+        <section class="page-block page-block--light faq-section faq-section--light" aria-labelledby="b2c-faq-title">
+            <div class="container">
+                <div class="faq-stage">
+                    <div class="faq-layout">
+                        <div class="faq-layout__content">
+                            <div class="faq-layout__intro">
+                                <p class="eyebrow eyebrow--dark">FAQ · B2C</p>
+                                <h2 id="b2c-faq-title" class="section-title section-title--dark section-title--wide">
+                                    Питання <span class="t-serif">інвесторів</span>
+                                </h2>
+                                <p class="faq-layout__lead">Усе, що варто знати перед першим апаратом — бюджет, локація,
+                                    час і масштабування без зайвої теорії.</p>
+                            </div>
+                            <div class="faq faq--cards" data-faq>
+                                <div class="faq__item is-open">
+                                    <span class="faq__index" aria-hidden="true">01</span>
+                                    <button type="button" class="faq__q">Скільки коштує старт від одного апарату? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Залежить від моделі HELPER+ або Bloomy та комплектації. Після
+                                        заявки надсилаємо детальний прорахунок і фінмодель під вашу ситуацію.</p>
+                                </div>
+                                <div class="faq__item">
+                                    <span class="faq__index" aria-hidden="true">02</span>
+                                    <button type="button" class="faq__q">Чи потрібна своя локація? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Не обов'язково — допомагаємо з підбором. Якщо локація вже є,
+                                        проведемо аудит трафіку та підкажемо оптимальний формат.</p>
+                                </div>
+                                <div class="faq__item">
+                                    <span class="faq__index" aria-hidden="true">03</span>
+                                    <button type="button" class="faq__q">Скільки часу займає обслуговування? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">У середньому до 20 хвилин на день на одну точку. Решту — заправка,
+                                        технічний сервіс і моніторинг — бере на себе Vendstore.</p>
+                                </div>
+                                <div class="faq__item">
+                                    <span class="faq__index" aria-hidden="true">04</span>
+                                    <button type="button" class="faq__q">Чи можна масштабувати після першого апарату? <i
+                                            class="icon-Namearrow_down" aria-hidden="true"></i></button>
+                                    <p class="faq__a">Так. Багато інвесторів починають з однієї точки і розгортають
+                                        мережу до десятків автоматів — з єдиною аналітикою та стандартом сервісу.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <figure class="faq-layout__media faq-layout__media--bloomi">
+                            <span class="faq-layout__ghost" aria-hidden="true">ROI</span>
+                            <img src="img/photo-bloomi.jpg" width="712" height="776"
+                                alt="Bloomy — парфумерний вендинг" loading="lazy" decoding="async">
+                            <figcaption class="faq-layout__caption">
+                                <span class="faq-layout__caption-tag">Bloomy · преміум</span>
+                                <span class="faq-layout__caption-text">Висока маржинальність і окупність від 5 місяців —
+                                    для інвесторів, що цінують wow-ефект.</span>
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="cta-banner section" aria-label="Заклик">
-            <div class="cta-banner__bg" aria-hidden="true">
-                <img src="img/photo-banner.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+        <section class="location-cta section" aria-labelledby="b2c-cta-title">
+            <div class="location-cta__bg" aria-hidden="true">
+                <img src="img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
             </div>
-            <div class="container cta-banner__inner">
-                <p class="eyebrow cta-banner__eyebrow">B2B</p>
-                <h2 class="cta-banner__title">Є локація для <span class="t-serif">апарата</span>?</h2>
-                <p class="cta-banner__desc">Пропонуйте площу — підберемо Helper або Bloomi.</p>
-                <a href="b2b.html" class="btn btn--primary">Для бізнесу</a>
+            <div class="container location-cta__container">
+                <div class="location-cta__inner">
+                    <p class="eyebrow">B2C</p>
+                    <h2 id="b2c-cta-title" class="location-cta__title">Почніть заробляти на <span
+                            class="t-serif">пасиві</span></h2>
+                    <p class="location-cta__lead">Отримайте фінмодель, розрахунок окупності та рекомендацію формату —
+                        HELPER+ чи Bloomy. Безкоштовна консультація маркетолога-стратега.</p>
+                    <div class="location-cta__actions">
+                        <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
+                            data-product="B2C">Отримати фінмодель</button>
+                        <button type="button" class="btn btn--outline js-open-modal"
+                            data-form-type="callback">Безкоштовна консультація</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -173,8 +406,9 @@
                     </a>
                     <p class="footer__tagline">Екосистема високотехнологічного мікровендингу під ключ.</p>
                 </div>
-                <button type="button" class="btn btn--primary footer__cta js-open-modal" data-form-type="callback">Безкоштовна
-                    консультація <i class="icon-Nameemail-m" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn--primary footer__cta js-open-modal"
+                    data-form-type="callback">Безкоштовна
+                    консультація</button>
             </div>
             <div class="footer__grid">
                 <div class="footer__col">
@@ -189,7 +423,7 @@
                 <div class="footer__col">
                     <p class="footer__label">Продукти</p>
                     <nav class="footer__nav" aria-label="Продукти">
-                        <a href="helper.html">Helper 24</a>
+                        <a href="helper.html">HELPER+</a>
                         <a href="bloomi.html">Bloomy</a>
                         <a href="index.html#products">Формати</a>
                         <a href="index.html#location">Локація</a>
@@ -209,10 +443,82 @@
         </div>
     </footer>
 
-    <script src="../libs/gsap/gsap.min.js"></script>
-    <script src="../libs/gsap/ScrollTrigger.min.js"></script>
-    <script src="../libs/lenis/lenis.min.js"></script>
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal__window">
+            <button type="button" class="modal__close js-modal-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
+            <div class="modal__content">
+                <h2 id="modal-title">Заявка <span>партнеру</span></h2>
+                <p class="modal__subtitle">B2C · Vendstore</p>
+                <form id="modal-form" class="modal__form">
+                    <input type="hidden" name="form_type" value="partner">
+                    <input type="hidden" name="product" id="modal-product" value="B2C">
+                    <div class="form-group">
+                        <label for="modal-name">Ім'я</label>
+                        <input type="text" id="modal-name" name="name" placeholder="Ваше ім'я" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-phone">Телефон *</label>
+                        <input type="tel" id="modal-phone" name="phone" placeholder="+38 (0__) ___-__-__" required
+                            aria-required="true" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-comment">Коментар</label>
+                        <textarea id="modal-comment" name="comment"
+                            placeholder="Бюджет, локація, формат…"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Надіслати</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"
+        aria-hidden="true">
+        <div class="modal__window">
+            <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити">
+                <i class="icon-Nameclose-r" aria-hidden="true"></i>
+            </button>
+            <div class="modal__content modal__content--center">
+                <h2 id="success-title"><span>Дякуємо!</span> Заявку отримано</h2>
+                <p>Менеджер Vendstore зателефонує протягом 1 робочого дня.</p>
+                <button type="button" class="btn btn--primary js-modal-success-close">Зрозуміло</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
+    <script>
+        (function () {
+            var scripts = [
+                '../libs/gsap/gsap.min.js',
+                '../libs/gsap/ScrollTrigger.min.js',
+                '../libs/lenis/lenis.min.js'
+            ];
+            var loaded = false;
+            function loadMotion() {
+                if (loaded) return;
+                loaded = true;
+                (function next(i) {
+                    if (i >= scripts.length) {
+                        if (typeof window.__vsInitMotion === 'function') window.__vsInitMotion();
+                        return;
+                    }
+                    var s = document.createElement('script');
+                    s.src = scripts[i];
+                    s.onload = function () { next(i + 1); };
+                    document.body.appendChild(s);
+                })(0);
+            }
+            ['scroll', 'pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
+                window.addEventListener(e, loadMotion, { once: true, passive: true });
+            });
+            window.addEventListener('load', function () {
+                setTimeout(loadMotion, 1500);
+            }, { once: true });
+        })();
+    </script>
 </body>
 
 </html>
