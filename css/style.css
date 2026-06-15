@@ -1484,6 +1484,43 @@ body.menu-open {
   white-space: nowrap;
 }
 
+/* Кнопки на темному фото — не успадковувати section--light */
+.product-spot__actions .btn--primary {
+  background: var(--vs-green);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.product-spot__actions .btn--primary:hover,
+.product-spot__actions .btn--primary:focus-visible {
+  background: var(--vs-helper-light);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  transform: none;
+}
+
+.product-spot__actions .btn--outline {
+  border-color: rgba(245, 243, 231, 0.38);
+  color: var(--vs-text);
+  background: rgba(12, 23, 18, 0.32);
+  backdrop-filter: blur(8px);
+}
+
+.product-spot__actions .btn--outline:hover,
+.product-spot__actions .btn--outline:focus-visible {
+  background: rgba(245, 243, 231, 0.12);
+  border-color: rgba(245, 243, 231, 0.62);
+  color: #fff;
+  box-shadow: none;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .product-spot__actions .btn:hover i {
+    transform: none;
+  }
+}
+
 .product-spot__cta {
   flex: 1.15;
   display: inline-flex;
