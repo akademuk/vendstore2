@@ -459,6 +459,18 @@ if (locationForm) {
   });
 }
 
+const calcForm = document.getElementById('calc-form');
+
+if (calcForm) {
+  calcForm.querySelectorAll('input[required], input[type="tel"]').forEach((f) => {
+    f.addEventListener('blur', () => validateField(f));
+  });
+  calcForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm(calcForm, calcForm.querySelector('button[type="submit"]'));
+  });
+}
+
 /* Smooth anchor (same page only) */
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener('click', (e) => {
@@ -577,5 +589,112 @@ if (document.body.dataset.page === 'home') {
     if (e.key !== 'Escape') return;
     document.querySelectorAll('.product-spot__visual.is-detail-open').forEach(closeProductDetail);
   });
+})();
+
+/* ─── Income calculator (noUiSlider) ─── */
+(function initCalculator() {
+  const section = document.getElementById('calculator');
+  if (!section) return;
+
+  const CONFIG = {
+    avgCheck: 52,
+    unitCost: 20,
+    daysInMonth: 30,
+    taxMonthly: 4500,
+    unitExpenses: 5750,
+  };
+
+  const SLIDERS = [
+    { selector: '.js-range-init-1', countId: 'calc-count-1', min: 12, max: 150, start: 12 },
+    { selector: '.js-range-init-2', countId: 'calc-count-2', min: 1, max: 12, start: 1 },
+    { selector: '.js-range-init-3', countId: 'calc-count-3', min: 1, max: 12, start: 1 },
+  ];
+
+  const profitEl = document.getElementById('calc-profit');
+  const profitRowEl = document.getElementById('calc-profit-row');
+  const grossEl = document.getElementById('calc-gross');
+  const expensesEl = document.getElementById('calc-expenses');
+  const summaryInput = document.getElementById('calc-form-summary');
+
+  const VALUE_MAP = {
+    'calc-count-1': 'calc-value-1',
+    'calc-count-2': 'calc-value-2',
+    'calc-count-3': 'calc-value-3',
+  };
+
+  function formatMoney(value) {
+    return `${Math.round(value).toLocaleString('uk-UA')} грн`;
+  }
+
+  function updateProfit() {
+    const cupsPerDay = parseInt(document.getElementById('calc-count-1')?.textContent, 10) || 0;
+    const units = parseInt(document.getElementById('calc-count-2')?.textContent, 10) || 0;
+    const months = parseInt(document.getElementById('calc-count-3')?.textContent, 10) || 0;
+
+    const grossPerUnitMonth =
+      (CONFIG.avgCheck - CONFIG.unitCost) * cupsPerDay * CONFIG.daysInMonth;
+    const totalGross = grossPerUnitMonth * units * months;
+    const totalExpenses =
+      CONFIG.taxMonthly * months + CONFIG.unitExpenses * units * months;
+    const netProfit = totalGross - totalExpenses;
+    const formatted = formatMoney(netProfit);
+
+    if (profitEl) profitEl.textContent = formatted;
+    if (profitRowEl) profitRowEl.textContent = formatted;
+    if (grossEl) grossEl.textContent = formatMoney(totalGross);
+    if (expensesEl) expensesEl.textContent = formatMoney(totalExpenses);
+    if (summaryInput) {
+      summaryInput.value =
+        `Продажів/день: ${cupsPerDay}; апаратів: ${units}; місяців: ${months}; ` +
+        `дохід: ${formatted}`;
+    }
+  }
+
+  function bindSlider(container, countId, range) {
+    const countEl = document.getElementById(countId);
+    const valueEl = document.getElementById(VALUE_MAP[countId]);
+    if (!container || !countEl || !window.noUiSlider) return;
+
+    const intFormat = {
+      to: (value) => Math.round(value),
+      from: (value) => parseInt(value, 10),
+    };
+
+    noUiSlider.create(container, {
+      start: [range.start],
+      connect: [true, false],
+      step: 1,
+      tooltips: [true],
+      range: { min: range.min, max: range.max },
+      format: intFormat,
+    });
+
+    container.noUiSlider.on('update', (values) => {
+      const val = values[0];
+      countEl.textContent = val;
+      if (valueEl) valueEl.textContent = val;
+      updateProfit();
+    });
+
+    countEl.textContent = String(range.start);
+    if (valueEl) valueEl.textContent = String(range.start);
+  }
+
+  function initSliders() {
+    SLIDERS.forEach((cfg) => {
+      bindSlider(section.querySelector(cfg.selector), cfg.countId, cfg);
+    });
+    updateProfit();
+  }
+
+  if (window.noUiSlider) {
+    initSliders();
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js';
+  script.onload = initSliders;
+  document.head.appendChild(script);
 })();
 
