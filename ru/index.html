@@ -9,14 +9,12 @@
         content="Vendstore — екосистема мікровендингу. HELPER+: товари першої необхідності поруч у потрібну мить. Bloomy: парфумерний вендинг. B2B та B2C під ключ." />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#0C1712" />
-    <link rel="icon" type="image/svg+xml" href="../img/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="preload" as="font" type="font/woff2" href="../fonts/icomoon.woff2" crossorigin>
-    <link rel="preload" as="image" href="../img/hero-poster.webp" type="image/webp" fetchpriority="high">
 </head>
 
 <body data-page="home">
@@ -430,34 +428,7 @@
             </div>
         </section>
 
-        <!-- 6. Локація — CTA -->
-        <section class="location-cta section" id="location" aria-labelledby="location-cta-title">
-            <div class="location-cta__bg" aria-hidden="true">
-                <img src="../img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
-            </div>
-            <div class="container location-cta__container">
-                <div class="location-cta__inner">
-                    <p class="eyebrow">Локація</p>
-                    <h2 id="location-cta-title" class="location-cta__title">Запропонувати <span
-                            class="t-serif">локацію</span>
-                        під встановлення</h2>
-                    <p class="location-cta__lead">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в
-                        місці
-                        з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення
-                        мережі
-                        Vendstore (ЖК, фітнес-центри, ТРЦ, бізнес-центри, готелі, заклади відпочинку).</p>
-                    <p class="location-cta__payoff">Запропонуйте нам локацію — ми проведемо безкоштовний аудит трафіку,
-                        і якщо
-                        місце підійде, ви отримаєте <strong>стабільний пасивний дохід від оренди площі</strong>:
-                        встановлення,
-                        сервіс і заправку апарата беремо на себе.</p>
-                    <a href="#location-apply" class="btn btn--primary">Запропонувати локацію <i
-                            class="icon-Namelocation-m" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Локація — форма -->
+        <!-- 6. Локація — форма -->
         <section class="location section section--light" id="location-apply" aria-labelledby="location-form-title">
             <div class="container location__layout">
                 <div class="location__intro">
@@ -511,6 +482,33 @@
                 </form>
             </div>
         </section>
+
+        <!-- 7. Локація — CTA -->
+        <section class="location-cta section" id="location" aria-labelledby="location-cta-title">
+            <div class="location-cta__bg" aria-hidden="true">
+                <img src="../img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="container location-cta__container">
+                <div class="location-cta__inner">
+                    <p class="eyebrow">Локація</p>
+                    <h2 id="location-cta-title" class="location-cta__title">Запропонувати <span
+                            class="t-serif">локацію</span>
+                        під встановлення</h2>
+                    <p class="location-cta__lead">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в
+                        місці
+                        з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення
+                        мережі
+                        Vendstore (ЖК, фітнес-центри, ТРЦ, бізнес-центри, готелі, заклади відпочинку).</p>
+                    <p class="location-cta__payoff">Запропонуйте нам локацію — ми проведемо безкоштовний аудит трафіку,
+                        і якщо
+                        місце підійде, ви отримаєте <strong>стабільний пасивний дохід від оренди площі</strong>:
+                        встановлення,
+                        сервіс і заправку апарата беремо на себе.</p>
+                    <a href="#location-apply" class="btn btn--primary">Запропонувати локацію <i
+                            class="icon-Namelocation-m" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -554,7 +552,14 @@
                 </div>
             </div>
             <div class="footer__bottom">
-                <p>© 2026 Vendstore. Усі права захищено. Інформація на сайті не є публічною офертою.</p>
+                <div class="footer__bottom-row">
+                    <p class="footer__copy">© 2026 Vendstore. Усі права захищено. Інформація на сайті не є публічною офертою.</p>
+                    <p class="footer__credit">
+                        <span class="footer__credit-label">Разработка и поддержка <span class="footer__credit-label-en" lang="en">· Web development &amp; support</span></span>
+                        <a href="https://timekairos.com.ua/" class="footer__credit-link" target="_blank"
+                            rel="noopener noreferrer"><span>TimeKairos</span></a>
+                    </p>
+                </div>
             </div>
         </div>
     </footer>

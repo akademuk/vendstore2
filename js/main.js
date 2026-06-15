@@ -540,6 +540,58 @@ function initGsapMotion() {
   ScrollTrigger.refresh();
 }
 
+function initProductCurtainPin() {
+  if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  const stage = document.querySelector('.products__stage');
+  if (!stage) return;
+
+  const visuals = stage.querySelectorAll('.product-spot__visual');
+  if (!visuals.length) return;
+
+  const pinScrollDistance = () => window.innerHeight * (isMobileViewport() ? 0.9 : 1.05);
+
+  if (isMobileViewport()) {
+    stage.querySelectorAll('.product-spot').forEach((spot) => {
+      const visual = spot.querySelector('.product-spot__visual');
+      if (!visual) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: spot,
+          start: 'top top',
+          end: () => `+=${pinScrollDistance()}`,
+          pin: true,
+          scrub: 0.4,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.fromTo(visual, { '--curtain-h': '100%' }, { '--curtain-h': '0%', ease: 'none' }, 0);
+    });
+    return;
+  }
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: stage,
+      start: 'top top',
+      end: () => `+=${pinScrollDistance()}`,
+      pin: true,
+      scrub: 0.4,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  visuals.forEach((visual) => {
+    tl.fromTo(visual, { '--curtain-h': '100%' }, { '--curtain-h': '0%', ease: 'none' }, 0);
+  });
+}
+
 function initScrollParallax() {
   if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     return;
@@ -594,26 +646,7 @@ function initScrollParallax() {
     });
   }
 
-  document.querySelectorAll('.product-spot').forEach((spot) => {
-    const visual = spot.querySelector('.product-spot__visual');
-    const curtain = spot.querySelector('.product-spot__curtain');
-    if (!visual || !curtain) return;
-
-    gsap.fromTo(
-      visual,
-      { '--curtain-h': '100%' },
-      {
-        '--curtain-h': '0%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: spot,
-          start: 'top 88%',
-          end: 'top 12%',
-          scrub: 0.4,
-        },
-      }
-    );
-  });
+  initProductCurtainPin();
 
   const ctaBanner = document.querySelector('.cta-banner');
   const ctaLeft = document.querySelector('.cta-banner__left');
