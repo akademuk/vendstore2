@@ -3489,13 +3489,6 @@ body.menu-open {
   line-height: 1.45;
 }
 
-.footer__credit-label-en {
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: rgba(253, 251, 250, 0.32);
-}
-
 .footer__credit-link {
   position: relative;
   display: inline-flex;
