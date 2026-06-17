@@ -1197,15 +1197,16 @@ if (document.body.dataset.page === 'home') {
   if (!section) return;
 
   const CONFIG = {
-    avgCheck: 52,
-    unitCost: 20,
+    avgCheck: 85,
+    marginPerSale: 35,
     daysInMonth: 30,
-    taxMonthly: 4500,
-    unitExpenses: 5750,
+    fopMonthly: 4500,
+    terminalMonthly: 800,
+    rentMonthly: 1000,
   };
 
   const SLIDERS = [
-    { selector: '.js-range-init-1', countId: 'calc-count-1', min: 12, max: 150, start: 12 },
+    { selector: '.js-range-init-1', countId: 'calc-count-1', min: 17, max: 150, start: 17 },
     { selector: '.js-range-init-2', countId: 'calc-count-2', min: 1, max: 12, start: 1 },
     { selector: '.js-range-init-3', countId: 'calc-count-3', min: 1, max: 12, start: 1 },
   ];
@@ -1232,10 +1233,11 @@ if (document.body.dataset.page === 'home') {
     const months = parseInt(document.getElementById('calc-count-3')?.textContent, 10) || 0;
 
     const grossPerUnitMonth =
-      (CONFIG.avgCheck - CONFIG.unitCost) * cupsPerDay * CONFIG.daysInMonth;
+      CONFIG.marginPerSale * cupsPerDay * CONFIG.daysInMonth;
     const totalGross = grossPerUnitMonth * units * months;
+    const perUnitMonthly = CONFIG.terminalMonthly + CONFIG.rentMonthly;
     const totalExpenses =
-      CONFIG.taxMonthly * months + CONFIG.unitExpenses * units * months;
+      CONFIG.fopMonthly * months + perUnitMonthly * units * months;
     const netProfit = totalGross - totalExpenses;
     const formatted = formatMoney(netProfit);
 

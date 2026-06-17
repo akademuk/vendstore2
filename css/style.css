@@ -3581,7 +3581,7 @@ body.menu-open {
 
 .footer__tagline {
   margin-top: 12px;
-  max-width: 28em;
+  max-width: 50em;
   font-size: clamp(14px, 1.6vw, 16px);
   line-height: 1.55;
   color: var(--vs-text-muted);
