@@ -1321,7 +1321,9 @@ body.menu-open {
   position: relative;
   overflow: hidden;
   background: #2e2e2e;
-  isolation: isolate;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .audience__lane--b2b .audience__frame {
@@ -1368,6 +1370,9 @@ body.menu-open {
   display: block;
   will-change: transform;
   transform-origin: center center;
+  border-radius: inherit;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .audience__lane--b2b .audience__frame img {
@@ -1436,13 +1441,25 @@ body.menu-open {
 
   .audience__figure {
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     will-change: auto;
+  }
+
+  .audience__frame {
+    contain: paint;
+    overflow: hidden;
+    overflow: clip;
+  }
+
+  .audience__frame::after {
+    mix-blend-mode: normal;
+    opacity: 0.1;
   }
 
   .audience__frame img {
     height: 100%;
     transform: none;
+    will-change: auto;
   }
 
   .audience__caption--end {
