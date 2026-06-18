@@ -535,6 +535,8 @@ function initGsapMotion() {
 
     initInnerPageMotion();
     initScrollParallax();
+    initSegmentScenesMotion();
+    initAudienceLaneMotion();
   }
 
   ScrollTrigger.refresh();
@@ -592,58 +594,66 @@ function initProductCurtainPin() {
   });
 }
 
-function initScrollParallax() {
+function initAudienceLaneMotion() {
   if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     return;
   }
 
-  if (!isMobileViewport()) {
-    document.querySelectorAll('.audience__lane').forEach((lane) => {
-      const figure = lane.querySelector('.audience__figure');
-      const img = lane.querySelector('.audience__frame img');
-      const isB2c = lane.classList.contains('audience__lane--b2c');
+  if (isMobileViewport()) return;
 
-      if (figure) {
-        gsap.fromTo(
-          figure,
-          {
-            y: 120,
-            x: isB2c ? -48 : 48,
-            rotate: isB2c ? -1.5 : 1.5,
+  document.querySelectorAll('.audience__lane').forEach((lane) => {
+    const figure = lane.querySelector('.audience__figure');
+    const img = lane.querySelector('.audience__frame img');
+    const isB2c = lane.classList.contains('audience__lane--b2c');
+
+    if (figure) {
+      gsap.fromTo(
+        figure,
+        {
+          y: 120,
+          x: isB2c ? -48 : 48,
+          rotate: isB2c ? -1.5 : 1.5,
+        },
+        {
+          y: -100,
+          x: isB2c ? 24 : -24,
+          rotate: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: lane,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.85,
+            invalidateOnRefresh: true,
           },
-          {
-            y: -100,
-            x: isB2c ? 24 : -24,
-            rotate: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: lane,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 0.85,
-            },
-          }
-        );
-      }
+        }
+      );
+    }
 
-      if (img) {
-        gsap.fromTo(
-          img,
-          { yPercent: -18, scale: 1.1 },
-          {
-            yPercent: 16,
-            scale: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: lane,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 0.65,
-            },
-          }
-        );
-      }
-    });
+    if (img) {
+      gsap.fromTo(
+        img,
+        { yPercent: -18, scale: 1.1 },
+        {
+          yPercent: 16,
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: lane,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.65,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+    }
+  });
+}
+
+function initScrollParallax() {
+  if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
   }
 
   initProductCurtainPin();
@@ -704,6 +714,119 @@ function initScrollParallax() {
   document.querySelectorAll('.faq-layout__media img').forEach((img) => {
     const section = img.closest('.faq-section');
     parallaxImg(img, section || img, { start: -10, end: 10, scrub: 0.5 });
+  });
+}
+
+function initSegmentScenesMotion() {
+  if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  const grid = document.querySelector('.segment-scenes');
+  if (!grid) return;
+
+  const cards = gsap.utils.toArray('.segment-scene', grid);
+  if (!cards.length) return;
+
+  const copies = cards.map((card) => card.querySelector('.segment-scene__copy'));
+  const images = cards.map((card) => card.querySelector('.segment-scene__media img'));
+
+  const dimmed = {
+    opacity: 0.38,
+    scale: 0.94,
+    filter: 'brightness(0.52) saturate(0.7)',
+    borderColor: 'rgba(245, 243, 231, 0.06)',
+    boxShadow: '0 10px 32px rgba(0, 0, 0, 0.16)',
+  };
+
+  const focused = {
+    opacity: 1,
+    scale: 1,
+    filter: 'brightness(1) saturate(1)',
+    borderColor: 'rgba(245, 243, 231, 0.24)',
+    boxShadow: '0 32px 80px rgba(0, 0, 0, 0.45)',
+  };
+
+  if (isMobileViewport()) {
+    gsap.fromTo(
+      cards,
+      { y: 56, opacity: 0, scale: 0.95 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.9,
+        stagger: 0.14,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: grid,
+          start: 'top 84%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    images.forEach((img, index) => {
+      if (img) parallaxImg(img, cards[index], { start: -10, end: 10, scrub: 0.55 });
+    });
+    return;
+  }
+
+  grid.classList.add('segment-scenes--focus');
+
+  gsap.set(cards, { transformOrigin: '50% 50%', ...dimmed });
+  gsap.set(cards[0], focused);
+  gsap.set(copies[0], { y: 0, opacity: 1 });
+  gsap.set(copies.slice(1), { yPercent: 110, opacity: 0 });
+
+  const pinTail = Math.min(window.innerHeight * 0.1, 80);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: grid,
+      start: 'top 15%',
+      end: () =>
+        `+=${window.innerHeight * (cards.length - 0.45) * 0.55 + pinTail}`,
+      pin: true,
+      scrub: 0.32,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  cards.forEach((card, index) => {
+    if (index === 0) return;
+
+    const at = index;
+    const prevCard = cards[index - 1];
+    const prevCopy = copies[index - 1];
+    const copy = copies[index];
+    const img = images[index];
+    const prevImg = images[index - 1];
+
+    tl.to(prevCard, { ...dimmed, duration: 0.55, ease: 'power2.inOut' }, at);
+    tl.to(card, { ...focused, duration: 0.55, ease: 'power2.inOut' }, at);
+
+    if (prevCopy && copy) {
+      tl.to(
+        prevCopy,
+        { yPercent: 110, opacity: 0, duration: 0.4, ease: 'power2.in' },
+        at
+      );
+      tl.fromTo(
+        copy,
+        { yPercent: 110, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.5, ease: 'power3.out' },
+        at + 0.02
+      );
+    }
+
+    if (prevImg) {
+      tl.to(prevImg, { scale: 1.04, duration: 0.55, ease: 'power2.inOut' }, at);
+    }
+    if (img) {
+      tl.fromTo(img, { scale: 1.14 }, { scale: 1.08, duration: 0.55, ease: 'power2.out' }, at);
+    }
   });
 }
 
