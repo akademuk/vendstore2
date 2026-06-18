@@ -5132,10 +5132,6 @@ body.is-motion-ready .split:hover .split__media img {
   padding-bottom: clamp(24px, 4vw, 40px);
 }
 
-.page-block:has(.segment-scenes) {
-  padding-bottom: clamp(88px, 11vw, 132px);
-}
-
 .segment-scene {
   position: relative;
   display: flex;
@@ -5147,8 +5143,9 @@ body.is-motion-ready .split:hover .split__media img {
   border-radius: 12px;
   border: 1px solid rgba(245, 243, 231, 0.1);
   box-shadow: 0 20px 56px rgba(0, 0, 0, 0.28);
-  transform-origin: 50% 50%;
-  will-change: transform, opacity, filter;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .segment-scene__media {
@@ -5164,7 +5161,7 @@ body.is-motion-ready .split:hover .split__media img {
   object-fit: cover;
   display: block;
   transform: scale(1.06);
-  will-change: transform;
+  transition: transform 0.45s ease;
 }
 
 .segment-scene--fitness .segment-scene__media img {
@@ -5206,7 +5203,6 @@ body.is-motion-ready .split:hover .split__media img {
   z-index: 3;
   padding: clamp(16px, 2.5vw, 22px);
   max-width: 100%;
-  will-change: transform, opacity;
 }
 
 .segment-scene__text {
@@ -5233,38 +5229,27 @@ body.is-motion-ready .split:hover .split__media img {
     gap: clamp(16px, 2vw, 22px);
   }
 
-  .segment-scenes--focus {
-    padding-bottom: clamp(56px, 8vh, 96px);
-  }
-
   .segment-scene {
     min-height: 0;
     height: 100%;
   }
 }
 
-body.is-motion-ready .segment-scenes--focus .segment-scene {
-  transition: none;
-}
-
 @media (hover: hover) {
-  body:not(.is-motion-ready) .segment-scene:hover .segment-scene__media img {
+  .segment-scene:hover .segment-scene__media img {
     transform: scale(1.08);
   }
 
-  body:not(.is-motion-ready) .segment-scene:hover {
+  .segment-scene:hover {
     border-color: rgba(245, 243, 231, 0.18);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .segment-scene,
-  .segment-scene__media img,
-  .segment-scene__copy {
-    transform: none !important;
-    filter: none !important;
-    opacity: 1 !important;
-    will-change: auto;
+  .segment-scene__media img {
+    transition: none;
   }
 }
 
