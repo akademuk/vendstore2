@@ -395,10 +395,18 @@ function initInnerPageMotion() {
 
   document.querySelectorAll('.specs').forEach((list) => {
     revealOnScroll(list.querySelectorAll('li'), {
-      trigger: list,
+      trigger: list.closest('.specs-layout') || list,
       start: 'top 88%',
       stagger: 0.06,
       y: 12,
+    });
+  });
+
+  document.querySelectorAll('.specs-layout__media').forEach((media) => {
+    revealOnScroll(media, {
+      trigger: media.closest('.specs-layout') || media,
+      start: 'top 86%',
+      y: 28,
     });
   });
 
@@ -900,16 +908,29 @@ function unlockScroll() {
   ScrollTrigger?.refresh();
 }
 
-const modalTitles = {
-  partner: ['Заявка', 'партнеру'],
-  callback: ['Консультація', 'VendStore'],
-  location: ['Пропозиція', 'локації'],
+const modalCopy = {
+  partner: {
+    title: ['Заявка на', 'партнерство'],
+    subtitle:
+      'Залиште контакти — підберемо формат і надішлемо розрахунок протягом 1 робочого дня.',
+  },
+  callback: {
+    title: ['Безкоштовна', 'консультація'],
+    subtitle: 'Залиште номер — менеджер Vendstore передзвонить протягом 1 робочого дня.',
+  },
+  location: {
+    title: ['Запропонувати', 'локацію'],
+    subtitle: 'Опишіть площу або адресу — перевіримо локацію на карту трафіку.',
+  },
 };
 
 function openModal(opts = {}) {
   if (!modal) return;
   const type = opts.formType || 'partner';
   const product = opts.product || '';
+  const copy = modalCopy[type] || modalCopy.partner;
+  const modalSubtitle = document.getElementById('modal-subtitle');
+  const modalProductLabel = document.getElementById('modal-product-label');
 
   if (modalForm) {
     const typeInput = modalForm.querySelector('[name="form_type"]');
@@ -917,9 +938,22 @@ function openModal(opts = {}) {
     if (modalProductInput) modalProductInput.value = product;
   }
 
-  const parts = modalTitles[type] || modalTitles.partner;
   if (modalTitle) {
-    modalTitle.innerHTML = `${parts[0]} <span>${parts[1]}</span>`;
+    modalTitle.innerHTML = `${copy.title[0]} <span>${copy.title[1]}</span>`;
+  }
+
+  if (modalSubtitle) {
+    modalSubtitle.textContent = copy.subtitle;
+  }
+
+  if (modalProductLabel) {
+    if (product) {
+      modalProductLabel.textContent = product;
+      modalProductLabel.hidden = false;
+    } else {
+      modalProductLabel.textContent = '';
+      modalProductLabel.hidden = true;
+    }
   }
 
   modal?.classList.add('is-open');

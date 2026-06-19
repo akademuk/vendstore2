@@ -403,12 +403,15 @@
 
     <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal__window">
+            <div class="modal__accent" aria-hidden="true"></div>
             <button type="button" class="modal__close js-modal-close" aria-label="Закрити">
                 <i class="icon-Nameclose-r" aria-hidden="true"></i>
             </button>
             <div class="modal__content">
-                <h2 id="modal-title">Заявка <span>партнеру</span></h2>
-                <p class="modal__subtitle">B2B · Vendstore</p>
+                <p class="modal__eyebrow">Vendstore</p>
+                <h2 id="modal-title">Заявка на <span>партнерство</span></h2>
+                <p class="modal__subtitle" id="modal-subtitle">Залиште контакти — підберемо формат і надішлемо розрахунок протягом 1 робочого дня.</p>
+                <p class="modal__product" id="modal-product-label" hidden></p>
                 <form id="modal-form" class="modal__form">
                     <input type="hidden" name="form_type" value="partner">
                     <input type="hidden" name="product" id="modal-product" value="B2B">
@@ -435,10 +438,13 @@
     <div id="modal-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"
         aria-hidden="true">
         <div class="modal__window">
+            <div class="modal__accent" aria-hidden="true"></div>
             <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити">
                 <i class="icon-Nameclose-r" aria-hidden="true"></i>
             </button>
             <div class="modal__content modal__content--center">
+                <div class="modal__success-mark" aria-hidden="true">✓</div>
+                <p class="modal__eyebrow">Vendstore</p>
                 <h2 id="success-title"><span>Дякуємо!</span> Заявку отримано</h2>
                 <p>Менеджер Vendstore зателефонує протягом 1 робочого дня.</p>
                 <button type="button" class="btn btn--primary js-modal-success-close">Зрозуміло</button>

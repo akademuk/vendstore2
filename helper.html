@@ -157,8 +157,8 @@
                         <li><strong>Дві модифікації</strong> — Box для максимуму SKU, Slim для вузьких коридорів</li>
                         <li><strong>B2B і B2C</strong> — revenue share для мереж або інвестиція від одного апарату</li>
                     </ul>
-                    <a href="b2b.html" class="btn btn--outline">Для мереж B2B <i class="icon-Namearrow_forward"
-                            aria-hidden="true"></i></a>
+                    <button class="btn btn--outline js-open-modal">Детальніше <i class="icon-Namearrow_forward"
+                            aria-hidden="true"></i></button>
                 </div>
             </div>
         </section>
@@ -192,34 +192,76 @@
                     <p class="section-desc">Дві конфігурації під різну площу та інтенсивність трафіку. Обидві — з
                         енергоефективним живленням 50 Вт і безконтактною оплатою.</p>
                 </div>
-                <div class="product-models">
-                    <article class="product-model product-model--featured">
-                        <span class="product-model__badge">Максимум SKU</span>
-                        <h3 class="product-model__name">HELPER+ Box</h3>
-                        <ul class="product-model__specs">
-                            <li><strong>Ємність:</strong> 80 товарів на ряд · 8 рядів</li>
-                            <li><strong>Живлення:</strong> 50 Вт</li>
-                            <li><strong>Для кого:</strong> ТРЦ, великі лобі, фітнес-клуби з високим трафіком</li>
-                        </ul>
+                <div class="product-models product-models--cards">
+                    <article class="product-model product-model--card product-model--featured">
+                        <figure class="product-model__media">
+                            <img src="img/Helper.jpg" width="800" height="480" alt="HELPER+ Box — мікровендинг автомат"
+                                loading="lazy" decoding="async">
+                        </figure>
+                        <div class="product-model__body">
+                            <span class="product-model__badge">Максимум SKU</span>
+                            <h3 class="product-model__name">HELPER+ Box</h3>
+                            <ul class="product-model__specs">
+                                <li><strong>Ємність:</strong> 80 товарів на ряд · 8 рядів</li>
+                                <li><strong>Живлення:</strong> 50 Вт</li>
+                                <li><strong>Для кого:</strong> ТРЦ, великі лобі, фітнес-клуби з високим трафіком</li>
+                            </ul>
+                            <button type="button" class="btn btn--primary product-model__cta js-open-modal"
+                                data-form-type="partner" data-product="HELPER+ Box">Залишити заявку</button>
+                        </div>
                     </article>
-                    <article class="product-model">
-                        <span class="product-model__badge">Компактний формат</span>
-                        <h3 class="product-model__name">HELPER+ Slim</h3>
-                        <ul class="product-model__specs">
-                            <li><strong>Ємність:</strong> 50 товарів на ряд · 5 рядів</li>
-                            <li><strong>Живлення:</strong> 50 Вт</li>
-                            <li><strong>Для кого:</strong> коридори, офіси, ЖК — від ~1 м² площі</li>
-                        </ul>
+                    <article class="product-model product-model--card">
+                        <figure class="product-model__media">
+                            <img src="img/photo-helper.jpg" width="737" height="776"
+                                alt="HELPER+ Slim у коридорі офісу" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="product-model__body">
+                            <span class="product-model__badge">Компактний формат</span>
+                            <h3 class="product-model__name">HELPER+ Slim</h3>
+                            <ul class="product-model__specs">
+                                <li><strong>Ємність:</strong> 50 товарів на ряд · 5 рядів</li>
+                                <li><strong>Живлення:</strong> 50 Вт</li>
+                                <li><strong>Для кого:</strong> коридори, офіси, ЖК — від ~1 м² площі</li>
+                            </ul>
+                            <button type="button" class="btn btn--primary product-model__cta js-open-modal"
+                                data-form-type="partner" data-product="HELPER+ Slim">Залишити заявку</button>
+                        </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section class="page-block page-block--light" aria-labelledby="helper-audience-title">
+        <section class="page-block page-block--light" aria-labelledby="helper-specs-title">
+            <div class="container">
+                <div class="specs-layout">
+                    <div class="specs-layout__content">
+                        <div class="page-block__head">
+                            <p class="eyebrow eyebrow--dark">Специфікація</p>
+                            <h2 id="helper-specs-title" class="section-title section-title--dark section-title--wide">
+                                Технічні <span class="t-serif">характеристики</span>
+                            </h2>
+                        </div>
+                        <ul class="specs">
+                            <li><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5 рядів</span></li>
+                            <li><strong>Живлення</strong><span>50 Вт · енергоефективна робота 24/7</span></li>
+                            <li><strong>Оплата</strong><span>Безконтакт, картка, QR-код</span></li>
+                            <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
+                            <li><strong>Сервіс</strong><span>Заправка SKU, техпідтримка, аналітика продажів</span></li>
+                        </ul>
+                    </div>
+                    <figure class="specs-layout__media">
+                        <img src="img/Helper.jpg" width="800" height="480" alt="HELPER+ — технічні характеристики"
+                            loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-block" aria-labelledby="helper-audience-title">
             <div class="container">
                 <div class="page-block__head">
-                    <p class="eyebrow eyebrow--dark">Локації</p>
-                    <h2 id="helper-audience-title" class="section-title section-title--dark section-title--wide">Де
+                    <p class="eyebrow">Локації</p>
+                    <h2 id="helper-audience-title" class="section-title section-title--wide">Де
                         <span class="t-serif">працює</span> найкраще
                     </h2>
                 </div>
@@ -276,7 +318,7 @@
                         <span class="vs-icon-wrap" aria-hidden="true">
                             <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
                         </span>
-                        <h3>Операційка на Vendstore</h3>
+                        <h3>Операційку закриває компанія</h3>
                         <p>Заправка, техпідтримка, моніторинг залишків і звітність — повний цикл під ключ.</p>
                     </article>
                     <article class="card card--helper">
@@ -286,6 +328,10 @@
                         <h3>Прозора економіка</h3>
                         <p>Зрозуміла фінмодель, аналітика продажів і прогноз окупності до старту.</p>
                     </article>
+                </div>
+                <div class="page-block__actions">
+                    <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
+                        data-product="HELPER+">Залишити заявку</button>
                 </div>
             </div>
         </section>
@@ -370,7 +416,7 @@
                     <h2 id="helper-cta-title" class="location-cta__title">Готові до <span class="t-serif">першої
                             точки</span>?</h2>
                     <p class="location-cta__lead">Залиште заявку — підберемо модель (Box або Slim), локацію та надішлемо
-                        фінмодель під ваш сценарій: B2B або B2C.</p>
+                        фінмодель під ваш сценарій.</p>
                     <div class="location-cta__actions">
                         <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
                             data-product="HELPER+">стати першим на ринку</button>
@@ -433,12 +479,15 @@
 
     <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal__window">
+            <div class="modal__accent" aria-hidden="true"></div>
             <button type="button" class="modal__close js-modal-close" aria-label="Закрити">
                 <i class="icon-Nameclose-r" aria-hidden="true"></i>
             </button>
             <div class="modal__content">
-                <h2 id="modal-title">HELPER<span>+</span></h2>
-                <p class="modal__subtitle">Заявка на запуск</p>
+                <p class="modal__eyebrow">Vendstore</p>
+                <h2 id="modal-title">Заявка на <span>партнерство</span></h2>
+                <p class="modal__subtitle" id="modal-subtitle">Залиште контакти — підберемо формат і надішлемо розрахунок протягом 1 робочого дня.</p>
+                <p class="modal__product" id="modal-product-label" hidden></p>
                 <form id="modal-form" class="modal__form">
                     <input type="hidden" name="form_type" value="partner">
                     <input type="hidden" name="product" id="modal-product" value="HELPER+">
@@ -465,10 +514,13 @@
     <div id="modal-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title"
         aria-hidden="true">
         <div class="modal__window">
+            <div class="modal__accent" aria-hidden="true"></div>
             <button type="button" class="modal__close js-modal-success-close" aria-label="Закрити">
                 <i class="icon-Nameclose-r" aria-hidden="true"></i>
             </button>
             <div class="modal__content modal__content--center">
+                <div class="modal__success-mark" aria-hidden="true">✓</div>
+                <p class="modal__eyebrow">Vendstore</p>
                 <h2 id="success-title"><span>Дякуємо!</span> Заявку отримано</h2>
                 <p>Менеджер Vendstore зателефонує протягом 1 робочого дня.</p>
                 <button type="button" class="btn btn--primary js-modal-success-close">Зрозуміло</button>
