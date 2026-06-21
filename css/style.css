@@ -1476,16 +1476,25 @@ body.menu-open {
 .products.section {
   position: relative;
   z-index: 2;
-  margin-top: calc(-1 * clamp(56px, 8vh, 96px));
+
   padding-top: calc(80px + clamp(56px, 8vh, 96px));
   border-top: none;
   background: linear-gradient(
     180deg,
-    var(--vs-bg-deep) 0%,
-    #0e1511 24%,
-    var(--vs-bg) 52%,
-    var(--vs-bg) 100%
+    rgba(12, 19, 15, 0.82) 0%,
+    rgba(14, 21, 17, 0.72) 24%,
+    rgba(12, 23, 18, 0.62) 52%,
+    rgba(12, 23, 18, 0.78) 100%
   );
+}
+
+.products.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('../img/bg.png') center / cover no-repeat;
 }
 
 .products {
@@ -1493,6 +1502,31 @@ body.menu-open {
 }
 
 .products > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-block--bg-flip {
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 19, 15, 0.82) 0%,
+    rgba(14, 21, 17, 0.72) 24%,
+    rgba(12, 23, 18, 0.62) 52%,
+    rgba(12, 23, 18, 0.78) 100%
+  );
+}
+
+.page-block--bg-flip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('../img/bg.png') center / cover no-repeat;
+}
+
+.page-block--bg-flip > .container {
   position: relative;
   z-index: 1;
 }

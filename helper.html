@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
     <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="preload" as="font" type="font/woff2" href="fonts/icomoon.woff2" crossorigin>
 </head>
@@ -114,7 +115,8 @@
                 <p class="eyebrow">Продукт · 01 · мікровендинг</p>
                 <h1 class="page-hero__title">HELPER<span class="t-serif">+</span></h1>
                 <p class="page-hero__text">Помічник у повсякденних ситуаціях: товари першої необхідності поруч у місцях
-                    високого трафіку. Швидкий сервіс без зайвих дій — фармація, tech, гігієна, снеки та auto care в одній
+                    високого трафіку. Швидкий сервіс без зайвих дій — фармація, tech, гігієна, снеки та auto care в
+                    одній
                     компактній точці.</p>
                 <div class="page-hero__actions">
                     <button type="button" class="btn btn--primary js-open-modal" data-form-type="partner"
@@ -147,16 +149,17 @@
                 </div>
                 <div class="split__content">
                     <span class="split__tag split__tag--helper">Концепція</span>
-                    <h2 id="helper-concept-title" class="section-title section-title--wide">Товар поруч — у <span
-                            class="t-serif">потрібну мить</span></h2>
-                    <p>HELPER+ закриває імпульс «потрібно зараз»: пластир, кабель, вода, гігієна — без пошуку магазину
-                        і без черги. Апарат працює автономно, а Vendstore бере на себе заправку, технічний сервіс і
-                        хмарний моніторинг.</p>
-                    <ul class="products__features">
+                    <h2 id="helper-concept-title" class="section-title section-title--wide">Товари першої необхідності — <span
+                            class="t-serif">завжди під рукою</span></h2>
+                    <p>HELPER рятує в ситуаціях, коли щось потрібно прямо зараз: пластир, кабель для зарядки, вода чи серветки. Більше не треба шукати супермаркет чи стояти в чергах. Апарат працює сам, а всі турботи — від заправки товарами до ремонту та контролю через інтернет — ми беремо на себе.</p>
+                    <p>Товари підлаштовуються під вас: всередину можна покласти до 5 різних категорій речей, залежно від того, що найчастіше купують саме на вашій локації.</p>
+                    <p>Два зручних розміри: велика модель (Box) — для максимального вибору товарів, та компактна (Slim) — для вузьких проходів чи коридорів.</p>
+                    <p>Вигідно для кожного: великі мережі можуть підсилювати впізнаваність бренду та сервіс, а приватні інвестори — купити навіть один апарат і заробляти самостійно.</p>
+                    <!-- <ul class="products__features">
                         <li><strong>Гнучке наповнення</strong> — 5 категорій SKU під аудиторію локації</li>
                         <li><strong>Дві модифікації</strong> — Box для максимуму SKU, Slim для вузьких коридорів</li>
                         <li><strong>B2B і B2C</strong> — revenue share для мереж або інвестиція від одного апарату</li>
-                    </ul>
+                    </ul> -->
                     <button class="btn btn--outline js-open-modal">Детальніше <i class="icon-Namearrow_forward"
                             aria-hidden="true"></i></button>
                 </div>
@@ -212,8 +215,8 @@
                     </article>
                     <article class="product-model product-model--card">
                         <figure class="product-model__media">
-                            <img src="img/photo-helper.jpg" width="737" height="776"
-                                alt="HELPER+ Slim у коридорі офісу" loading="lazy" decoding="async">
+                            <img src="img/photo-helper.jpg" width="737" height="776" alt="HELPER+ Slim у коридорі офісу"
+                                loading="lazy" decoding="async">
                         </figure>
                         <div class="product-model__body">
                             <span class="product-model__badge">Компактний формат</span>
@@ -242,7 +245,8 @@
                             </h2>
                         </div>
                         <ul class="specs">
-                            <li><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5 рядів</span></li>
+                            <li><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5
+                                    рядів</span></li>
                             <li><strong>Живлення</strong><span>50 Вт · енергоефективна робота 24/7</span></li>
                             <li><strong>Оплата</strong><span>Безконтакт, картка, QR-код</span></li>
                             <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
@@ -257,7 +261,7 @@
             </div>
         </section>
 
-        <section class="page-block" aria-labelledby="helper-audience-title">
+        <section class="page-block page-block--bg-flip" aria-labelledby="helper-audience-title">
             <div class="container">
                 <div class="page-block__head">
                     <p class="eyebrow">Локації</p>
@@ -268,28 +272,36 @@
                 <ul class="values values--icons">
                     <li class="values__item">
                         <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-pin" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-pin" />
+                            </svg>
                         </span>
                         <p class="values__text"><strong>ТРЦ та бізнес-центри</strong> — стабільний потік людей, висока
                             частота імпульсних покупок.</p>
                     </li>
                     <li class="values__item">
                         <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-clock" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-clock" />
+                            </svg>
                         </span>
                         <p class="values__text"><strong>ЖК, кампуси, медцентри</strong> — 24/7 доступ до необхідного,
                             коли поруч немає магазину.</p>
                     </li>
                     <li class="values__item">
                         <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-shield" />
+                            </svg>
                         </span>
                         <p class="values__text"><strong>Фітнес та wellness</strong> — гігієна, вода, снеки поруч із
                             залом без касового персоналу.</p>
                     </li>
                     <li class="values__item">
                         <span class="vs-icon-wrap vs-icon-wrap--sm" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-smartphone" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-smartphone" />
+                            </svg>
                         </span>
                         <p class="values__text"><strong>АЗС та транспортні вузли</strong> — tech, auto care і напої для
                             мандрівників у русі.</p>
@@ -308,7 +320,9 @@
                 <div class="cards cards--3">
                     <article class="card card--helper">
                         <span class="vs-icon-wrap" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-clock" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-clock" />
+                            </svg>
                         </span>
                         <h3>Цілодобовий сервіс</h3>
                         <p>Апарат працює без перерв. Покупець отримує товар у потрібну мить — ви не залучаєте
@@ -316,14 +330,18 @@
                     </article>
                     <article class="card card--helper">
                         <span class="vs-icon-wrap" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-shield" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-shield" />
+                            </svg>
                         </span>
                         <h3>Операційку закриває компанія</h3>
                         <p>Заправка, техпідтримка, моніторинг залишків і звітність — повний цикл під ключ.</p>
                     </article>
                     <article class="card card--helper">
                         <span class="vs-icon-wrap" aria-hidden="true">
-                            <svg class="vs-icon" viewBox="0 0 24 24"><use href="#vs-chart" /></svg>
+                            <svg class="vs-icon" viewBox="0 0 24 24">
+                                <use href="#vs-chart" />
+                            </svg>
                         </span>
                         <h3>Прозора економіка</h3>
                         <p>Зрозуміла фінмодель, аналітика продажів і прогноз окупності до старту.</p>
@@ -350,7 +368,8 @@
                     </div>
                     <p>Висока маржинальність на SKU першої необхідності. Розрахунок базується на середньому чеку
                         <strong>85 грн</strong> при <strong>17 продажах на день</strong>. Точні цифри залежать від
-                        локації, моделі (Box або Slim) та асортименту — надсилаємо фінмодель після заявки.</p>
+                        локації, моделі (Box або Slim) та асортименту — надсилаємо фінмодель після заявки.
+                    </p>
                 </div>
             </div>
         </section>
@@ -393,14 +412,138 @@
                         </div>
                         <figure class="faq-layout__media faq-layout__media--helper">
                             <span class="faq-layout__ghost" aria-hidden="true">+</span>
-                            <img src="img/photo-helper.jpg" width="737" height="776"
-                                alt="HELPER+ у лобі бізнес-центру" loading="lazy" decoding="async">
+                            <img src="img/photo-helper.jpg" width="737" height="776" alt="HELPER+ у лобі бізнес-центру"
+                                loading="lazy" decoding="async">
                             <figcaption class="faq-layout__caption">
                                 <span class="faq-layout__caption-tag">HELPER+ · Box</span>
                                 <span class="faq-layout__caption-text">Максимум SKU для локацій з щільним трафіком і
                                     високою частотою покупок.</span>
                             </figcaption>
                         </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="calc-section section section--light" aria-labelledby="calc-title">
+            <div class="container">
+                <header class="calc-section__head">
+                    <p class="eyebrow eyebrow--dark">Економіка</p>
+                    <h2 id="calc-title" class="section-title section-title--dark section-title--wide">Економіка
+                        <span class="t-serif">проєкту</span>
+                    </h2>
+                    <p class="calc-section__lead">Пересуньте параметри — і одразу побачите орієнтовний чистий дохід
+                        від мережі HELPER+. Для детального прорахунку залиште контакти.</p>
+                </header>
+                <div class="calc-section__shell">
+                    <div class="calc-section__grid">
+                        <aside class="calc-section__content">
+                            <div class="calc-section__sticky">
+                                <h3 class="calc-section__aside-title">Персональний розрахунок</h3>
+                                <p class="calc-section__aside-text">Надішлемо фінмодель з урахуванням вашої локації,
+                                    формату Box/Slim та сценарію B2B або B2C.</p>
+                                <form id="calc-form" class="calc-section__form" novalidate>
+                                    <input type="hidden" name="form_type" value="callback">
+                                    <input type="hidden" name="product" value="Калькулятор доходу — HELPER+">
+                                    <input type="hidden" name="calc_summary" id="calc-form-summary" value="">
+                                    <div class="form-group">
+                                        <label for="calc-name">Ім'я</label>
+                                        <input type="text" id="calc-name" name="name" placeholder="Ваше ім'я"
+                                            autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="calc-phone">Телефон *</label>
+                                        <input type="tel" id="calc-phone" name="phone" placeholder="+38 (0__) ___-__-__"
+                                            required aria-required="true" autocomplete="tel">
+                                    </div>
+                                    <button type="submit" class="btn btn--primary btn--block">Отримати
+                                        розрахунок</button>
+                                    <p class="form-note calc-section__form-note">Відповімо протягом 1 робочого дня.</p>
+                                </form>
+                            </div>
+                        </aside>
+                        <div class="calc-section__controls">
+                            <h3 class="calc-section__controls-title">Параметри моделі</h3>
+                            <div class="calc-section__sliders">
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-1">Продажів на
+                                            день</label>
+                                        <output class="calc-section__value" id="calc-value-1"
+                                            for="calc-range-1">17</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-1" id="calc-range-1" aria-label="Продажів на день">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>17</span><span>150</span>
+                                    </div>
+                                    <span id="calc-count-1" hidden>17</span>
+                                </div>
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-2">Кількість
+                                            апаратів</label>
+                                        <output class="calc-section__value" id="calc-value-2"
+                                            for="calc-range-2">1</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-2" id="calc-range-2" aria-label="Кількість апаратів">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>1</span><span>12</span>
+                                    </div>
+                                    <span id="calc-count-2" hidden>1</span>
+                                </div>
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-3">Період,
+                                            місяців</label>
+                                        <output class="calc-section__value" id="calc-value-3"
+                                            for="calc-range-3">1</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-3" id="calc-range-3" aria-label="Період у місяцях">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>1</span><span>12</span>
+                                    </div>
+                                    <span id="calc-count-3" hidden>1</span>
+                                </div>
+                            </div>
+                            <div class="calc-section__result-card" aria-live="polite" aria-atomic="true">
+                                <p class="calc-section__result-label">Ваш дохід за обраний період</p>
+                                <p class="calc-section__result-value" id="calc-profit">0 грн</p>
+                                <table class="calc-section__table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Показник</th>
+                                            <th scope="col">Сума</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Маржинальний оборот</td>
+                                            <td id="calc-gross">0 грн</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Витрати за період</td>
+                                            <td id="calc-expenses">0 грн</td>
+                                        </tr>
+                                        <tr class="calc-section__table-total">
+                                            <td>Чистий дохід</td>
+                                            <td id="calc-profit-row">0 грн</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="calc-section__disclaimer">Орієнтовний розрахунок за планом мінімум: чек
+                                    85&nbsp;грн, маржа 35&nbsp;грн/од., 17 продажів/день. Витрати: 4&nbsp;500&nbsp;грн
+                                    (ФОП) + 800&nbsp;грн (термінал) + 1&nbsp;000&nbsp;грн (оренда) на місяць.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -433,7 +576,9 @@
                     <a href="index.html" class="footer__logo" aria-label="Vendstore — на головну">
                         <span class="footer__logo-text">Vend<span class="footer__logo-serif">store</span></span>
                     </a>
-                    <p class="footer__tagline">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в місці з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення мережі Vendstore (ЖК, фітнес-центри, ТРЦ, бізнес-центри, готелі, заклади відпочинку).</p>
+                    <p class="footer__tagline">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в
+                        місці з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення
+                        мережі Vendstore (ЖК, фітнес-центри, ТРЦ, бізнес-центри, готелі, заклади відпочинку).</p>
                 </div>
                 <button type="button" class="btn btn--primary footer__cta js-open-modal"
                     data-form-type="callback">запропонувати локацію</button>
@@ -466,7 +611,8 @@
             </div>
             <div class="footer__bottom">
                 <div class="footer__bottom-row">
-                    <p class="footer__copy">© 2026 Vendstore. Усі права захищено. Інформація на сайті не є публічною офертою.</p>
+                    <p class="footer__copy">© 2026 Vendstore. Усі права захищено. Інформація на сайті не є публічною
+                        офертою.</p>
                     <p class="footer__credit">
                         <span class="footer__credit-label" lang="en">Web development &amp; support</span>
                         <a href="https://timekairos.com.ua/" class="footer__credit-link" target="_blank"
@@ -486,7 +632,8 @@
             <div class="modal__content">
                 <p class="modal__eyebrow">Vendstore</p>
                 <h2 id="modal-title">Заявка на <span>партнерство</span></h2>
-                <p class="modal__subtitle" id="modal-subtitle">Залиште контакти — підберемо формат і надішлемо розрахунок протягом 1 робочого дня.</p>
+                <p class="modal__subtitle" id="modal-subtitle">Залиште контакти — підберемо формат і надішлемо
+                    розрахунок протягом 1 робочого дня.</p>
                 <p class="modal__product" id="modal-product-label" hidden></p>
                 <form id="modal-form" class="modal__form">
                     <input type="hidden" name="form_type" value="partner">
