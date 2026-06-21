@@ -1473,7 +1473,7 @@ body.menu-open {
 }
 
 /* ─── Products: dual-character split ─── */
-.products.section {
+body[data-page="home"] .products.section {
   position: relative;
   z-index: 2;
 
@@ -1488,7 +1488,7 @@ body.menu-open {
   );
 }
 
-.products.section::before {
+body[data-page="home"] .products.section::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1506,7 +1506,7 @@ body.menu-open {
   z-index: 1;
 }
 
-.page-block--bg-flip {
+body[data-page="home"] .page-block--bg-flip {
   overflow: hidden;
   background: linear-gradient(
     180deg,
@@ -1517,7 +1517,7 @@ body.menu-open {
   );
 }
 
-.page-block--bg-flip::before {
+body[data-page="home"] .page-block--bg-flip::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1526,7 +1526,7 @@ body.menu-open {
   background: url('../img/bg.png') center / cover no-repeat;
 }
 
-.page-block--bg-flip > .container {
+body[data-page="home"] .page-block--bg-flip > .container {
   position: relative;
   z-index: 1;
 }

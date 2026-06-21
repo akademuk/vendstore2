@@ -164,6 +164,132 @@
             </div>
         </section>
 
+        <section id="calculator" class="calc-section section section--light" aria-labelledby="calc-title">
+            <div class="container">
+                <header class="calc-section__head">
+                    <p class="eyebrow eyebrow--dark">Економіка</p>
+                    <h2 id="calc-title" class="section-title section-title--dark section-title--wide">Економіка
+                        <span class="t-serif">проєкту</span>
+                    </h2>
+                    <p class="calc-section__lead">Пересуньте параметри — і одразу побачите орієнтовний чистий дохід
+                        від точки Bloomy. Для детального прорахунку залиште контакти.</p>
+                </header>
+                <div class="calc-section__shell">
+                    <div class="calc-section__grid">
+                        <aside class="calc-section__content">
+                            <div class="calc-section__sticky">
+                                <h3 class="calc-section__aside-title">Персональний розрахунок</h3>
+                                <p class="calc-section__aside-text">Надішлемо фінмодель з урахуванням вашої локації,
+                                    формату (настінна або підлогова) та сценарію B2B або B2C.</p>
+                                <form id="calc-form" class="calc-section__form" novalidate>
+                                    <input type="hidden" name="form_type" value="callback">
+                                    <input type="hidden" name="product" value="Калькулятор доходу — Bloomy">
+                                    <input type="hidden" name="calc_summary" id="calc-form-summary" value="">
+                                    <div class="form-group">
+                                        <label for="calc-name">Ім'я</label>
+                                        <input type="text" id="calc-name" name="name" placeholder="Ваше ім'я"
+                                            autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="calc-phone">Телефон *</label>
+                                        <input type="tel" id="calc-phone" name="phone" placeholder="+38 (0__) ___-__-__"
+                                            required aria-required="true" autocomplete="tel">
+                                    </div>
+                                    <button type="submit" class="btn btn--primary btn--bloomi btn--block">Отримати
+                                        розрахунок</button>
+                                    <p class="form-note calc-section__form-note">Відповімо протягом 1 робочого дня.</p>
+                                </form>
+                            </div>
+                        </aside>
+                        <div class="calc-section__controls">
+                            <h3 class="calc-section__controls-title">Параметри моделі</h3>
+                            <div class="calc-section__sliders">
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-1">Продажів на
+                                            день</label>
+                                        <output class="calc-section__value" id="calc-value-1"
+                                            for="calc-range-1">17</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-1" id="calc-range-1" aria-label="Продажів на день">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>17</span><span>150</span>
+                                    </div>
+                                    <span id="calc-count-1" hidden>17</span>
+                                </div>
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-2">Кількість
+                                            апаратів</label>
+                                        <output class="calc-section__value" id="calc-value-2"
+                                            for="calc-range-2">1</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-2" id="calc-range-2" aria-label="Кількість апаратів">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>1</span><span>12</span>
+                                    </div>
+                                    <span id="calc-count-2" hidden>1</span>
+                                </div>
+                                <div class="calc-section__slider-group">
+                                    <div class="calc-section__slider-top">
+                                        <label class="calc-section__slider-label" for="calc-range-3">Період,
+                                            місяців</label>
+                                        <output class="calc-section__value" id="calc-value-3"
+                                            for="calc-range-3">1</output>
+                                    </div>
+                                    <div class="calc-section__slider-track">
+                                        <div class="js-range-init-3" id="calc-range-3" aria-label="Період у місяцях">
+                                        </div>
+                                    </div>
+                                    <div class="calc-section__slider-bounds" aria-hidden="true">
+                                        <span>1</span><span>12</span>
+                                    </div>
+                                    <span id="calc-count-3" hidden>1</span>
+                                </div>
+                            </div>
+                            <div class="calc-section__result-card" aria-live="polite" aria-atomic="true">
+                                <p class="calc-section__result-label">Ваш дохід за обраний період</p>
+                                <p class="calc-section__result-value" id="calc-profit">0 грн</p>
+                                <table class="calc-section__table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Показник</th>
+                                            <th scope="col">Сума</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Маржинальний оборот</td>
+                                            <td id="calc-gross">0 грн</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Витрати за період</td>
+                                            <td id="calc-expenses">0 грн</td>
+                                        </tr>
+                                        <tr class="calc-section__table-total">
+                                            <td>Чистий дохід</td>
+                                            <td id="calc-profit-row">0 грн</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="calc-section__disclaimer">Орієнтовний розрахунок за планом мінімум: чек
+                                    85&nbsp;грн, маржа 35&nbsp;грн/од., 17 продажів/день. Витрати: 4&nbsp;500&nbsp;грн
+                                    (ФОП) + 800&nbsp;грн (термінал) + 1&nbsp;000&nbsp;грн (оренда) на місяць.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </section>
+
         <section class="page-block page-block--light" aria-labelledby="bloomi-experience-title">
             <div class="container">
                 <div class="page-block__head">
@@ -388,130 +514,6 @@
                                     локацій, де важливий візуальний wow-ефект.</span>
                             </figcaption>
                         </figure>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="calculator" class="calc-section section section--light" aria-labelledby="calc-title">
-            <div class="container">
-                <header class="calc-section__head">
-                    <p class="eyebrow eyebrow--dark">Економіка</p>
-                    <h2 id="calc-title" class="section-title section-title--dark section-title--wide">Економіка
-                        <span class="t-serif">проєкту</span>
-                    </h2>
-                    <p class="calc-section__lead">Пересуньте параметри — і одразу побачите орієнтовний чистий дохід
-                        від точки Bloomy. Для детального прорахунку залиште контакти.</p>
-                </header>
-                <div class="calc-section__shell">
-                    <div class="calc-section__grid">
-                        <aside class="calc-section__content">
-                            <div class="calc-section__sticky">
-                                <h3 class="calc-section__aside-title">Персональний розрахунок</h3>
-                                <p class="calc-section__aside-text">Надішлемо фінмодель з урахуванням вашої локації,
-                                    формату (настінна або підлогова) та сценарію B2B або B2C.</p>
-                                <form id="calc-form" class="calc-section__form" novalidate>
-                                    <input type="hidden" name="form_type" value="callback">
-                                    <input type="hidden" name="product" value="Калькулятор доходу — Bloomy">
-                                    <input type="hidden" name="calc_summary" id="calc-form-summary" value="">
-                                    <div class="form-group">
-                                        <label for="calc-name">Ім'я</label>
-                                        <input type="text" id="calc-name" name="name" placeholder="Ваше ім'я"
-                                            autocomplete="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="calc-phone">Телефон *</label>
-                                        <input type="tel" id="calc-phone" name="phone" placeholder="+38 (0__) ___-__-__"
-                                            required aria-required="true" autocomplete="tel">
-                                    </div>
-                                    <button type="submit" class="btn btn--primary btn--bloomi btn--block">Отримати
-                                        розрахунок</button>
-                                    <p class="form-note calc-section__form-note">Відповімо протягом 1 робочого дня.</p>
-                                </form>
-                            </div>
-                        </aside>
-                        <div class="calc-section__controls">
-                            <h3 class="calc-section__controls-title">Параметри моделі</h3>
-                            <div class="calc-section__sliders">
-                                <div class="calc-section__slider-group">
-                                    <div class="calc-section__slider-top">
-                                        <label class="calc-section__slider-label" for="calc-range-1">Продажів на
-                                            день</label>
-                                        <output class="calc-section__value" id="calc-value-1"
-                                            for="calc-range-1">17</output>
-                                    </div>
-                                    <div class="calc-section__slider-track">
-                                        <div class="js-range-init-1" id="calc-range-1" aria-label="Продажів на день">
-                                        </div>
-                                    </div>
-                                    <div class="calc-section__slider-bounds" aria-hidden="true">
-                                        <span>17</span><span>150</span>
-                                    </div>
-                                    <span id="calc-count-1" hidden>17</span>
-                                </div>
-                                <div class="calc-section__slider-group">
-                                    <div class="calc-section__slider-top">
-                                        <label class="calc-section__slider-label" for="calc-range-2">Кількість
-                                            апаратів</label>
-                                        <output class="calc-section__value" id="calc-value-2"
-                                            for="calc-range-2">1</output>
-                                    </div>
-                                    <div class="calc-section__slider-track">
-                                        <div class="js-range-init-2" id="calc-range-2" aria-label="Кількість апаратів">
-                                        </div>
-                                    </div>
-                                    <div class="calc-section__slider-bounds" aria-hidden="true">
-                                        <span>1</span><span>12</span>
-                                    </div>
-                                    <span id="calc-count-2" hidden>1</span>
-                                </div>
-                                <div class="calc-section__slider-group">
-                                    <div class="calc-section__slider-top">
-                                        <label class="calc-section__slider-label" for="calc-range-3">Період,
-                                            місяців</label>
-                                        <output class="calc-section__value" id="calc-value-3"
-                                            for="calc-range-3">1</output>
-                                    </div>
-                                    <div class="calc-section__slider-track">
-                                        <div class="js-range-init-3" id="calc-range-3" aria-label="Період у місяцях">
-                                        </div>
-                                    </div>
-                                    <div class="calc-section__slider-bounds" aria-hidden="true">
-                                        <span>1</span><span>12</span>
-                                    </div>
-                                    <span id="calc-count-3" hidden>1</span>
-                                </div>
-                            </div>
-                            <div class="calc-section__result-card" aria-live="polite" aria-atomic="true">
-                                <p class="calc-section__result-label">Ваш дохід за обраний період</p>
-                                <p class="calc-section__result-value" id="calc-profit">0 грн</p>
-                                <table class="calc-section__table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Показник</th>
-                                            <th scope="col">Сума</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Маржинальний оборот</td>
-                                            <td id="calc-gross">0 грн</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Витрати за період</td>
-                                            <td id="calc-expenses">0 грн</td>
-                                        </tr>
-                                        <tr class="calc-section__table-total">
-                                            <td>Чистий дохід</td>
-                                            <td id="calc-profit-row">0 грн</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p class="calc-section__disclaimer">Орієнтовний розрахунок за планом мінімум: чек
-                                    85&nbsp;грн, маржа 35&nbsp;грн/од., 17 продажів/день. Витрати: 4&nbsp;500&nbsp;грн
-                                    (ФОП) + 800&nbsp;грн (термінал) + 1&nbsp;000&nbsp;грн (оренда) на місяць.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
