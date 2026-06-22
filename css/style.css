@@ -3664,6 +3664,19 @@ body[data-page="home"] .page-block--bg-flip > .container {
   border-top-color: var(--vs-border-dark);
 }
 
+.steps.section--light .steps__note {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--vs-text-dark);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+.steps.section--light .steps__note strong {
+  font-weight: 700;
+  color: var(--vs-accent);
+}
+
 @media (max-width: 767px) {
   .steps.section--light .steps__track {
     border-left-color: rgba(154, 143, 127, 0.45);
@@ -5762,6 +5775,19 @@ body.is-motion-ready .split:hover .split__media img {
 
 .page-block .steps__note {
   border-top-color: var(--vs-border-dark);
+}
+
+.page-block--light .steps__note {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--vs-text-dark);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+.page-block--light .steps__note strong {
+  font-weight: 700;
+  color: var(--vs-accent);
 }
 
 .page-block--light .steps__track::before {
