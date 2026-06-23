@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#0C1712" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -31,8 +31,7 @@
                     <span class="burger__line"></span>
                 </button>
                 <a href="index.html" class="header__logo" aria-label="Vendstore — на головну">
-                    <span class="header__logo-text" aria-hidden="true">Vend<span
-                            class="header__logo-serif">store</span></span>
+                    <img src="img/logo.png" alt="" class="header__logo-img" width="4352" height="745" decoding="async">
                 </a>
             </div>
             <nav id="main-nav" class="header__nav" aria-label="Основна навігація">
@@ -109,7 +108,11 @@
 
         <section class="page-hero page-hero--helper page-hero--product">
             <div class="page-hero__bg" aria-hidden="true">
-                <img src="img/photo-helper.jpg" width="737" height="776" alt="" loading="eager" decoding="async">
+                <picture>
+                    <source srcset="img/helper-hero.webp" type="image/webp">
+                    <img src="img/helper-hero.jpg" width="3840" height="2160" alt="" loading="eager"
+                        decoding="async" fetchpriority="high">
+                </picture>
             </div>
             <div class="container">
                 <p class="eyebrow">Продукт · 01 · мікровендинг</p>
@@ -144,8 +147,11 @@
         <section class="page-block" aria-labelledby="helper-concept-title">
             <div class="container split">
                 <div class="split__media">
-                    <img src="img/Helper.jpg" width="800" height="480" alt="HELPER+ — мікровендинг автомат"
-                        loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="img/consept.webp" type="image/webp">
+                        <img src="img/consept.jpg" width="2480" height="3312"
+                            alt="HELPER+ — концепція мікровендингу" loading="lazy" decoding="async">
+                    </picture>
                 </div>
                 <div class="split__content">
                     <span class="split__tag split__tag--helper">Концепція</span>
@@ -321,11 +327,61 @@
                     <p class="section-desc">Дві конфігурації під різну площу та інтенсивність трафіку. Обидві — з
                         енергоефективним живленням 50 Вт і безконтактною оплатою.</p>
                 </div>
-                <div class="product-models product-models--cards">
+                <div class="product-models product-models--cards product-models--spread" data-earn-spread>
                     <article class="product-model product-model--card product-model--featured">
                         <figure class="product-model__media">
-                            <img src="img/Helper.jpg" width="800" height="480" alt="HELPER+ Box — мікровендинг автомат"
-                                loading="lazy" decoding="async">
+                            <div class="model-slider" data-model-slider data-interval="4500"
+                                aria-roledescription="carousel" aria-label="HELPER+ Box — галерея">
+                                <div class="model-slider__slides">
+                                    <div class="model-slider__slide is-active">
+                                        <picture>
+                                            <source srcset="img/HELPER+Box1.webp" type="image/webp">
+                                            <img src="img/HELPER+Box1.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Box — вигляд 1" loading="eager" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/HELPER+Box2.webp" type="image/webp">
+                                            <img src="img/HELPER+Box2.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Box — вигляд 2" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/HELPER+Box3.webp" type="image/webp">
+                                            <img src="img/HELPER+Box3.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Box — вигляд 3" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/HELPER+Box4.webp" type="image/webp">
+                                            <img src="img/HELPER+Box4.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Box — вигляд 4" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/HELPER+Box5.webp" type="image/webp">
+                                            <img src="img/HELPER+Box5.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Box — вигляд 5" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                </div>
+                                <div class="model-slider__dots" role="tablist" aria-label="Слайди HELPER+ Box">
+                                    <button type="button" class="model-slider__dot is-active" role="tab"
+                                        aria-label="Слайд 1" aria-selected="true"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 2"
+                                        aria-selected="false"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 3"
+                                        aria-selected="false"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 4"
+                                        aria-selected="false"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 5"
+                                        aria-selected="false"></button>
+                                </div>
+                            </div>
                         </figure>
                         <div class="product-model__body">
                             <span class="product-model__badge">Максимум SKU</span>
@@ -339,10 +395,92 @@
                                 data-form-type="partner" data-product="HELPER+ Box">Залишити заявку</button>
                         </div>
                     </article>
+                    <div class="product-models__earn-gap">
+                        <div class="product-models__earn-item product-models__earn-item--box">
+                            <div class="product-models__earn-piece">
+                                <div class="product-models__earn-stat">
+
+                                    <p class="product-models__earn-amount">
+                                        <span>від</span>
+                                        <strong data-earn-box>0</strong>
+                                        <span class="product-models__earn-unit">грн/міс</span>
+                                    </p>
+                                </div>
+                                <svg class="product-models__earn-connector is-desk" viewBox="0 0 240 44"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="168,0 168,28 0,28" />
+                                    <rect class="product-models__earn-node" x="-3.5" y="24.5" width="7" height="7" />
+                                </svg>
+                                <svg class="product-models__earn-connector is-mob" viewBox="0 0 56 96"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="28,96 28,0" />
+                                    <rect class="product-models__earn-node" x="24.5" y="-3.5" width="7" height="7" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="product-models__earn-axis">
+                            <span class="product-models__earn-axis-line" aria-hidden="true"></span>
+                            <p class="product-models__earn-axis-label">Чистий прибуток</p>
+                            <span class="product-models__earn-axis-line" aria-hidden="true"></span>
+                        </div>
+                        <div class="product-models__earn-item product-models__earn-item--slim">
+                            <div class="product-models__earn-piece">
+                                <div class="product-models__earn-stat">
+                                    <p class="product-models__earn-amount">
+                                        <span>від</span>
+                                        <strong data-earn-slim>0</strong>
+                                        <span class="product-models__earn-unit">грн/міс</span>
+                                    </p>
+                                </div>
+                                <svg class="product-models__earn-connector is-desk" viewBox="0 0 240 44"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="72,0 72,28 240,28" />
+                                    <rect class="product-models__earn-node" x="236.5" y="24.5" width="7" height="7" />
+                                </svg>
+                                <svg class="product-models__earn-connector is-mob" viewBox="0 0 56 96"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="28,0 28,96" />
+                                    <rect class="product-models__earn-node" x="24.5" y="92.5" width="7" height="7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                     <article class="product-model product-model--card">
                         <figure class="product-model__media">
-                            <img src="img/photo-helper.jpg" width="737" height="776" alt="HELPER+ Slim у коридорі офісу"
-                                loading="lazy" decoding="async">
+                            <div class="model-slider" data-model-slider data-interval="4500"
+                                aria-roledescription="carousel" aria-label="HELPER+ Slim — галерея">
+                                <div class="model-slider__slides">
+                                    <div class="model-slider__slide is-active">
+                                        <picture>
+                                            <source srcset="img/Helper+slim1.webp" type="image/webp">
+                                            <img src="img/Helper+slim1.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Slim — вигляд 1" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/Helper+slim2.webp" type="image/webp">
+                                            <img src="img/Helper+slim2.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Slim — вигляд 2" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/Helper+slim3.webp" type="image/webp">
+                                            <img src="img/Helper+slim3.jpg" width="1920" height="1920"
+                                                alt="HELPER+ Slim — вигляд 3" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                </div>
+                                <div class="model-slider__dots" role="tablist" aria-label="Слайди HELPER+ Slim">
+                                    <button type="button" class="model-slider__dot is-active" role="tab"
+                                        aria-label="Слайд 1" aria-selected="true"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 2"
+                                        aria-selected="false"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 3"
+                                        aria-selected="false"></button>
+                                </div>
+                            </div>
                         </figure>
                         <div class="product-model__body">
                             <span class="product-model__badge">Компактний формат</span>
@@ -362,27 +500,34 @@
 
         <section class="page-block page-block--light" aria-labelledby="helper-specs-title">
             <div class="container">
-                <div class="specs-layout">
-                    <div class="specs-layout__content">
-                        <div class="page-block__head">
-                            <p class="eyebrow eyebrow--dark">Специфікація</p>
-                            <h2 id="helper-specs-title" class="section-title section-title--dark section-title--wide">
-                                Технічні <span class="t-serif">характеристики</span>
-                            </h2>
-                        </div>
-                        <ul class="specs">
-                            <li><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5
-                                    рядів</span></li>
-                            <li><strong>Живлення</strong><span>50 Вт · енергоефективна робота 24/7</span></li>
-                            <li><strong>Оплата</strong><span>Безконтакт, картка, QR-код</span></li>
-                            <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
-                            <li><strong>Сервіс</strong><span>Заправка SKU, техпідтримка, аналітика продажів</span></li>
-                        </ul>
+                <div class="specs-presentation">
+                    <div class="page-block__head">
+                        <p class="eyebrow eyebrow--dark">Специфікація</p>
+                        <h2 id="helper-specs-title" class="section-title section-title--dark section-title--wide">
+                            Технічні <span class="t-serif">характеристики</span>
+                        </h2>
                     </div>
-                    <figure class="specs-layout__media">
-                        <img src="img/Helper.jpg" width="800" height="480" alt="HELPER+ — технічні характеристики"
-                            loading="lazy" decoding="async">
-                    </figure>
+                    <div class="specs-presentation__deck">
+                        <div class="specs-presentation__copy">
+                            <ul class="specs specs--presentation" data-specs-presentation>
+                                <li class="is-active"><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5
+                                        рядів</span></li>
+                                <li><strong>Живлення</strong><span>50 Вт · енергоефективна робота 24/7</span></li>
+                                <li><strong>Оплата</strong><span>Безконтакт, картка, QR-код</span></li>
+                                <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
+                                <li><strong>Сервіс</strong><span>Заправка SKU, техпідтримка, аналітика продажів</span></li>
+                            </ul>
+                        </div>
+                        <div class="specs-presentation__screen">
+                            <video class="specs-presentation__video" muted playsinline loop autoplay preload="metadata"
+                                aria-label="HELPER+ — 3D огляд апарата">
+                                <source src="img/helper+.MP4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="specs-presentation__progress" aria-hidden="true">
+                            <span class="specs-presentation__bar"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -576,7 +721,7 @@
             <div class="footer__mast">
                 <div class="footer__brand">
                     <a href="index.html" class="footer__logo" aria-label="Vendstore — на головну">
-                        <span class="footer__logo-text">Vend<span class="footer__logo-serif">store</span></span>
+                        <img src="img/logo.png" alt="" class="footer__logo-img" width="4352" height="745" decoding="async">
                     </a>
                     <p class="footer__tagline">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в
                         місці з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення
