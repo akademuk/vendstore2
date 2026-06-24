@@ -1116,6 +1116,15 @@ body.menu-open {
   overflow: visible;
 }
 
+.audience:not(.section--light) {
+  background: var(--vs-green-deep);
+  border-top-color: var(--vs-section-line);
+}
+
+.audience:not(.section--light)::after {
+  display: none;
+}
+
 .audience::before {
   z-index: 0;
 }
@@ -1181,17 +1190,27 @@ body.menu-open {
 }
 
 .audience__tag {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding: 8px 14px 8px 12px;
-  border-radius: 10px 10px 0 0;
+  gap: 16px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--vs-green-deep);
-  background: var(--vs-gradient-plate);
+  color: var(--vs-text-muted);
   margin-bottom: 16px;
+}
+
+.audience__tag::before {
+  content: "";
+  width: 48px;
+  height: 2px;
+  background: var(--vs-eyebrow-dash);
+  flex-shrink: 0;
+}
+
+.audience.section--light .audience__tag {
+  color: var(--vs-text-secondary);
 }
 
 .audience__copy h3 {
@@ -1475,6 +1494,8 @@ body[data-page="home"] .products.section {
   z-index: 2;
   padding-top: calc(80px + clamp(56px, 8vh, 96px));
   border-top: none;
+  background: var(--vs-green-deep);
+  color: var(--vs-text);
 }
 
 .products {
