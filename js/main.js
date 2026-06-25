@@ -1346,20 +1346,26 @@ if (document.body.dataset.page === 'home') {
 
 /* ─── Product model image slider ─── */
 (function () {
-  const sliders = document.querySelectorAll('[data-model-slider]');
-  if (!sliders.length) return;
+  const sliderRegistry = new Map();
 
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSliderVisible = (slider) => {
+    const panel = slider.closest('.model-variant__panel');
+    if (panel && (panel.hidden || !panel.classList.contains('is-active'))) return false;
+    return slider.offsetParent !== null || slider.getClientRects().length > 0;
+  };
 
-  sliders.forEach((slider) => {
+  const initSlider = (slider) => {
+    if (sliderRegistry.has(slider)) return sliderRegistry.get(slider);
+
     const slides = [...slider.querySelectorAll('.model-slider__slide')];
     const dots = [...slider.querySelectorAll('.model-slider__dot')];
-    if (slides.length < 2) return;
+    if (slides.length < 2) return null;
 
     let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
     if (index < 0) index = 0;
 
     let timer = null;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const interval = parseInt(slider.dataset.interval, 10) || 4500;
 
     const goTo = (nextIndex) => {
@@ -1371,10 +1377,13 @@ if (document.body.dataset.page === 'home') {
       });
     };
 
-    const next = () => goTo(index + 1);
+    const next = () => {
+      if (!isSliderVisible(slider)) return;
+      goTo(index + 1);
+    };
 
     const start = () => {
-      if (reducedMotion) return;
+      if (reducedMotion || !isSliderVisible(slider)) return;
       stop();
       timer = window.setInterval(next, interval);
     };
@@ -1400,7 +1409,51 @@ if (document.body.dataset.page === 'home') {
       if (!slider.contains(event.relatedTarget)) start();
     });
 
+    const api = { start, stop, goTo };
+    sliderRegistry.set(slider, api);
     start();
+    return api;
+  };
+
+  document.querySelectorAll('[data-model-slider]').forEach(initSlider);
+
+  document.querySelectorAll('[data-model-variant]').forEach((variant) => {
+    const tabs = [...variant.querySelectorAll('[data-variant-tab]')];
+    const panels = [...variant.querySelectorAll('[data-variant-panel]')];
+    const card = variant.closest('.product-model');
+    const metas = card ? [...card.querySelectorAll('[data-variant-meta]')] : [];
+
+    if (!tabs.length || !panels.length) return;
+
+    const activate = (key) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.variantTab === key;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      panels.forEach((panel) => {
+        const active = panel.dataset.variantPanel === key;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+        panel.querySelectorAll('[data-model-slider]').forEach((slider) => {
+          const api = sliderRegistry.get(slider);
+          if (!api) return;
+          if (active) api.start();
+          else api.stop();
+        });
+      });
+
+      metas.forEach((meta) => {
+        const active = meta.dataset.variantMeta === key;
+        meta.classList.toggle('is-active', active);
+        meta.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activate(tab.dataset.variantTab));
+    });
   });
 })();
 
@@ -1409,11 +1462,17 @@ if (document.body.dataset.page === 'home') {
   const spread = document.querySelector('[data-earn-spread]');
   if (!spread) return;
 
+  const singleEl = spread.querySelector('[data-earn-single]');
   const boxEl = spread.querySelector('[data-earn-box]');
   const slimEl = spread.querySelector('[data-earn-slim]');
-  if (!boxEl || !slimEl) return;
+  const isSingle = spread.dataset.earnMode === 'single' || Boolean(singleEl);
 
-  const targets = { box: 16050, slim: 9450 };
+  if (isSingle && !singleEl) return;
+  if (!isSingle && (!boxEl || !slimEl)) return;
+
+  const targets = isSingle
+    ? { single: 11550 }
+    : { box: 16050, slim: 9450 };
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const frames = new Map();
   let hasPlayed = false;
@@ -1454,6 +1513,13 @@ if (document.body.dataset.page === 'home') {
     spread.classList.remove('is-playing');
     void spread.offsetWidth;
     spread.classList.add('is-playing');
+
+    if (isSingle) {
+      singleEl.textContent = '0';
+      animateCounter(singleEl, targets.single, 550);
+      return;
+    }
+
     boxEl.textContent = '0';
     slimEl.textContent = '0';
     animateCounter(boxEl, targets.box, 550);
@@ -1476,8 +1542,12 @@ if (document.body.dataset.page === 'home') {
   observer.observe(spread);
 
   if (reducedMotion) {
-    boxEl.textContent = format(targets.box);
-    slimEl.textContent = format(targets.slim);
+    if (isSingle) {
+      singleEl.textContent = format(targets.single);
+    } else {
+      boxEl.textContent = format(targets.box);
+      slimEl.textContent = format(targets.slim);
+    }
     spread.classList.add('is-playing');
   }
 })();
@@ -1485,9 +1555,11 @@ if (document.body.dataset.page === 'home') {
 /* ─── Specs presentation (synced with 3D video) ─── */
 (function () {
   const root = document.querySelector('[data-specs-presentation]');
-  const video = document.querySelector('.specs-presentation__video');
-  const progressBar = document.querySelector('.specs-presentation__bar');
   if (!root) return;
+
+  const presentation = root.closest('.specs-presentation');
+  const video = presentation?.querySelector('.specs-presentation__video');
+  const progressBar = presentation?.querySelector('.specs-presentation__bar');
 
   const items = [...root.querySelectorAll('li')];
   if (!items.length) return;

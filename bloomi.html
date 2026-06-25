@@ -108,7 +108,10 @@
 
         <section class="page-hero page-hero--bloomi page-hero--product">
             <div class="page-hero__bg" aria-hidden="true">
-                <img src="img/photo-bloomi.jpg" width="712" height="776" alt="" loading="eager" decoding="async">
+                <picture>
+                    <source srcset="img/bloomy-hero.webp" type="image/webp">
+                    <img src="img/bloomy-hero.jpg" width="3840" height="2160" alt="" loading="eager" decoding="async">
+                </picture>
             </div>
             <div class="container">
                 <p class="eyebrow">Продукт · 02 · парфумерія</p>
@@ -141,8 +144,11 @@
         <section class="page-block" aria-labelledby="bloomi-concept-title">
             <div class="container split split--reverse">
                 <div class="split__media">
-                    <img src="img/Bloomy.jpg" width="800" height="480" alt="Bloomy — парфумерний вендинг" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="img/forms1.webp" type="image/webp">
+                        <img src="img/forms1.jpg" width="2480" height="3312" alt="Bloomy — парфумерний вендинг"
+                            loading="lazy" decoding="async">
+                    </picture>
                 </div>
                 <div class="split__content">
                     <span class="split__tag split__tag--bloomi">Концепція</span>
@@ -320,16 +326,49 @@
             <div class="container">
                 <div class="page-block__head">
                     <p class="eyebrow">Моделі</p>
-                    <h2 id="bloomi-models-title" class="section-title section-title--wide">Два формати <span
-                            class="t-serif">обладнання</span></h2>
-                    <p class="section-desc">Настінна — для компактних зон. Підлогова — флагман з великим дисплеєм і
-                        максимальним wow-ефектом у просторі.</p>
+                    <h2 id="bloomi-models-title" class="section-title section-title--wide">Настінна <span
+                            class="t-serif">Bloomy</span></h2>
+                    <p class="section-desc">Компактна модель для коридорів, лобі та зон очікування — преміум-парфумерія
+                        з Android-дисплеєм 10,1" і безконтактною оплатою.</p>
                 </div>
-                <div class="product-models product-models--cards">
-                    <article class="product-model product-model--card">
+                <div class="product-models product-models--cards product-models--spread product-models--single"
+                    data-earn-spread data-earn-mode="single">
+                    <article class="product-model product-model--card product-model--featured">
                         <figure class="product-model__media">
-                            <img src="img/photo-bloomi.jpg" width="712" height="776"
-                                alt="Настінна Bloomy у лобі" loading="lazy" decoding="async">
+                            <div class="model-slider" data-model-slider data-interval="4500"
+                                aria-roledescription="carousel" aria-label="Настінна Bloomy — галерея">
+                                <div class="model-slider__slides">
+                                    <div class="model-slider__slide is-active">
+                                        <picture>
+                                            <source srcset="img/bloomi-img1.webp" type="image/webp">
+                                            <img src="img/bloomi-img1.png" width="712" height="776"
+                                                alt="Настінна Bloomy — вигляд 1" loading="eager" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/bloomi-img2.webp" type="image/webp">
+                                            <img src="img/bloomi-img2.png" width="712" height="776"
+                                                alt="Настінна Bloomy — вигляд 2" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                    <div class="model-slider__slide">
+                                        <picture>
+                                            <source srcset="img/bloomi-img3.webp" type="image/webp">
+                                            <img src="img/bloomi-img3.png" width="712" height="776"
+                                                alt="Настінна Bloomy — вигляд 3" loading="lazy" decoding="async">
+                                        </picture>
+                                    </div>
+                                </div>
+                                <div class="model-slider__dots" role="tablist" aria-label="Слайди Настінна Bloomy">
+                                    <button type="button" class="model-slider__dot is-active" role="tab"
+                                        aria-label="Слайд 1" aria-selected="true"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 2"
+                                        aria-selected="false"></button>
+                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 3"
+                                        aria-selected="false"></button>
+                                </div>
+                            </div>
                         </figure>
                         <div class="product-model__body">
                             <span class="product-model__badge">Компакт</span>
@@ -344,50 +383,64 @@
                                 data-form-type="partner" data-product="Bloomy настінна">Залишити заявку</button>
                         </div>
                     </article>
-                    <article class="product-model product-model--card product-model--featured">
-                        <figure class="product-model__media">
-                            <img src="img/Bloomy.jpg" width="800" height="480" alt="Підлогова Bloomy у торговому центрі"
-                                loading="lazy" decoding="async">
-                        </figure>
-                        <div class="product-model__body">
-                            <span class="product-model__badge">Флагман</span>
-                            <h3 class="product-model__name">Підлогова Bloomy</h3>
-                            <ul class="product-model__specs">
-                                <li><strong>Габарити:</strong> 800×250×1900 мм</li>
-                                <li><strong>Вага:</strong> 100 кг</li>
-                                <li><strong>Дисплеї:</strong> 10,1" + 43" екран</li>
-                                <li><strong>Для кого:</strong> ТРЦ, готелі, преміум-клуби</li>
-                            </ul>
-                            <button type="button" class="btn btn--primary btn--bloomi product-model__cta js-open-modal"
-                                data-form-type="partner" data-product="Bloomy підлогова">Залишити заявку</button>
+                    <div class="product-models__earn-gap product-models__earn-gap--single">
+                        <div class="product-models__earn-item product-models__earn-item--bloomi">
+                            <div class="product-models__earn-piece">
+                                <div class="product-models__earn-stat">
+                                    <p class="product-models__earn-axis-label product-models__earn-axis-label--stack">Чистий
+                                        прибуток</p>
+                                    <p class="product-models__earn-amount">
+                                        <span>від</span>
+                                        <strong data-earn-single>0</strong>
+                                        <span class="product-models__earn-unit">грн/міс</span>
+                                    </p>
+                                </div>
+                                <svg class="product-models__earn-connector is-desk" viewBox="0 0 240 44"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="168,0 168,28 0,28" />
+                                    <rect class="product-models__earn-node" x="-3.5" y="24.5" width="7" height="7" />
+                                </svg>
+                                <svg class="product-models__earn-connector is-mob" viewBox="0 0 56 96"
+                                    preserveAspectRatio="none" aria-hidden="true">
+                                    <polyline class="product-models__earn-path" points="28,96 28,0" />
+                                    <rect class="product-models__earn-node" x="24.5" y="-3.5" width="7" height="7" />
+                                </svg>
+                            </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="page-block page-block--light" aria-labelledby="bloomi-specs-title">
             <div class="container">
-                <div class="specs-layout">
-                    <div class="specs-layout__content">
-                        <div class="page-block__head">
-                            <p class="eyebrow eyebrow--dark">Специфікація</p>
-                            <h2 id="bloomi-specs-title" class="section-title section-title--dark section-title--wide">
-                                Технічні <span class="t-serif">характеристики</span>
-                            </h2>
-                        </div>
-                        <ul class="specs">
-                            <li><strong>Аромати</strong><span>5 позицій · 1000–1200 розпилень по 100 мл кожен</span></li>
-                            <li><strong>Корпус</strong><span>Сталевий антивандальний · розпилення до 50 см</span></li>
-                            <li><strong>Оплата</strong><span>Безконтакт, картка, монети</span></li>
-                            <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
-                            <li><strong>Сервіс</strong><span>Заправка ароматів, техпідтримка, аналітика продажів</span></li>
-                        </ul>
+                <div class="specs-presentation specs-presentation--bloomi">
+                    <div class="page-block__head">
+                        <p class="eyebrow eyebrow--dark">Специфікація</p>
+                        <h2 id="bloomi-specs-title" class="section-title section-title--dark section-title--wide">
+                            Технічні <span class="t-serif">характеристики</span>
+                        </h2>
                     </div>
-                    <figure class="specs-layout__media">
-                        <img src="img/Bloomy.jpg" width="800" height="480" alt="Bloomy — парфумерний вендинг"
-                            loading="lazy" decoding="async">
-                    </figure>
+                    <div class="specs-presentation__deck">
+                        <div class="specs-presentation__copy">
+                            <ul class="specs specs--presentation" data-specs-presentation>
+                                <li class="is-active"><strong>Аромати</strong><span>5 позицій · 1000–1200 розпилень по 100 мл кожен</span></li>
+                                <li><strong>Корпус</strong><span>Сталевий антивандальний · розпилення до 50 см</span></li>
+                                <li><strong>Оплата</strong><span>Безконтакт, картка, монети</span></li>
+                                <li><strong>ПЗ</strong><span>Android-інтерфейс, хмарний моніторинг Vendstore</span></li>
+                                <li><strong>Сервіс</strong><span>Заправка ароматів, техпідтримка, аналітика продажів</span></li>
+                            </ul>
+                        </div>
+                        <div class="specs-presentation__screen">
+                            <video class="specs-presentation__video" muted playsinline loop autoplay preload="metadata"
+                                aria-label="Bloomy — 3D огляд апарата">
+                                <source src="img/bloomy.MP4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="specs-presentation__progress" aria-hidden="true">
+                            <span class="specs-presentation__bar"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
