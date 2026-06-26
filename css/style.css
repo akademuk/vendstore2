@@ -4895,6 +4895,16 @@ body.product-profile--bloomi .footer__logo-img {
   align-items: center;
 }
 
+.split__figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.split__figure .audience__caption {
+  margin-top: 18px;
+  max-width: none;
+}
+
 .split__media {
   position: relative;
   overflow: hidden;
@@ -4942,7 +4952,7 @@ body.product-profile--bloomi .footer__logo-img {
   width: 100%;
   height: 115%;
   object-fit: cover;
-  object-position: center;
+  object-position: 78%;
   display: block;
   transition: filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
@@ -5633,7 +5643,7 @@ body.is-motion-ready .split:hover .split__media img {
   }
 
   .faq-layout__media--helper img {
-    object-position: center 18%;
+    object-position: 83% 18%;
   }
 
   .faq-layout__media--bloomi img {
@@ -6694,19 +6704,7 @@ body.is-motion-ready .split:hover .split__media img {
   }
 }
 
-.product-model--card .product-model__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(
-    to top,
-    rgba(12, 23, 18, 0.72) 0%,
-    rgba(12, 23, 18, 0.18) 38%,
-    transparent 68%
-  );
-}
+
 
 .product-model--card .product-model__body {
   display: flex;
@@ -7348,14 +7346,7 @@ body.is-motion-ready .split:hover .split__media img {
     0 16px 44px rgba(12, 23, 18, 0.1);
 }
 
-.page-block--light .product-model--card .product-model__media::after {
-  background: linear-gradient(
-    to top,
-    rgba(248, 246, 240, 0.92) 0%,
-    rgba(248, 246, 240, 0.28) 42%,
-    transparent 72%
-  );
-}
+
 
 .product-stat {
   display: grid;
