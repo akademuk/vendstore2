@@ -30,8 +30,12 @@
                     <span class="burger__line"></span>
                     <span class="burger__line"></span>
                 </button>
-                <a href="index.html" class="header__logo" aria-label="Vendstore — на головну">
-                    <img src="img/logo.png" alt="" class="header__logo-img" width="4352" height="745" decoding="async">
+                <a href="index.html" class="header__logo" aria-label="HELPER+ — на головну">
+                    <picture>
+                        <source srcset="img/helper-logo.webp" type="image/webp">
+                        <img src="img/helper-logo.png" alt="" class="header__logo-img" width="3054" height="2037"
+                            decoding="async">
+                    </picture>
                 </a>
             </div>
             <nav id="main-nav" class="header__nav" aria-label="Основна навігація">
@@ -595,7 +599,7 @@
 
         <section class="page-block page-block--light" aria-labelledby="helper-specs-title">
             <div class="container">
-                <div class="specs-presentation">
+                <div class="specs-presentation specs-presentation--helper" data-specs-videos>
                     <div class="page-block__head">
                         <p class="eyebrow eyebrow--dark">Специфікація</p>
                         <h2 id="helper-specs-title" class="section-title section-title--dark section-title--wide">
@@ -604,6 +608,24 @@
                     </div>
                     <div class="specs-presentation__deck">
                         <div class="specs-presentation__copy">
+                            <div class="specs-presentation__switch">
+                                <p class="specs-presentation__label" id="helper-specs-variant-label">Модифікація</p>
+                                <div class="specs-presentation__tabs" role="tablist"
+                                    aria-labelledby="helper-specs-variant-label">
+                                    <button type="button" class="specs-presentation__tab is-active" role="tab"
+                                        id="helper-specs-tab-box" aria-selected="true"
+                                        aria-controls="helper-specs-panel-box" data-specs-video-tab="box">HELPER+
+                                        Box</button>
+                                    <button type="button" class="specs-presentation__tab" role="tab"
+                                        id="helper-specs-tab-slim" aria-selected="false"
+                                        aria-controls="helper-specs-panel-slim" data-specs-video-tab="slim">HELPER+
+                                        Slim</button>
+                                    <button type="button" class="specs-presentation__tab" role="tab"
+                                        id="helper-specs-tab-slim-stand" aria-selected="false"
+                                        aria-controls="helper-specs-panel-slim-stand"
+                                        data-specs-video-tab="slim-stand">HELPER+ Slim + стійка</button>
+                                </div>
+                            </div>
                             <ul class="specs specs--presentation" data-specs-presentation>
                                 <li class="is-active"><strong>Ємність</strong><span>Box — 80 товарів/ряд × 8 рядів · Slim — 50/ряд × 5
                                         рядів</span></li>
@@ -614,10 +636,30 @@
                             </ul>
                         </div>
                         <div class="specs-presentation__screen">
-                            <video class="specs-presentation__video" muted playsinline loop autoplay preload="metadata"
-                                aria-label="HELPER+ — 3D огляд апарата">
-                                <source src="img/helper+.MP4" type="video/mp4">
-                            </video>
+                            <div class="specs-presentation__panels">
+                                <div class="specs-presentation__panel is-active" id="helper-specs-panel-box"
+                                    role="tabpanel" aria-labelledby="helper-specs-tab-box" data-specs-video-panel="box">
+                                    <video class="specs-presentation__video" muted playsinline loop autoplay
+                                        preload="metadata" aria-label="HELPER+ Box — 3D огляд">
+                                        <source src="img/HELPER+Box.MP4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="specs-presentation__panel" id="helper-specs-panel-slim" role="tabpanel"
+                                    aria-labelledby="helper-specs-tab-slim" data-specs-video-panel="slim" hidden>
+                                    <video class="specs-presentation__video" muted playsinline loop
+                                        preload="metadata" aria-label="HELPER+ Slim — 3D огляд">
+                                        <source src="img/HELPER+Slim.MP4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="specs-presentation__panel" id="helper-specs-panel-slim-stand" role="tabpanel"
+                                    aria-labelledby="helper-specs-tab-slim-stand" data-specs-video-panel="slim-stand"
+                                    hidden>
+                                    <video class="specs-presentation__video" muted playsinline loop
+                                        preload="metadata" aria-label="HELPER+ Slim + стійка — 3D огляд">
+                                        <source src="img/HELPER+Slim+стійка.MP4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
                         </div>
                         <div class="specs-presentation__progress" aria-hidden="true">
                             <span class="specs-presentation__bar"></span>
@@ -778,8 +820,11 @@
                         </div>
                         <figure class="faq-layout__media faq-layout__media--helper">
                             <span class="faq-layout__ghost" aria-hidden="true">+</span>
-                            <img src="img/photo-helper.jpg" width="737" height="776" alt="HELPER+ у лобі бізнес-центру"
-                                loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="img/consept.webp" type="image/webp">
+                                <img src="img/consept.jpg" width="2480" height="3312"
+                                    alt="HELPER+ — концепція мікровендингу" loading="lazy" decoding="async">
+                            </picture>
                             <figcaption class="faq-layout__caption">
                                 <span class="faq-layout__caption-tag">HELPER+ · Box</span>
                                 <span class="faq-layout__caption-text">Максимум SKU для локацій з щільним трафіком і
@@ -793,7 +838,10 @@
 
         <section class="location-cta section" aria-labelledby="helper-cta-title">
             <div class="location-cta__bg" aria-hidden="true">
-                <img src="img/photo-banner.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+                <picture>
+                    <source srcset="img/helper-hero.webp" type="image/webp">
+                    <img src="img/helper-hero.jpg" width="3840" height="2160" alt="" loading="lazy" decoding="async">
+                </picture>
             </div>
             <div class="container location-cta__container">
                 <div class="location-cta__inner">
@@ -815,8 +863,12 @@
         <div class="container footer__shell">
             <div class="footer__mast">
                 <div class="footer__brand">
-                    <a href="index.html" class="footer__logo" aria-label="Vendstore — на головну">
-                        <img src="img/logo.png" alt="" class="footer__logo-img" width="4352" height="745" decoding="async">
+                    <a href="index.html" class="footer__logo" aria-label="HELPER+ — на головну">
+                        <picture>
+                            <source srcset="img/helper-logo.webp" type="image/webp">
+                            <img src="img/helper-logo.png" alt="" class="footer__logo-img" width="3054" height="2037"
+                                decoding="async">
+                        </picture>
                     </a>
                     <p class="footer__tagline">Маєте комерційну площу, порожній квадратний метр біля входу чи стіну в
                         місці з високим потоком людей? Перетворіть їх на гроші. Ми шукаємо топові локації для розширення

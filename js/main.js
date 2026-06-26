@@ -684,15 +684,15 @@ function initScrollParallax() {
     );
   }
 
-  document.querySelectorAll('.cta-banner__format-media img').forEach((img) => {
+  document.querySelectorAll('.cta-banner__format-media picture').forEach((picture) => {
     gsap.fromTo(
-      img,
-      { yPercent: -12 },
+      picture,
+      { yPercent: -6 },
       {
-        yPercent: 12,
+        yPercent: 6,
         ease: 'none',
         scrollTrigger: {
-          trigger: img.closest('.cta-banner__format') || img,
+          trigger: picture.closest('.cta-banner__format') || picture,
           start: 'top bottom',
           end: 'bottom top',
           scrub: true,
@@ -1558,14 +1558,18 @@ if (document.body.dataset.page === 'home') {
   if (!root) return;
 
   const presentation = root.closest('.specs-presentation');
-  const video = presentation?.querySelector('.specs-presentation__video');
   const progressBar = presentation?.querySelector('.specs-presentation__bar');
+  const hasVideoTabs = presentation?.hasAttribute('data-specs-videos');
+  const tabs = hasVideoTabs ? [...presentation.querySelectorAll('[data-specs-video-tab]')] : [];
+  const panels = hasVideoTabs ? [...presentation.querySelectorAll('[data-specs-video-panel]')] : [];
 
   const items = [...root.querySelectorAll('li')];
   if (!items.length) return;
 
   let activeIndex = 0;
   let rafId = null;
+  let isInView = false;
+  let video = null;
 
   const setActive = (index) => {
     if (index === activeIndex) return;
@@ -1573,15 +1577,20 @@ if (document.body.dataset.page === 'home') {
     items.forEach((item, i) => item.classList.toggle('is-active', i === index));
   };
 
+  const resetProgress = () => {
+    activeIndex = -1;
+    setActive(0);
+    if (progressBar) progressBar.style.transform = 'scaleX(0)';
+  };
+
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (reducedMotion || !video) {
-    setActive(0);
-    if (progressBar) progressBar.style.transform = 'scaleX(1)';
-    return;
-  }
-
   const tick = () => {
+    if (!video) {
+      rafId = window.requestAnimationFrame(tick);
+      return;
+    }
+
     const duration = video.duration;
     if (!duration || !Number.isFinite(duration)) {
       rafId = window.requestAnimationFrame(tick);
@@ -1618,18 +1627,79 @@ if (document.body.dataset.page === 'home') {
     }
   };
 
-  video.addEventListener('play', startLoop);
-  video.addEventListener('pause', stopLoop);
-  video.addEventListener('ended', stopLoop);
-  video.addEventListener('loadedmetadata', () => {
+  const bindVideo = (nextVideo, { force = false } = {}) => {
+    if (!nextVideo || (!force && nextVideo === video)) return;
+
+    if (video) {
+      video.pause();
+      video.removeEventListener('play', startLoop);
+      video.removeEventListener('pause', stopLoop);
+      video.removeEventListener('ended', stopLoop);
+      video.removeEventListener('loadedmetadata', onLoadedMetadata);
+      video.removeEventListener('seeked', tick);
+    }
+
+    video = nextVideo;
+    resetProgress();
+
+    video.addEventListener('play', startLoop);
+    video.addEventListener('pause', stopLoop);
+    video.addEventListener('ended', stopLoop);
+    video.addEventListener('loadedmetadata', onLoadedMetadata);
+    video.addEventListener('seeked', tick);
+
+    if (isInView) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+  };
+
+  function onLoadedMetadata() {
     tick();
-    if (!video.paused) startLoop();
+    if (video && !video.paused) startLoop();
+  }
+
+  const initialVideo =
+    presentation?.querySelector('.specs-presentation__panel.is-active .specs-presentation__video') ||
+    presentation?.querySelector('.specs-presentation__video');
+
+  if (reducedMotion || !initialVideo) {
+    setActive(0);
+    if (progressBar) progressBar.style.transform = 'scaleX(1)';
+    return;
+  }
+
+  const activateTab = (key) => {
+    tabs.forEach((tab) => {
+      const active = tab.dataset.specsVideoTab === key;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      const active = panel.dataset.specsVideoPanel === key;
+      panel.classList.toggle('is-active', active);
+      panel.hidden = !active;
+    });
+
+    const nextVideo = presentation?.querySelector(
+      `.specs-presentation__panel.is-active .specs-presentation__video`
+    );
+    bindVideo(nextVideo);
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => activateTab(tab.dataset.specsVideoTab));
   });
-  video.addEventListener('seeked', tick);
+
+  bindVideo(initialVideo, { force: true });
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        isInView = entry.isIntersecting;
+        if (!video) return;
+
         if (entry.isIntersecting) {
           video.muted = true;
           video.play().catch(() => {});
@@ -1642,7 +1712,8 @@ if (document.body.dataset.page === 'home') {
     { threshold: 0.35 }
   );
 
-  observer.observe(video);
+  const observeTarget = presentation?.querySelector('.specs-presentation__screen') || video;
+  if (observeTarget) observer.observe(observeTarget);
 
   if (!video.paused) startLoop();
 })();
