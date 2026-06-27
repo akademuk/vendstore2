@@ -1,0 +1,21 @@
+# Сайт у режимі передзапуску: сторінки мають meta robots noindex,nofollow.
+# Після запуску змініть meta на index,follow у HTML-файлах.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://vendstore.com.ua/sitemap.xml

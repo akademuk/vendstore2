@@ -1,5 +1,44 @@
 /* VendStore — main interactions */
 
+/* ─── Language switch — paired pages ─── */
+(function initLangSwitch() {
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const inRu = pathParts[0] === 'ru';
+  let file = inRu ? pathParts[1] : pathParts[pathParts.length - 1];
+  if (!file || !file.endsWith('.html')) file = 'index.html';
+
+  const ruAvailable = new Set(['index.html', 'helper.html', 'bloomi.html', 'b2b.html', 'b2c.html']);
+  const urls = {
+    uk: inRu ? `../${file}` : file,
+    ru: inRu ? file : `ru/${file}`,
+  };
+
+  document.querySelectorAll('.lang-switch__btn[hreflang]').forEach((btn) => {
+    const lang = btn.getAttribute('hreflang');
+    if (lang === 'uk') {
+      btn.href = urls.uk;
+      return;
+    }
+    if (lang !== 'ru') return;
+
+    if (ruAvailable.has(file)) {
+      btn.href = urls.ru;
+      btn.removeAttribute('aria-disabled');
+      btn.removeAttribute('title');
+      btn.classList.remove('lang-switch__btn--pending');
+      return;
+    }
+
+    btn.href = '#';
+    btn.setAttribute('aria-disabled', 'true');
+    btn.title = document.documentElement.lang === 'ru'
+      ? 'Украинская версия скоро'
+      : 'Русская версия скоро';
+    btn.classList.add('lang-switch__btn--pending');
+    btn.addEventListener('click', (event) => event.preventDefault());
+  });
+})();
+
 /* ─── Active nav link ─── */
 (function () {
   const page = document.body.dataset.page;
@@ -483,20 +522,37 @@ function initGsapMotion() {
     if (hero) {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       const body = hero.querySelector('.hero__body');
-      const perks = hero.querySelector('.hero__perks');
       const actions = hero.querySelector('.hero__actions');
       if (body) {
         tl.fromTo(body, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85 });
       }
-      if (perks) {
-        tl.fromTo(perks, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.45');
-      }
       if (actions) {
-        tl.fromTo(actions, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, '-=0.5');
+        tl.fromTo(actions, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, '-=0.42');
       }
     } else {
       initPageHeroAnimation();
     }
+
+    document.querySelectorAll('.home-perks').forEach((strip) => {
+      const items = strip.querySelectorAll('.home-perks__item');
+      if (!items.length) return;
+      gsap.fromTo(
+        items,
+        { y: 16, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.58,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: strip,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
 
     gsap.utils
       .toArray(
