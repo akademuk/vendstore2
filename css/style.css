@@ -3284,6 +3284,11 @@ body[data-page="home"] .products.section {
     min-height: 0;
     max-height: 440px;
     aspect-ratio: auto;
+    background: #0b0b0b;
+  }
+
+  .cta-banner__format-media picture {
+    inset: -8% -5%;
   }
 
   .products__grid .product-card__media {
@@ -5149,7 +5154,7 @@ img.vs-icon {
   }
 
   .split__media img {
-    height: 100%;
+    height: 115%;
     object-position: center 32%;
   }
 }
@@ -5783,7 +5788,7 @@ body.is-motion-ready .split:hover .split__media img {
   }
 
   .faq-layout__media img {
-    height: 100%;
+    height: 115%;
     object-position: center 28%;
   }
 
@@ -7073,6 +7078,24 @@ body.is-motion-ready .split:hover .split__media img {
   opacity: 1;
 }
 
+.model-slider.swiper .model-slider__slide.swiper-slide {
+  position: relative;
+  inset: auto;
+  opacity: 1;
+  pointer-events: auto;
+  transition-property: opacity;
+}
+
+.model-slider.swiper-fade .model-slider__slide.swiper-slide:not(.swiper-slide-active) {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.model-slider.swiper-fade .model-slider__slide.swiper-slide-active {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
 .model-slider__slide picture {
   display: block;
   width: 100%;
@@ -7087,22 +7110,25 @@ body.is-motion-ready .split:hover .split__media img {
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.model-slider__dots {
+.model-slider__dots.swiper-pagination {
   position: absolute;
   bottom: 14px;
   left: 50%;
-  z-index: 5;
+  right: auto;
+  width: auto;
+  z-index: 20;
+  transform: translateX(-50%) !important;
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
   border-radius: var(--vs-radius-pill);
   background: rgba(12, 23, 18, 0.42);
-  transform: translateX(-50%);
   pointer-events: auto;
 }
 
-.model-slider__dot {
+.model-slider__dot,
+.model-slider__dots .swiper-pagination-bullet {
   position: relative;
   z-index: 1;
   width: 6px;
@@ -7112,12 +7138,15 @@ body.is-motion-ready .split:hover .split__media img {
   border-radius: 99px;
   background: rgba(245, 242, 232, 0.45);
   cursor: pointer;
+  opacity: 1;
+  margin: 0 !important;
   transition:
     width 0.25s ease,
     background 0.25s ease;
 }
 
-.model-slider__dot.is-active {
+.model-slider__dot.is-active,
+.model-slider__dots .swiper-pagination-bullet-active {
   width: 18px;
   background: var(--vs-cream);
 }
@@ -7125,6 +7154,31 @@ body.is-motion-ready .split:hover .split__media img {
 .model-slider__dot:focus-visible {
   outline: 2px solid var(--vs-cyan);
   outline-offset: 2px;
+}
+
+.model-slider.swiper {
+  overflow: hidden;
+}
+
+.product-models--cards .model-slider.swiper .model-slider__slides.swiper-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.product-models--cards .model-slider.swiper .model-slider__slide.swiper-slide {
+  grid-area: unset;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.product-models--single.product-models--spread .model-slider.swiper .model-slider__slides.swiper-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.product-models--single.product-models--spread .model-slider.swiper .model-slider__slide.swiper-slide {
+  grid-area: unset;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -7179,7 +7233,7 @@ body.is-motion-ready .split:hover .split__media img {
   }
 
   .product-models--cards .product-model--card:hover .product-model__media img,
-  .product-models--cards .product-model--card:hover .model-slider__slide.is-active img {
+  .product-models--cards .product-model--card:hover .model-slider__slide.swiper-slide-active img {
     transform: none;
   }
 }
@@ -7459,22 +7513,6 @@ body.is-motion-ready .split:hover .split__media img {
   text-align: center;
 }
 
-.product-models__earn-stat::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  pointer-events: none;
-  border-left: 1px dashed rgba(245, 242, 232, 0.42);
-}
-
-@media (min-width: 992px) {
-  .product-models__earn-stat::after {
-    bottom: 0;
-    height: clamp(18px, 3vw, 28px);
-    transform: translateX(-50%);
-  }
-
-}
 
 @media (max-width: 991px) {
   .product-models__earn-item--box .product-models__earn-stat {
@@ -7499,27 +7537,6 @@ body.is-motion-ready .split:hover .split__media img {
     height: calc(44px + clamp(20px, 4vw, 36px));
   }
 
-  .product-models__earn-item--box .product-models__earn-stat::after {
-    left: 50%;
-    right: auto;
-    top: 0;
-    bottom: auto;
-    height: clamp(16px, 4vw, 24px);
-    transform: translateX(-50%);
-    transform-origin: bottom center;
-    display: none;
-  }
-
-  .product-models__earn-item--slim .product-models__earn-stat::after {
-    left: 50%;
-    right: auto;
-    top: 0;
-    bottom: auto;
-    height: clamp(16px, 4vw, 24px);
-    transform: translateX(-50%);
-    transform-origin: bottom center;
-    display: none;
-  }
 }
 
 .product-models__earn-item--box .product-models__earn-stat {
@@ -7533,7 +7550,7 @@ body.is-motion-ready .split:hover .split__media img {
 @media (min-width: 992px) {
   .product-models__earn-item--box .product-models__earn-stat {
     text-align: right;
-    border-left: none;
+    border-left: 1px solid rgba(245, 242, 232, 0.12);
     border-right: 3px solid var(--vs-green);
   }
 
@@ -7779,26 +7796,30 @@ body.is-motion-ready .split:hover .split__media img {
   }
 }
 
-.product-models--spread .model-slider__dots {
+.product-models--spread .model-slider__dots,
+.product-models--spread .model-slider__dots.swiper-pagination {
   bottom: 18px;
-  z-index: 10;
+  z-index: 20;
   gap: 10px;
   padding: 12px 16px;
 }
 
-.product-models--spread .model-slider__dot {
+.product-models--spread .model-slider__dot,
+.product-models--spread .model-slider__dots .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   min-width: 12px;
 }
 
-.product-models--spread .model-slider__dot::before {
+.product-models--spread .model-slider__dot::before,
+.product-models--spread .model-slider__dots .swiper-pagination-bullet::before {
   content: "";
   position: absolute;
   inset: -14px;
 }
 
-.product-models--spread .model-slider__dot.is-active {
+.product-models--spread .model-slider__dot.is-active,
+.product-models--spread .model-slider__dots .swiper-pagination-bullet-active {
   width: 36px;
 }
 

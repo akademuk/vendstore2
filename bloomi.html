@@ -35,9 +35,11 @@
         content="Bloomy — автоматизована преміум-точка парфумерії 24/7. Запуск під ключ від Vendstore.">
     <meta name="twitter:image" content="https://vendstore.com.ua/img/bloomy-hero.webp">
     <link rel="preload" as="font" type="font/woff2" href="fonts/roboto.woff2" crossorigin>
-    <link rel="preload" as="image" href="img/bloomy-banner2.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="img/bloomy-banner2-mob.webp" type="image/webp" fetchpriority="high" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="img/bloomy-banner2.webp" type="image/webp" fetchpriority="high" media="(min-width: 768px)">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+    <link rel="stylesheet" href="css/vendor/nouislider.min.css">
+    <link rel="stylesheet" href="css/vendor/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script type="application/ld+json">
     {
@@ -178,10 +180,11 @@
         <section class="page-hero page-hero--bloomi page-hero--product" aria-labelledby="bloomi-hero-title">
             <div class="page-hero__bg" aria-hidden="true">
                 <picture>
+                    <source media="(max-width: 767px)" srcset="img/bloomy-banner2-mob.webp" type="image/webp">
                     <source srcset="img/bloomy-banner2.webp" type="image/webp">
                     <img src="img/bloomy-banner2.jpg" width="1365" height="768"
                         alt="Bloomy — парфумерний вендинговий автомат Vendstore" loading="eager"
-                        decoding="async" fetchpriority="high">
+                        decoding="async" fetchpriority="high" sizes="100vw">
                 </picture>
             </div>
             <div class="container">
@@ -406,24 +409,24 @@
                     data-earn-spread data-earn-mode="single">
                     <article class="product-model product-model--card product-model--featured">
                         <figure class="product-model__media">
-                            <div class="model-slider" data-model-slider data-interval="4500"
+                            <div class="model-slider swiper" data-model-slider data-interval="4500"
                                 aria-roledescription="carousel" aria-label="Настінна Bloomy — галерея">
-                                <div class="model-slider__slides">
-                                    <div class="model-slider__slide is-active">
+                                <div class="model-slider__slides swiper-wrapper">
+                                    <div class="model-slider__slide swiper-slide">
                                         <picture>
                                             <source srcset="img/bloomi-img1.webp" type="image/webp">
                                             <img src="img/bloomi-img1.png" width="712" height="776"
                                                 alt="Настінна Bloomy — вигляд 1" loading="eager" decoding="async">
                                         </picture>
                                     </div>
-                                    <div class="model-slider__slide">
+                                    <div class="model-slider__slide swiper-slide">
                                         <picture>
                                             <source srcset="img/bloomi-img2.webp" type="image/webp">
                                             <img src="img/bloomi-img2.png" width="712" height="776"
                                                 alt="Настінна Bloomy — вигляд 2" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
-                                    <div class="model-slider__slide">
+                                    <div class="model-slider__slide swiper-slide">
                                         <picture>
                                             <source srcset="img/bloomi-img3.webp" type="image/webp">
                                             <img src="img/bloomi-img3.png" width="712" height="776"
@@ -431,16 +434,10 @@
                                         </picture>
                                     </div>
                                 </div>
-                                <div class="model-slider__dots" role="tablist" aria-label="Слайди Настінна Bloomy">
-                                    <button type="button" class="model-slider__dot is-active" role="tab"
-                                        aria-label="Слайд 1" aria-selected="true"></button>
-                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 2"
-                                        aria-selected="false"></button>
-                                    <button type="button" class="model-slider__dot" role="tab" aria-label="Слайд 3"
-                                        aria-selected="false"></button>
                                 </div>
-                            </div>
-                        </figure>
+
+                                <div class="model-slider__dots swiper-pagination" aria-label="Слайди Настінна Bloomy"></div>
+                    </figure>
                         <div class="product-model__body">
                             <span class="product-model__badge">Компакт</span>
                             <h3 class="product-model__name">Настінна Bloomy</h3>
@@ -503,9 +500,10 @@
                             </ul>
                         </div>
                         <div class="specs-presentation__screen">
-                            <video class="specs-presentation__video" muted playsinline loop autoplay preload="metadata"
+                            <video class="specs-presentation__video" muted playsinline loop preload="none"
                                 aria-label="Bloomy — 3D огляд апарата">
-                                <source src="img/bloomy.MP4" type="video/mp4">
+                                <source data-src="img/videos/bloomy.webm" type="video/webm">
+                                <source data-src="img/videos/bloomy.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="specs-presentation__progress" aria-hidden="true">
@@ -780,7 +778,7 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 
 </html>

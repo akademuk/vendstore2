@@ -132,14 +132,26 @@ const html = document.documentElement;
   }
 })();
 
+function getAssetBase() {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  return parts[0] === 'ru' ? '../' : '';
+}
+
+function vendorPath(relativePath) {
+  return `${getAssetBase()}${relativePath}`;
+}
+
 /* ─── Lenis + GSAP ─── */
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const MOTION_SCRIPTS = [
-  'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js',
-  'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js',
-  'https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js',
-];
+
+function getMotionScripts() {
+  return [
+    vendorPath('js/vendor/gsap.min.js'),
+    vendorPath('js/vendor/ScrollTrigger.min.js'),
+    vendorPath('js/vendor/lenis.min.js'),
+  ];
+}
 const MOBILE_MAX_WIDTH = 899;
 
 function isMobileViewport() {
@@ -295,6 +307,8 @@ function parallaxImg(img, trigger, options = {}) {
   if (!img || !trigger || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     return;
   }
+
+  if (isMobileViewport()) return;
 
   const { start = -12, end = 12, scrub = 0.5 } = options;
 
@@ -740,22 +754,24 @@ function initScrollParallax() {
     );
   }
 
-  document.querySelectorAll('.cta-banner__format-media picture').forEach((picture) => {
-    gsap.fromTo(
-      picture,
-      { yPercent: -6 },
-      {
-        yPercent: 6,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: picture.closest('.cta-banner__format') || picture,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-  });
+  if (!isMobileViewport()) {
+    document.querySelectorAll('.cta-banner__format-media picture').forEach((picture) => {
+      gsap.fromTo(
+        picture,
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: picture.closest('.cta-banner__format') || picture,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    });
+  }
 
   document.querySelectorAll('.location-cta').forEach((section) => {
     const img = section.querySelector('.location-cta__bg img');
@@ -789,14 +805,16 @@ function loadMotionScripts() {
   if (motionScriptsLoading || gsapMotionReady) return;
   motionScriptsLoading = true;
 
+  const scripts = getMotionScripts();
+
   (function next(index) {
-    if (index >= MOTION_SCRIPTS.length) {
+    if (index >= scripts.length) {
       initMotion();
       return;
     }
 
     const script = document.createElement('script');
-    script.src = MOTION_SCRIPTS[index];
+    script.src = scripts[index];
     script.onload = () => next(index + 1);
     document.head.appendChild(script);
   })(0);
@@ -805,10 +823,30 @@ function loadMotionScripts() {
 initScrollProgress();
 window.__vsInitMotion = initMotion;
 
+function scheduleMotionScripts() {
+  if (prefersReducedMotion || motionScriptsLoading || gsapMotionReady) return;
+
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    loadMotionScripts();
+  };
+
+  window.addEventListener('scroll', start, { once: true, passive: true });
+  window.addEventListener('pointerdown', start, { once: true, passive: true });
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(start, { timeout: 4000 });
+  } else {
+    window.addEventListener('load', () => setTimeout(start, 2500), { once: true });
+  }
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadMotionScripts, { once: true });
+  document.addEventListener('DOMContentLoaded', scheduleMotionScripts, { once: true });
 } else {
-  loadMotionScripts();
+  scheduleMotionScripts();
 }
 
 function updateHeader() {
@@ -1395,122 +1433,126 @@ if (document.body.dataset.page === 'home') {
   }
 
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js';
+  script.src = vendorPath('js/vendor/nouislider.min.js');
   script.onload = initSliders;
   document.head.appendChild(script);
 })();
 
-/* ─── Product model image slider ─── */
+/* ─── Product model image slider (Swiper) ─── */
 (function () {
+  const sliders = [...document.querySelectorAll('[data-model-slider]')];
+  if (!sliders.length) return;
+
   const sliderRegistry = new Map();
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const isSliderVisible = (slider) => {
-    const panel = slider.closest('.model-variant__panel');
-    if (panel && (panel.hidden || !panel.classList.contains('is-active'))) return false;
-    return slider.offsetParent !== null || slider.getClientRects().length > 0;
-  };
+  const initSwiper = (slider) => {
+    if (sliderRegistry.has(slider) || typeof Swiper === 'undefined') return;
 
-  const initSlider = (slider) => {
-    if (sliderRegistry.has(slider)) return sliderRegistry.get(slider);
+    const slides = slider.querySelectorAll('.swiper-slide');
+    if (slides.length < 2) return;
 
-    const slides = [...slider.querySelectorAll('.model-slider__slide')];
-    const dots = [...slider.querySelectorAll('.model-slider__dot')];
-    if (slides.length < 2) return null;
-
-    let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
-    if (index < 0) index = 0;
-
-    let timer = null;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const interval = parseInt(slider.dataset.interval, 10) || 4500;
+    const paginationEl = slider.parentElement?.querySelector(':scope > .model-slider__dots');
 
-    const goTo = (nextIndex) => {
-      index = (nextIndex + slides.length) % slides.length;
-      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('is-active', i === index);
-        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
-      });
-    };
-
-    const next = () => {
-      if (!isSliderVisible(slider)) return;
-      goTo(index + 1);
-    };
-
-    const start = () => {
-      if (reducedMotion || !isSliderVisible(slider)) return;
-      stop();
-      timer = window.setInterval(next, interval);
-    };
-
-    const stop = () => {
-      if (timer) {
-        window.clearInterval(timer);
-        timer = null;
-      }
-    };
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        goTo(i);
-        start();
-      });
+    const instance = new Swiper(slider, {
+      slidesPerView: 1,
+      effect: 'fade',
+      fadeEffect: { crossFade: true },
+      speed: 750,
+      loop: slides.length > 1,
+      autoplay: reducedMotion
+        ? false
+        : {
+            delay: interval,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+      pagination: paginationEl
+        ? {
+            el: paginationEl,
+            clickable: true,
+            type: 'bullets',
+            bulletClass: 'model-slider__dot',
+            bulletActiveClass: 'is-active',
+            renderBullet(index, className) {
+              return `<button type="button" class="${className}" role="tab" aria-label="Слайд ${index + 1}"></button>`;
+            },
+          }
+        : undefined,
+      watchOverflow: true,
     });
 
-    slider.addEventListener('mouseenter', stop);
-    slider.addEventListener('mouseleave', start);
-    slider.addEventListener('focusin', stop);
-    slider.addEventListener('focusout', (event) => {
-      if (!slider.contains(event.relatedTarget)) start();
+    sliderRegistry.set(slider, {
+      start: () => instance.autoplay?.start(),
+      stop: () => instance.autoplay?.stop(),
+      update: () => instance.update(),
     });
-
-    const api = { start, stop, goTo };
-    sliderRegistry.set(slider, api);
-    start();
-    return api;
   };
 
-  document.querySelectorAll('[data-model-slider]').forEach(initSlider);
+  const bootSwipers = () => {
+    sliders.forEach(initSwiper);
 
-  document.querySelectorAll('[data-model-variant]').forEach((variant) => {
-    const tabs = [...variant.querySelectorAll('[data-variant-tab]')];
-    const panels = [...variant.querySelectorAll('[data-variant-panel]')];
-    const card = variant.closest('.product-model');
-    const metas = card ? [...card.querySelectorAll('[data-variant-meta]')] : [];
-
-    if (!tabs.length || !panels.length) return;
-
-    const activate = (key) => {
-      tabs.forEach((tab) => {
-        const active = tab.dataset.variantTab === key;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-
-      panels.forEach((panel) => {
-        const active = panel.dataset.variantPanel === key;
-        panel.classList.toggle('is-active', active);
-        panel.hidden = !active;
-        panel.querySelectorAll('[data-model-slider]').forEach((slider) => {
-          const api = sliderRegistry.get(slider);
-          if (!api) return;
-          if (active) api.start();
-          else api.stop();
-        });
-      });
-
-      metas.forEach((meta) => {
-        const active = meta.dataset.variantMeta === key;
-        meta.classList.toggle('is-active', active);
-        meta.hidden = !active;
-      });
-    };
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => activate(tab.dataset.variantTab));
+    sliders.forEach((slider) => {
+      const panel = slider.closest('.model-variant__panel');
+      if (panel && panel.hidden) {
+        sliderRegistry.get(slider)?.stop();
+      }
     });
-  });
+
+    document.querySelectorAll('[data-model-variant]').forEach((variant) => {
+      const tabs = [...variant.querySelectorAll('[data-variant-tab]')];
+      const panels = [...variant.querySelectorAll('[data-variant-panel]')];
+      const card = variant.closest('.product-model');
+      const metas = card ? [...card.querySelectorAll('[data-variant-meta]')] : [];
+
+      if (!tabs.length || !panels.length) return;
+
+      const activate = (key) => {
+        tabs.forEach((tab) => {
+          const active = tab.dataset.variantTab === key;
+          tab.classList.toggle('is-active', active);
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.dataset.variantPanel === key;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+          panel.querySelectorAll('[data-model-slider]').forEach((slider) => {
+            const api = sliderRegistry.get(slider);
+            if (!api) return;
+            if (active) {
+              api.update();
+              api.start();
+            } else {
+              api.stop();
+            }
+          });
+        });
+
+        metas.forEach((meta) => {
+          const active = meta.dataset.variantMeta === key;
+          meta.classList.toggle('is-active', active);
+          meta.hidden = !active;
+        });
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activate(tab.dataset.variantTab));
+      });
+    });
+  };
+
+  if (window.Swiper) {
+    bootSwipers();
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.src = vendorPath('js/vendor/swiper-bundle.min.js');
+  script.onload = bootSwipers;
+  document.head.appendChild(script);
 })();
 
 /* ─── Models earnings presentation (between cards) ─── */
@@ -1683,6 +1725,18 @@ if (document.body.dataset.page === 'home') {
     }
   };
 
+  const loadVideoSources = (targetVideo) => {
+    if (!targetVideo || targetVideo.dataset.loaded === 'true') return;
+
+    targetVideo.querySelectorAll('source[data-src]').forEach((source) => {
+      source.src = source.dataset.src;
+      source.removeAttribute('data-src');
+    });
+
+    targetVideo.load();
+    targetVideo.dataset.loaded = 'true';
+  };
+
   const bindVideo = (nextVideo, { force = false } = {}) => {
     if (!nextVideo || (!force && nextVideo === video)) return;
 
@@ -1705,6 +1759,7 @@ if (document.body.dataset.page === 'home') {
     video.addEventListener('seeked', tick);
 
     if (isInView) {
+      loadVideoSources(video);
       video.muted = true;
       video.play().catch(() => {});
     }
@@ -1757,6 +1812,7 @@ if (document.body.dataset.page === 'home') {
         if (!video) return;
 
         if (entry.isIntersecting) {
+          loadVideoSources(video);
           video.muted = true;
           video.play().catch(() => {});
         } else {

@@ -36,7 +36,6 @@ python3 -m http.server 8080
 | Файл | Зміст |
 |------|--------|
 | `index.html` | Головна (5 секцій) |
-| `about.html` | Про нас |
 | `b2b.html` | Партнерство B2B |
 | `b2c.html` | Покупцям B2C |
 | `helper.html` | Helper 24 |

@@ -38,7 +38,8 @@
     <meta name="twitter:image" content="https://vendstore.com.ua/img/hero.webp">
     <meta name="twitter:image:alt" content="Vendstore — автоматизированные точки микровендинга HELPER+ и Bloomy">
     <link rel="preload" as="font" type="font/woff2" href="../fonts/roboto.woff2" crossorigin>
-    <link rel="preload" as="image" href="../img/hero.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../img/hero-mob.webp" type="image/webp" fetchpriority="high" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="../img/hero.webp" type="image/webp" fetchpriority="high" media="(min-width: 768px)">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/style.css">
     <script type="application/ld+json">
@@ -203,10 +204,11 @@
         <section class="hero hero--home" id="offer" aria-labelledby="hero-title">
             <div class="hero__bg" aria-hidden="true">
                 <picture class="hero__poster">
+                    <source media="(max-width: 767px)" srcset="../img/hero-mob.webp" type="image/webp">
                     <source srcset="../img/hero.webp" type="image/webp">
-                    <img src="../img/hero.png" width="1376" height="768"
-                        alt="Vendstore — автоматизированные точки микровендинга HELPER+ и Bloomy" fetchpriority="high"
-                        decoding="async">
+                    <img src="../img/hero.png" width="1920" height="1080"
+                        alt="Vendstore — автоматизированные точки микровендинга HELPER+ и Bloomy" loading="eager"
+                        fetchpriority="high" decoding="async" sizes="100vw">
                 </picture>
             </div>
             <div class="container hero__container">
@@ -260,9 +262,10 @@
                     <div class="product-card__shell">
                         <div class="product-card__media">
                             <picture>
-                                <source srcset="../img/helper-hero.webp" type="image/webp">
-                                <img src="../img/helper-hero.jpg" width="3840" height="2160"
-                                    alt="HELPER+ — микровендинговый автомат" loading="lazy" decoding="async">
+                    <source media="(max-width: 767px)" srcset="../img/helper-hero-mob.webp" type="image/webp">
+                    <source srcset="../img/helper-hero.webp" type="image/webp">
+                    <img src="../img/helper-hero.jpg" width="1920" height="1080"
+                                    alt="HELPER+ — микровендинговый автомат" loading="lazy" decoding="async" sizes="100vw">
                             </picture>
                             <span class="product-card__badge">01 — HELPER+</span>
                             <div class="product-card__shine" aria-hidden="true"></div>

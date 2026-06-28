@@ -35,7 +35,8 @@
         content="B2C от Vendstore: частные инвесторы, пассивный доход, HELPER+ и Bloomy под ключ.">
     <meta name="twitter:image" content="https://vendstore.com.ua/img/b2c-banner.webp">
     <link rel="preload" as="font" type="font/woff2" href="../fonts/roboto.woff2" crossorigin>
-    <link rel="preload" as="image" href="../img/b2c-banner.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../img/b2c-banner-mob.webp" type="image/webp" fetchpriority="high" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="../img/b2c-banner.webp" type="image/webp" fetchpriority="high" media="(min-width: 768px)">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/style.css">
     <script type="application/ld+json">
@@ -165,10 +166,11 @@
         <section class="page-hero" aria-labelledby="b2c-hero-title">
             <div class="page-hero__bg" aria-hidden="true">
                 <picture>
+                    <source media="(max-width: 767px)" srcset="../img/b2c-banner-mob.webp" type="image/webp">
                     <source srcset="../img/b2c-banner.webp" type="image/webp">
                     <img src="../img/b2c-banner.png" width="1376" height="768"
                         alt="B2C — инвестиции в микровендинг Vendstore" loading="eager" decoding="async"
-                        fetchpriority="high">
+                        fetchpriority="high" sizes="100vw">
                 </picture>
             </div>
             <div class="container">
@@ -192,9 +194,10 @@
             <div class="container split">
                 <div class="split__media">
                     <picture>
-                        <source srcset="../img/hero.webp" type="image/webp">
-                        <img src="../img/hero.jpg" width="3840" height="2160"
-                            alt="Частный инвестор возле автомата" loading="lazy" decoding="async">
+                    <source media="(max-width: 767px)" srcset="../img/hero-mob.webp" type="image/webp">
+                    <source srcset="../img/hero.webp" type="image/webp">
+                    <img src="../img/hero.jpg" width="1920" height="1080"
+                            alt="Частный инвестор возле автомата" loading="lazy" decoding="async" sizes="100vw">
                     </picture>
                 </div>
                 <div class="split__content">
@@ -319,9 +322,10 @@
                     <a href="helper.html" class="product-pick product-pick--helper">
                         <div class="product-pick__media">
                             <picture>
-                                <source srcset="../img/helper-hero.webp" type="image/webp">
-                                <img src="../img/helper-hero.jpg" width="3840" height="2160"
-                                    alt="HELPER+ — микровендинг" loading="lazy" decoding="async">
+                    <source media="(max-width: 767px)" srcset="../img/helper-hero-mob.webp" type="image/webp">
+                    <source srcset="../img/helper-hero.webp" type="image/webp">
+                    <img src="../img/helper-hero.jpg" width="1920" height="1080"
+                                    alt="HELPER+ — микровендинг" loading="lazy" decoding="async" sizes="100vw">
                             </picture>
                             <span class="product-pick__badge">HELPER+</span>
                         </div>
@@ -486,8 +490,9 @@
         <section class="location-cta section" aria-labelledby="b2c-cta-title">
             <div class="location-cta__bg" aria-hidden="true">
                 <picture>
+                    <source media="(max-width: 767px)" srcset="../img/hero-mob.webp" type="image/webp">
                     <source srcset="../img/hero.webp" type="image/webp">
-                    <img src="../img/hero.png" width="1376" height="768" alt="" loading="lazy" decoding="async">
+                    <img src="../img/hero.png" width="1920" height="1080" alt="" loading="lazy" decoding="async" sizes="100vw">
                 </picture>
             </div>
             <div class="container location-cta__container">
@@ -611,7 +616,7 @@
         </div>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" defer></script>
 </body>
 
 </html>

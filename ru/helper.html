@@ -35,9 +35,11 @@
         content="HELPER+ Box и Slim — товары первой необходимости 24/7. Запуск под ключ от Vendstore.">
     <meta name="twitter:image" content="https://vendstore.com.ua/img/helper-hero.webp">
     <link rel="preload" as="font" type="font/woff2" href="../fonts/roboto.woff2" crossorigin>
-    <link rel="preload" as="image" href="../img/helper-hero.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../img/helper-hero-mob.webp" type="image/webp" fetchpriority="high" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="../img/helper-hero.webp" type="image/webp" fetchpriority="high" media="(min-width: 768px)">
     <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+    <link rel="stylesheet" href="../css/vendor/nouislider.min.css">
+    <link rel="stylesheet" href="../css/vendor/swiper-bundle.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script type="application/ld+json">
     {
@@ -170,8 +172,11 @@
     <section aria-labelledby="helper-hero-title" class="page-hero page-hero--helper page-hero--product">
     <div aria-hidden="true" class="page-hero__bg">
     <picture>
-    <source srcset="../img/helper-hero.webp" type="image/webp"/>
-    <img alt="HELPER+ — микровендинговый автомат Vendstore" decoding="async" fetchpriority="high" height="2160" loading="eager" src="../img/helper-hero.jpg" width="3840"/>
+    <source media="(max-width: 767px)" srcset="../img/helper-hero-mob.webp" type="image/webp">
+    <source srcset="../img/helper-hero.webp" type="image/webp">
+    <img src="../img/helper-hero.jpg" width="1920" height="1080"
+        alt="HELPER+ — микровендинговый автомат Vendstore" loading="eager" fetchpriority="high"
+        decoding="async" sizes="100vw">
     </picture>
     </div>
     <div class="container">
@@ -355,41 +360,37 @@
     <div class="product-models product-models--cards product-models--spread" data-earn-spread="">
     <article class="product-model product-model--card product-model--featured">
     <figure class="product-model__media">
-    <div aria-label="HELPER+ Box — галерея" aria-roledescription="carousel" class="model-slider" data-interval="4500" data-model-slider="">
-    <div class="model-slider__slides">
-    <div class="model-slider__slide is-active">
+    <div aria-label="HELPER+ Box — галерея" aria-roledescription="carousel" class="model-slider swiper" data-interval="4500" data-model-slider="">
+    <div class="model-slider__slides swiper-wrapper">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/HELPER+Box1.webp" type="image/webp"/>
     <img alt="HELPER+ Box — вид 1" decoding="async" height="420" loading="eager" src="../img/HELPER+Box1.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/HELPER+Box2.webp" type="image/webp"/>
     <img alt="HELPER+ Box — вид 2" decoding="async" height="420" loading="lazy" src="../img/HELPER+Box2.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/HELPER+Box3.webp" type="image/webp"/>
     <img alt="HELPER+ Box — вид 3" decoding="async" height="420" loading="lazy" src="../img/HELPER+Box3.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/HELPER+Box4.webp" type="image/webp"/>
     <img alt="HELPER+ Box — вид 4" decoding="async" height="420" loading="lazy" src="../img/HELPER+Box4.png" width="350"/>
     </picture>
     </div>
     </div>
-    <div aria-label="Слайды HELPER+ Box" class="model-slider__dots" role="tablist">
-    <button aria-label="Слайд 1" aria-selected="true" class="model-slider__dot is-active" role="tab" type="button"></button>
-    <button aria-label="Слайд 2" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 3" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 4" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
     </div>
-    </div>
-    </figure>
+
+    <div class="model-slider__dots swiper-pagination" aria-label="Слайды HELPER+ Box"></div>
+                    </figure>
     <div class="product-model__body">
     <div aria-hidden="true" class="model-variant__switch-spacer"></div>
     <span class="product-model__badge">Максимум SKU</span>
@@ -452,76 +453,66 @@
     <figure class="product-model__media">
     <div class="model-variant__panels">
     <div aria-labelledby="slim-variant-wall" class="model-variant__panel is-active" data-variant-panel="slim" id="slim-panel-wall" role="tabpanel">
-    <div aria-label="HELPER+ Slim — галерея" aria-roledescription="carousel" class="model-slider" data-interval="4500" data-model-slider="">
-    <div class="model-slider__slides">
-    <div class="model-slider__slide is-active">
+    <div aria-label="HELPER+ Slim — галерея" aria-roledescription="carousel" class="model-slider swiper" data-interval="4500" data-model-slider="">
+    <div class="model-slider__slides swiper-wrapper">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim1.webp" type="image/webp"/>
     <img alt="HELPER+ Slim — вид 1" decoding="async" height="420" loading="lazy" src="../img/Helper+slim1.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim2.webp" type="image/webp"/>
     <img alt="HELPER+ Slim — вид 2" decoding="async" height="420" loading="lazy" src="../img/Helper+slim2.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim3.webp" type="image/webp"/>
     <img alt="HELPER+ Slim — вид 3" decoding="async" height="420" loading="lazy" src="../img/Helper+slim3.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim4.webp" type="image/webp"/>
     <img alt="HELPER+ Slim — вид 4" decoding="async" height="420" loading="lazy" src="../img/Helper+slim4.png" width="350"/>
     </picture>
     </div>
     </div>
-    <div aria-label="Слайды HELPER+ Slim" class="model-slider__dots" role="tablist">
-    <button aria-label="Слайд 1" aria-selected="true" class="model-slider__dot is-active" role="tab" type="button"></button>
-    <button aria-label="Слайд 2" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 3" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 4" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
     </div>
-    </div>
+    <div class="model-slider__dots swiper-pagination" aria-label="Слайды HELPER+ Slim"></div>
     </div>
     <div aria-labelledby="slim-variant-stand" class="model-variant__panel" data-variant-panel="slim-stand" hidden="" id="slim-panel-stand" role="tabpanel">
-    <div aria-label="HELPER+ Slim + стойка — галерея" aria-roledescription="carousel" class="model-slider" data-interval="4500" data-model-slider="">
-    <div class="model-slider__slides">
-    <div class="model-slider__slide is-active">
+    <div aria-label="HELPER+ Slim + стойка — галерея" aria-roledescription="carousel" class="model-slider swiper" data-interval="4500" data-model-slider="">
+    <div class="model-slider__slides swiper-wrapper">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim-stand1.webp" type="image/webp"/>
     <img alt="HELPER+ Slim + стойка — вид 1" decoding="async" height="420" loading="lazy" src="../img/Helper+slim-stand1.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim-stand2.webp" type="image/webp"/>
     <img alt="HELPER+ Slim + стойка — вид 2" decoding="async" height="420" loading="lazy" src="../img/Helper+slim-stand2.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim-stand3.webp" type="image/webp"/>
     <img alt="HELPER+ Slim + стойка — вид 3" decoding="async" height="420" loading="lazy" src="../img/Helper+slim-stand3.png" width="350"/>
     </picture>
     </div>
-    <div class="model-slider__slide">
+    <div class="model-slider__slide swiper-slide">
     <picture>
     <source srcset="../img/Helper+slim-stand4.webp" type="image/webp"/>
     <img alt="HELPER+ Slim + стойка — вид 4" decoding="async" height="420" loading="lazy" src="../img/Helper+slim-stand4.png" width="350"/>
     </picture>
     </div>
     </div>
-    <div aria-label="Слайды HELPER+ Slim + стойка" class="model-slider__dots" role="tablist">
-    <button aria-label="Слайд 1" aria-selected="true" class="model-slider__dot is-active" role="tab" type="button"></button>
-    <button aria-label="Слайд 2" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 3" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
-    <button aria-label="Слайд 4" aria-selected="false" class="model-slider__dot" role="tab" type="button"></button>
     </div>
-    </div>
+    <div class="model-slider__dots swiper-pagination" aria-label="Слайды HELPER+ Slim + стойка"></div>
     </div>
     </div>
     </figure>
@@ -591,18 +582,21 @@
     <div class="specs-presentation__screen">
     <div class="specs-presentation__panels">
     <div aria-labelledby="helper-specs-tab-box" class="specs-presentation__panel is-active" data-specs-video-panel="box" id="helper-specs-panel-box" role="tabpanel">
-    <video aria-label="HELPER+ Box — 3D обзор" autoplay="" class="specs-presentation__video" loop="" muted="" playsinline="" preload="metadata">
-    <source src="../img/HELPER+Box.MP4" type="video/mp4"/>
+    <video aria-label="HELPER+ Box — 3D обзор" class="specs-presentation__video" loop muted playsinline preload="none">
+    <source data-src="../img/videos/helper-box.webm" type="video/webm">
+    <source data-src="../img/videos/helper-box.mp4" type="video/mp4">
     </video>
     </div>
     <div aria-labelledby="helper-specs-tab-slim" class="specs-presentation__panel" data-specs-video-panel="slim" hidden="" id="helper-specs-panel-slim" role="tabpanel">
-    <video aria-label="HELPER+ Slim — 3D обзор" class="specs-presentation__video" loop="" muted="" playsinline="" preload="metadata">
-    <source src="../img/HELPER+Slim.MP4" type="video/mp4"/>
+    <video aria-label="HELPER+ Slim — 3D обзор" class="specs-presentation__video" loop muted playsinline preload="none">
+    <source data-src="../img/videos/helper-slim.webm" type="video/webm">
+    <source data-src="../img/videos/helper-slim.mp4" type="video/mp4">
     </video>
     </div>
     <div aria-labelledby="helper-specs-tab-slim-stand" class="specs-presentation__panel" data-specs-video-panel="slim-stand" hidden="" id="helper-specs-panel-slim-stand" role="tabpanel">
-    <video aria-label="HELPER+ Slim + стойка — 3D обзор" class="specs-presentation__video" loop="" muted="" playsinline="" preload="metadata">
-    <source src="../img/HELPER+Slim+стійка.MP4" type="video/mp4"/>
+    <video aria-label="HELPER+ Slim + стойка — 3D обзор" class="specs-presentation__video" loop muted playsinline preload="none">
+    <source data-src="../img/videos/helper-slim-stand.webm" type="video/webm">
+    <source data-src="../img/videos/helper-slim-stand.mp4" type="video/mp4">
     </video>
     </div>
     </div>
