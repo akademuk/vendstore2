@@ -1168,7 +1168,7 @@ async function submitForm(form, submitBtn) {
     openModalSuccess();
   } catch (err) {
     console.error(err);
-    alert('Не вдалося надіслати заявку. Спробуйте ще раз або напишіть на hello@vendstore.ua');
+    alert('Не вдалося надіслати заявку. Спробуйте ще раз або напишіть на headofmarketingv12@gmail.com');
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
