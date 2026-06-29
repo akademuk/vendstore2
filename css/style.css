@@ -3347,7 +3347,7 @@ body[data-page="home"] .products.section {
 
   .cta-banner__format-media {
     width: 100%;
-    height: clamp(352px, 76vw, 440px);
+    height: clamp(400px, 76vw, 440px);
     min-height: 0;
     max-height: 440px;
     aspect-ratio: auto;
