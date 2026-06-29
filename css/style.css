@@ -5211,17 +5211,18 @@ img.vs-icon {
 }
 
 .split__media {
+  --split-media-radius: clamp(36px, 7vw, 120px);
   position: relative;
-  overflow: hidden;
   aspect-ratio: 4 / 5;
   max-height: 560px;
   background: #2e2e2e;
-  border-radius: 0 clamp(36px, 7vw, 120px) 0 0;
-  isolation: isolate;
+  border-radius: 0 var(--split-media-radius) 0 0;
+  box-shadow: var(--vs-shadow-soft);
+  border: 1px solid rgba(245, 243, 231, 0.06);
 }
 
 .split--reverse .split__media {
-  border-radius: clamp(36px, 7vw, 120px) 0 0 0;
+  border-radius: var(--split-media-radius) 0 0 0;
 }
 
 .split__media::before {
@@ -5230,8 +5231,12 @@ img.vs-icon {
   inset: 12px;
   z-index: 2;
   border: 1px solid rgba(253, 251, 250, 0.18);
-  border-radius: inherit;
+  border-radius: 0 max(0px, calc(var(--split-media-radius) - 12px)) 0 0;
   pointer-events: none;
+}
+
+.split--reverse .split__media::before {
+  border-radius: max(0px, calc(var(--split-media-radius) - 12px)) 0 0 0;
 }
 
 .split__media::after {
@@ -5239,6 +5244,7 @@ img.vs-icon {
   position: absolute;
   inset: 0;
   z-index: 1;
+  border-radius: inherit;
   background-image: var(--vs-noise);
   background-repeat: repeat;
   background-size: 180px 180px;
@@ -5248,9 +5254,21 @@ img.vs-icon {
 }
 
 .split__media picture {
+  position: relative;
+  z-index: 0;
   display: block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  clip-path: inset(0 round 0 var(--split-media-radius) 0 0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.split--reverse .split__media picture {
+  clip-path: inset(0 round var(--split-media-radius) 0 0 0);
 }
 
 .split__media img {
@@ -5260,7 +5278,6 @@ img.vs-icon {
   object-position: 78%;
   display: block;
   transition: filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 }
 
 @media (max-width: 767px) {
@@ -8758,14 +8775,8 @@ body:not(.is-motion-ready) .hero--home .hero__actions {
   color: var(--vs-cyan);
 }
 
-.split__media {
-  box-shadow: var(--vs-shadow-soft);
-  border: 1px solid rgba(245, 243, 231, 0.06);
-}
-
 .page-block--light .split__media {
   border-color: var(--vs-border-dark);
-  box-shadow: var(--vs-shadow-soft);
 }
 
 /* ─── Inner pages: premium motion polish ─── */
