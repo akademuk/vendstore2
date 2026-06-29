@@ -4806,6 +4806,7 @@ body[data-page="home"] .products.section {
     min-height: 100svh;
     padding: calc(var(--vs-header-h) + 20px) 0 36px;
     align-items: flex-end;
+    height: 1000px;
   }
 
   .page-hero--helper .page-hero__bg img {
@@ -4838,7 +4839,8 @@ body[data-page="home"] .products.section {
     gap: 10px;
   }
 
-  .page-hero--helper.page-hero--product .page-hero__stats {
+  .page-hero--helper.page-hero--product .page-hero__stats,
+  .page-hero--bloomi.page-hero--product .page-hero__stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px 8px;
@@ -4846,15 +4848,17 @@ body[data-page="home"] .products.section {
     padding-top: 16px;
   }
 
-  .page-hero--helper.page-hero--product .page-hero__stat strong {
+  .page-hero--helper.page-hero--product .page-hero__stat strong,
+  .page-hero--bloomi.page-hero--product .page-hero__stat strong {
     font-size: clamp(0.95rem, 4.2vw, 1.15rem);
     margin-bottom: 2px;
   }
 
-  .page-hero--helper.page-hero--product .page-hero__stat span {
+  .page-hero--helper.page-hero--product .page-hero__stat span,
+  .page-hero--bloomi.page-hero--product .page-hero__stat span {
     font-size: 9px;
     letter-spacing: 0.05em;
-    line-height: 1.25;
+    line-height: normal;
   }
 }
 
@@ -4874,10 +4878,12 @@ body[data-page="home"] .products.section {
     min-height: 100svh;
     padding: calc(var(--vs-header-h) + 20px) 0 36px;
     align-items: flex-end;
+    height: 1000px;
   }
 
   .page-hero--bloomi .page-hero__bg img {
-    object-position: center 28%;
+    object-position: center;
+    height: 100%;
   }
 
   .page-hero--bloomi .page-hero__bg::after {
@@ -8713,6 +8719,18 @@ body:not(.is-motion-ready) .page-hero .container > .page-hero__text {
 body:not(.is-motion-ready) .page-hero .container > .page-hero__actions,
 body:not(.is-motion-ready) .page-hero .container > .page-hero__stats {
   animation-delay: 0.18s;
+}
+
+body.is-motion-ready .hero--home .hero__body,
+body.is-motion-ready .hero--home .hero__perks,
+body.is-motion-ready .hero--home .hero__actions,
+body.is-motion-ready .page-hero .container > .eyebrow,
+body.is-motion-ready .page-hero .container > .page-hero__title,
+body.is-motion-ready .page-hero .container > .page-hero__text,
+body.is-motion-ready .page-hero .container > .page-hero__actions,
+body.is-motion-ready .page-hero .container > .page-hero__stats {
+  opacity: 1;
+  transform: none;
 }
 
 body:not(.is-motion-ready) .hero--home .hero__perks {

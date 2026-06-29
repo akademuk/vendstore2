@@ -328,39 +328,6 @@ function parallaxImg(img, trigger, options = {}) {
   );
 }
 
-function initPageHeroAnimation() {
-  const pageHero = document.querySelector('.page-hero');
-  if (!pageHero) return;
-
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  const eyebrow = pageHero.querySelector('.eyebrow');
-  const title = pageHero.querySelector('.page-hero__title');
-  const text = pageHero.querySelector('.page-hero__text');
-  const actions = pageHero.querySelector('.page-hero__actions');
-  const stats = pageHero.querySelectorAll('.page-hero__stat');
-
-  if (eyebrow) {
-    tl.fromTo(eyebrow, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.68 });
-  }
-  if (title) {
-    tl.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85 }, '-=0.38');
-  }
-  if (text) {
-    tl.fromTo(text, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75 }, '-=0.52');
-  }
-  if (actions) {
-    tl.fromTo(actions, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, '-=0.48');
-  }
-  if (stats.length) {
-    tl.fromTo(
-      stats,
-      { y: 16, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.58, stagger: 0.09 },
-      '-=0.42'
-    );
-  }
-}
-
 function initInnerPageMotion() {
   document.querySelectorAll('.split').forEach((split) => {
     const content = split.querySelector('.split__content');
@@ -532,21 +499,6 @@ function initGsapMotion() {
   gsap.registerPlugin(ScrollTrigger);
 
   if (!prefersReducedMotion) {
-    const hero = document.querySelector('.hero--home');
-    if (hero) {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      const body = hero.querySelector('.hero__body');
-      const actions = hero.querySelector('.hero__actions');
-      if (body) {
-        tl.fromTo(body, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85 });
-      }
-      if (actions) {
-        tl.fromTo(actions, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, '-=0.42');
-      }
-    } else {
-      initPageHeroAnimation();
-    }
-
     document.querySelectorAll('.home-perks').forEach((strip) => {
       const items = strip.querySelectorAll('.home-perks__item');
       if (!items.length) return;
