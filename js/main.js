@@ -864,6 +864,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 function openMenu() {
   burger?.classList.add('is-active');
   mobileMenu?.classList.add('is-open');
+  header?.classList.add('header--menu-open');
   body.classList.add('menu-open');
   html.classList.add('menu-open');
   burger?.setAttribute('aria-expanded', 'true');
@@ -874,6 +875,7 @@ function openMenu() {
 function closeMenu() {
   burger?.classList.remove('is-active');
   mobileMenu?.classList.remove('is-open');
+  header?.classList.remove('header--menu-open');
   body.classList.remove('menu-open');
   html.classList.remove('menu-open');
   burger?.setAttribute('aria-expanded', 'false');
@@ -1394,6 +1396,7 @@ if (document.body.dataset.page === 'home') {
     const countEl = document.getElementById(countId);
     const valueEl = document.getElementById(VALUE_MAP[countId]);
     if (!container || !countEl || !window.noUiSlider) return;
+    if (container.noUiSlider) return;
 
     const intFormat = {
       to: (value) => Math.round(value),
@@ -1404,9 +1407,10 @@ if (document.body.dataset.page === 'home') {
       start: [range.start],
       connect: [true, false],
       step: 1,
-      tooltips: [true],
+      tooltips: window.matchMedia('(min-width: 768px)').matches ? [true] : [false],
       range: { min: range.min, max: range.max },
       format: intFormat,
+      behaviour: 'tap-drag',
     });
 
     container.noUiSlider.on('update', (values) => {
@@ -1435,6 +1439,9 @@ if (document.body.dataset.page === 'home') {
   const script = document.createElement('script');
   script.src = vendorPath('js/vendor/nouislider.min.js');
   script.onload = initSliders;
+  script.onerror = () => {
+    console.error('noUiSlider failed to load:', script.src);
+  };
   document.head.appendChild(script);
 })();
 
@@ -1446,14 +1453,29 @@ if (document.body.dataset.page === 'home') {
   const sliderRegistry = new Map();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const initSwiper = (slider) => {
+  const isPanelVisible = (panel) => {
+    if (!panel) return true;
+    return !panel.hidden && panel.classList.contains('is-active');
+  };
+
+  const getPaginationEl = (slider) => {
+    const parent = slider.parentElement;
+    if (!parent) return null;
+    const dots = [...parent.children].filter((el) => el.classList.contains('model-slider__dots'));
+    return dots[0] || null;
+  };
+
+  const initSwiper = (slider, force = false) => {
     if (sliderRegistry.has(slider) || typeof Swiper === 'undefined') return;
+
+    const panel = slider.closest('.model-variant__panel');
+    if (!force && panel && !isPanelVisible(panel)) return;
 
     const slides = slider.querySelectorAll('.swiper-slide');
     if (slides.length < 2) return;
 
     const interval = parseInt(slider.dataset.interval, 10) || 4500;
-    const paginationEl = slider.parentElement?.querySelector(':scope > .model-slider__dots');
+    const paginationEl = getPaginationEl(slider);
 
     const instance = new Swiper(slider, {
       slidesPerView: 1,
@@ -1461,6 +1483,9 @@ if (document.body.dataset.page === 'home') {
       fadeEffect: { crossFade: true },
       speed: 750,
       loop: slides.length > 1,
+      observer: true,
+      observeParents: true,
+      resizeObserver: true,
       autoplay: reducedMotion
         ? false
         : {
@@ -1484,18 +1509,33 @@ if (document.body.dataset.page === 'home') {
     });
 
     sliderRegistry.set(slider, {
+      instance,
       start: () => instance.autoplay?.start(),
       stop: () => instance.autoplay?.stop(),
-      update: () => instance.update(),
+      update: () => {
+        instance.update();
+        instance.slideToLoop?.(instance.realIndex || 0, 0, false);
+      },
     });
   };
 
+  const ensureSwiper = (slider) => {
+    if (!sliderRegistry.has(slider)) {
+      initSwiper(slider, true);
+    }
+    const api = sliderRegistry.get(slider);
+    if (!api) return null;
+    api.update();
+    api.start();
+    return api;
+  };
+
   const bootSwipers = () => {
-    sliders.forEach(initSwiper);
+    sliders.forEach((slider) => initSwiper(slider));
 
     sliders.forEach((slider) => {
       const panel = slider.closest('.model-variant__panel');
-      if (panel && panel.hidden) {
+      if (panel && !isPanelVisible(panel)) {
         sliderRegistry.get(slider)?.stop();
       }
     });
@@ -1520,13 +1560,10 @@ if (document.body.dataset.page === 'home') {
           panel.classList.toggle('is-active', active);
           panel.hidden = !active;
           panel.querySelectorAll('[data-model-slider]').forEach((slider) => {
-            const api = sliderRegistry.get(slider);
-            if (!api) return;
             if (active) {
-              api.update();
-              api.start();
+              ensureSwiper(slider);
             } else {
-              api.stop();
+              sliderRegistry.get(slider)?.stop();
             }
           });
         });
@@ -1552,6 +1589,9 @@ if (document.body.dataset.page === 'home') {
   const script = document.createElement('script');
   script.src = vendorPath('js/vendor/swiper-bundle.min.js');
   script.onload = bootSwipers;
+  script.onerror = () => {
+    console.error('Swiper failed to load:', script.src);
+  };
   document.head.appendChild(script);
 })();
 
