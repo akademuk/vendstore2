@@ -727,6 +727,26 @@ ol {
   align-self: flex-start;
 }
 
+.header__menu .lang-switch--menu {
+  background: rgba(12, 23, 18, 0.05);
+  border-color: rgba(12, 23, 18, 0.1);
+}
+
+.header__menu .lang-switch--menu .lang-switch__btn {
+  color: var(--vs-text-secondary);
+  background: transparent;
+}
+
+.header__menu .lang-switch--menu .lang-switch__btn:hover,
+.header__menu .lang-switch--menu .lang-switch__btn:focus-visible {
+  color: var(--vs-text-dark);
+}
+
+.header__menu .lang-switch--menu .lang-switch__btn.is-active {
+  background: var(--vs-primary);
+  color: var(--vs-primary-text);
+}
+
 .lang-switch__btn {
   display: inline-flex;
   align-items: center;
@@ -890,37 +910,33 @@ body.menu-open .burger__line {
   background: var(--vs-text-dark);
 }
 
-body.menu-open .lang-switch {
+body.menu-open .header__inner .header__right .lang-switch {
   background: rgba(12, 23, 18, 0.05);
   border-color: rgba(12, 23, 18, 0.1);
 }
 
-body.menu-open .lang-switch__btn {
+body.menu-open .header__inner .header__right .lang-switch__btn {
   color: var(--vs-text-secondary);
 }
 
-body.menu-open .lang-switch__btn:hover,
-body.menu-open .lang-switch__btn:focus-visible {
+body.menu-open .header__inner .header__right .lang-switch__btn:hover,
+body.menu-open .header__inner .header__right .lang-switch__btn:focus-visible {
   color: var(--vs-text-dark);
 }
 
-body.menu-open .lang-switch__btn.is-active {
+body.menu-open .header__inner .header__right .lang-switch__btn.is-active {
   background: var(--vs-text-dark);
   color: var(--vs-text);
 }
 
-body.menu-open .header__menu nav a {
+body.menu-open .header__menu nav:not(.lang-switch) a {
   color: var(--vs-text-dark);
 }
 
-body.menu-open .header__menu nav a:hover,
-body.menu-open .header__menu nav a:focus-visible,
-body.menu-open .header__menu a.is-active {
+body.menu-open .header__menu nav:not(.lang-switch) a:hover,
+body.menu-open .header__menu nav:not(.lang-switch) a:focus-visible,
+body.menu-open .header__menu nav:not(.lang-switch) a.is-active {
   color: #2f7e55;
-}
-
-body.menu-open .lang-switch a.is-active {
-  color: #fff;
 }
 
 .header__menu-inner {
@@ -4701,7 +4717,7 @@ body[data-page="home"] .products.section {
   font-weight: 600;
 }
 
-.header__menu a.is-active {
+.header__menu nav:not(.lang-switch) a.is-active {
   color: var(--vs-text-dark);
   font-weight: 600;
 }
@@ -4851,6 +4867,29 @@ body[data-page="home"] .products.section {
     rgba(95, 138, 114, 0.16) 72%,
     transparent 100%
   );
+}
+
+@media (max-width: 767px) {
+  .page-hero--bloomi.page-hero--product {
+    min-height: 100svh;
+    padding: calc(var(--vs-header-h) + 20px) 0 36px;
+    align-items: flex-end;
+  }
+
+  .page-hero--bloomi .page-hero__bg img {
+    object-position: center 28%;
+  }
+
+  .page-hero--bloomi .page-hero__bg::after {
+    background: linear-gradient(
+      to top,
+      rgba(18, 28, 24, 0.98) 0%,
+      rgba(18, 28, 24, 0.94) 28%,
+      rgba(12, 23, 18, 0.62) 48%,
+      rgba(12, 23, 18, 0.22) 68%,
+      transparent 86%
+    );
+  }
 }
 
 .page-hero .hero__mesh {
@@ -5510,20 +5549,37 @@ body.is-motion-ready .split:hover .split__media img {
 }
 
 .specs-presentation__panels {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  min-height: inherit;
+  height: 100%;
 }
 
 .specs-presentation__panel {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 }
 
 .specs-presentation__panel:not(.is-active) {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.specs-presentation__panel.is-active {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.specs-presentation[data-specs-videos] .specs-presentation__panel[hidden] {
+  display: flex;
 }
 
 @media (max-width: 767px) {
@@ -5534,10 +5590,16 @@ body.is-motion-ready .split:hover .split__media img {
 
 .specs-presentation__screen {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: clamp(240px, 38vw, 420px);
+  width: 100%;
+  min-height: clamp(280px, 44vw, 420px);
+  aspect-ratio: 4 / 5;
+}
+
+.specs-presentation__screen > .specs-presentation__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .specs-presentation__screen::before {
@@ -5574,8 +5636,8 @@ body.is-motion-ready .split:hover .split__media img {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: auto;
-  max-height: min(68vh, 520px);
+  height: 100%;
+  max-height: 100%;
   object-fit: contain;
   display: block;
   border: none;
@@ -7014,6 +7076,8 @@ body.is-motion-ready .split:hover .split__media img {
   min-height: 76px;
   margin-bottom: 14px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 4;
 }
 
 .model-variant__switch-spacer {
@@ -7052,6 +7116,10 @@ body.is-motion-ready .split:hover .split__media img {
   line-height: 1.25;
   text-align: center;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 1;
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
@@ -7118,6 +7186,7 @@ body.is-motion-ready .split:hover .split__media img {
 
 .product-model--has-variants .product-model__body {
   position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -7229,7 +7298,7 @@ body.is-motion-ready .split:hover .split__media img {
 
 .model-slider.swiper {
   overflow: hidden;
-  touch-action: pan-y;
+  touch-action: pan-x pinch-zoom;
 }
 
 .product-models--cards .model-slider.swiper .model-slider__slides.swiper-wrapper {
@@ -7699,6 +7768,7 @@ body.is-motion-ready .split:hover .split__media img {
   width: 100%;
   margin-top: -1px;
   overflow: visible;
+  pointer-events: none;
 }
 
 .product-models__earn-connector.is-desk {
@@ -8186,11 +8256,11 @@ body.is-motion-ready .split:hover .split__media img {
 .calc-section__slider-track {
   padding: 34px 14px 10px;
   margin: 0 -6px;
-  touch-action: pan-y;
 }
 
 .calc-section .noUi-target,
-.calc-section .noUi-handle {
+.calc-section .noUi-handle,
+.calc-section .noUi-touch-area {
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;

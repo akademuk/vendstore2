@@ -45,7 +45,7 @@
   if (!page) return;
   const map = { home: 'index.html' };
   const current = map[page] || `${page}.html`;
-  document.querySelectorAll('.header__nav a, .header__menu nav a').forEach((a) => {
+  document.querySelectorAll('.header__nav a, .header__menu nav:not(.lang-switch) a').forEach((a) => {
     const href = a.getAttribute('href');
     if (href === current || (page === 'home' && href === 'index.html')) {
       a.classList.add('is-active');
@@ -1230,7 +1230,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 
 /* Mark home nav on index */
 if (document.body.dataset.page === 'home') {
-  document.querySelector('.header__menu a[href="index.html"]')?.classList.add('is-active');
+  document.querySelector('.header__menu nav:not(.lang-switch) a[href="index.html"]')?.classList.add('is-active');
 }
 
 /* ─── Product detail overlay (home) ─── */
@@ -1403,15 +1403,20 @@ if (document.body.dataset.page === 'home') {
       from: (value) => parseInt(value, 10),
     };
 
-    noUiSlider.create(container, {
-      start: [range.start],
-      connect: [true, false],
-      step: 1,
-      tooltips: window.matchMedia('(min-width: 768px)').matches ? [true] : [false],
-      range: { min: range.min, max: range.max },
-      format: intFormat,
-      behaviour: 'tap-drag',
-    });
+    try {
+      noUiSlider.create(container, {
+        start: [range.start],
+        connect: [true, false],
+        step: 1,
+        tooltips: window.matchMedia('(min-width: 768px)').matches ? [true] : [false],
+        range: { min: range.min, max: range.max },
+        format: intFormat,
+        behaviour: 'tap-drag',
+      });
+    } catch (error) {
+      console.error('noUiSlider init failed:', error);
+      return;
+    }
 
     container.noUiSlider.on('update', (values) => {
       const val = values[0];
@@ -1448,8 +1453,6 @@ if (document.body.dataset.page === 'home') {
 /* ─── Product model image slider (Swiper) ─── */
 (function () {
   const sliders = [...document.querySelectorAll('[data-model-slider]')];
-  if (!sliders.length) return;
-
   const sliderRegistry = new Map();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1477,46 +1480,59 @@ if (document.body.dataset.page === 'home') {
     const interval = parseInt(slider.dataset.interval, 10) || 4500;
     const paginationEl = getPaginationEl(slider);
 
-    const instance = new Swiper(slider, {
-      slidesPerView: 1,
-      effect: 'fade',
-      fadeEffect: { crossFade: true },
-      speed: 750,
-      loop: slides.length > 1,
-      observer: true,
-      observeParents: true,
-      resizeObserver: true,
-      autoplay: reducedMotion
-        ? false
-        : {
-            delay: interval,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          },
-      pagination: paginationEl
-        ? {
-            el: paginationEl,
-            clickable: true,
-            type: 'bullets',
-            bulletClass: 'model-slider__dot',
-            bulletActiveClass: 'is-active',
-            renderBullet(index, className) {
-              return `<button type="button" class="${className}" role="tab" aria-label="Слайд ${index + 1}"></button>`;
+    try {
+      const instance = new Swiper(slider, {
+        slidesPerView: 1,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        speed: 750,
+        loop: slides.length > 1,
+        observer: true,
+        observeParents: true,
+        resizeObserver: true,
+        touchStartPreventDefault: false,
+        autoplay: reducedMotion
+          ? false
+          : {
+              delay: interval,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             },
-          }
-        : undefined,
-      watchOverflow: true,
-    });
+        pagination: paginationEl
+          ? {
+              el: paginationEl,
+              clickable: true,
+              type: 'bullets',
+              bulletClass: 'model-slider__dot',
+              bulletActiveClass: 'is-active',
+              renderBullet(index, className) {
+                return `<button type="button" class="${className}" role="tab" aria-label="Слайд ${index + 1}"></button>`;
+              },
+            }
+          : undefined,
+        watchOverflow: true,
+      });
 
-    sliderRegistry.set(slider, {
-      instance,
-      start: () => instance.autoplay?.start(),
-      stop: () => instance.autoplay?.stop(),
-      update: () => {
-        instance.update();
-        instance.slideToLoop?.(instance.realIndex || 0, 0, false);
-      },
-    });
+      sliderRegistry.set(slider, {
+        instance,
+        start: () => instance.autoplay?.start(),
+        stop: () => instance.autoplay?.stop(),
+        update: () => {
+          instance.update();
+          try {
+            if (instance.params.loop) {
+              instance.slideToLoop(instance.realIndex || 0, 0, false);
+            } else {
+              instance.slideTo(instance.activeIndex || 0, 0, false);
+            }
+          } catch (error) {
+            /* noop */
+          }
+        },
+      });
+    } catch (error) {
+      console.error('Swiper init failed:', error);
+    }
   };
 
   const ensureSwiper = (slider) => {
@@ -1539,7 +1555,9 @@ if (document.body.dataset.page === 'home') {
         sliderRegistry.get(slider)?.stop();
       }
     });
+  };
 
+  const initVariantTabs = () => {
     document.querySelectorAll('[data-model-variant]').forEach((variant) => {
       const tabs = [...variant.querySelectorAll('[data-variant-tab]')];
       const panels = [...variant.querySelectorAll('[data-variant-panel]')];
@@ -1576,10 +1594,16 @@ if (document.body.dataset.page === 'home') {
       };
 
       tabs.forEach((tab) => {
+        if (tab.dataset.variantBound === 'true') return;
+        tab.dataset.variantBound = 'true';
         tab.addEventListener('click', () => activate(tab.dataset.variantTab));
       });
     });
   };
+
+  initVariantTabs();
+
+  if (!sliders.length) return;
 
   if (window.Swiper) {
     bootSwipers();
@@ -1700,6 +1724,9 @@ if (document.body.dataset.page === 'home') {
   const hasVideoTabs = presentation?.hasAttribute('data-specs-videos');
   const tabs = hasVideoTabs ? [...presentation.querySelectorAll('[data-specs-video-tab]')] : [];
   const panels = hasVideoTabs ? [...presentation.querySelectorAll('[data-specs-video-panel]')] : [];
+  if (hasVideoTabs) {
+    panels.forEach((panel) => panel.removeAttribute('hidden'));
+  }
 
   const items = [...root.querySelectorAll('li')];
   if (!items.length) return;
@@ -1716,8 +1743,8 @@ if (document.body.dataset.page === 'home') {
   };
 
   const resetProgress = () => {
-    activeIndex = -1;
-    setActive(0);
+    activeIndex = 0;
+    items.forEach((item, i) => item.classList.toggle('is-active', i === 0));
     if (progressBar) progressBar.style.transform = 'scaleX(0)';
   };
 
@@ -1830,7 +1857,8 @@ if (document.body.dataset.page === 'home') {
     panels.forEach((panel) => {
       const active = panel.dataset.specsVideoPanel === key;
       panel.classList.toggle('is-active', active);
-      panel.hidden = !active;
+      panel.removeAttribute('hidden');
+      panel.setAttribute('aria-hidden', active ? 'false' : 'true');
     });
 
     const nextVideo = presentation?.querySelector(
